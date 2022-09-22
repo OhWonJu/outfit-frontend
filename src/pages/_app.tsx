@@ -1,23 +1,26 @@
-import Head from "next/head";
 import type { AppProps } from "next/app";
 
-import "../styles/globals.css";
+import AppHead from "@components/common/AppHead";
+import wrapper from "@lib/store/store";
+import { ManagedUIContext } from "@components/ui/context";
 import { GlobalStyle } from "src/styles/GlobalStyle";
-import { ManagedUIContext } from "src/components/ui/context";
+import Layout from "@components/common/Layout";
+import "../styles/globals.css";
 
 function App({ Component, pageProps }: AppProps) {
   return (
     <>
-      <Head>
-        <title>OUTFIT</title>
-        <meta name="description" content="OUTFIT" />
-      </Head>
+      <AppHead />
       <ManagedUIContext>
         <GlobalStyle />
-        <Component {...pageProps} />
+        <Layout pageProps={pageProps}>
+          <Component {...pageProps} />
+        </Layout>
       </ManagedUIContext>
     </>
   );
 }
 
-export default App;
+// export default App;
+
+export default wrapper.withRedux(App);

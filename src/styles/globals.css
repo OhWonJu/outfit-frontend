@@ -4,6 +4,10 @@
 
 @tailwind utilities;
 
+body {
+  min-width: 420px;
+}
+
 /* html,
 body {
   padding: 0;
