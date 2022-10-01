@@ -15,3 +15,4 @@ export { default as Modal } from "./Modal";
 // export { default as Rating } from './Rating'
 // export * from './Dropdown/Dropdown'
 export { useUI } from "./context";
+export { default as DropDown } from "./DropDown";

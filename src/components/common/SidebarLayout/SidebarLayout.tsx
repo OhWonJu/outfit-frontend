@@ -17,9 +17,9 @@ const SidebarLayout: FC<ComponentProps> = ({
   return (
     <div className={cn("relative h-full flex flex-col", className)}>
       <header
-        className="sticky top-0 pl-4 py-4 pr-6
+        className="sticky top-0 pl-4 py-2 pr-6
   flex items-center justify-between 
-  bg-accent-0 box-border w-full z-10 min-h-[66px]"
+  bg-accent-0 box-border w-full z-10 h-[60px]"
       >
         {handleClose && (
           <button

@@ -10,7 +10,7 @@ export type ModalStateType = {
 
 const initialState: ModalStateType = {
   displayModal: false,
-  modalView: "LOGIN_VIEW",
+  modalView: "SIGNUP_VIEW",
 };
 
 const modalSlice = createSlice({

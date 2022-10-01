@@ -75,6 +75,7 @@ const ClickOutside: FC<ClickOutsideProps> = forwardRef(
     };
 
     return React.cloneElement(child, {
+      /* @ts-ignore */
       ref: mergeRefs([composedRefCallback, innerRef, forwardedRef]),
     });
   },

@@ -5,13 +5,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { lightTheme, darkTheme } from "src/styles/Theme";
 
 // actions
-import { modalActions, sidebarActions } from "@lib/store/reducers";
+import {
+  dropDownActions,
+  modalActions,
+  sidebarActions,
+} from "@lib/store/reducers";
 
 // type
 // import type { GetServerSideProps, GetServerSidePropsContext, NextPage } from "next";
 import type { RootState } from "@lib/store/store";
 import type { SIDEBAR_VIEWS } from "@lib/store/types/sidebarType";
 import type { MODAL_VIEWS } from "@lib/store/types/modalType";
+import type { DROP_DOWN_VIEWS } from "@lib/store/types/dropDownType";
 
 export const useUI = () => {
   const dispatch = useDispatch();
@@ -22,6 +27,9 @@ export const useUI = () => {
   );
   const { displayModal, modalView } = useSelector(
     ({ modal }: RootState) => modal,
+  );
+  const { displayDropDown, dropDownView } = useSelector(
+    ({ dropDown }: RootState) => dropDown,
   );
   // --------------------------------------------------- //
 
@@ -41,6 +49,17 @@ export const useUI = () => {
 
   const closeModal = useCallback(
     () => dispatch(modalActions.modalReducer({ type: "CLOSE_MODAL" })),
+    [dispatch],
+  );
+
+  const openDropDown = useCallback(
+    () => dispatch(dropDownActions.dropDownReducer({ type: "OPEN_DROP_DOWN" })),
+    [dispatch],
+  );
+
+  const closeDropDown = useCallback(
+    () =>
+      dispatch(dropDownActions.dropDownReducer({ type: "CLOSE_DROP_DOWN" })),
     [dispatch],
   );
 
@@ -68,7 +87,16 @@ export const useUI = () => {
   );
 
   const setModalView = useCallback(
-    (view: MODAL_VIEWS) => dispatch({ type: "SET_MODAL_VIEW", view }),
+    (view: MODAL_VIEWS) =>
+      dispatch(modalActions.modalReducer({ type: "SET_MODAL_VIEW", view })),
+    [dispatch],
+  );
+
+  const setDropDownView = useCallback(
+    (view: DROP_DOWN_VIEWS) =>
+      dispatch(
+        dropDownActions.dropDownReducer({ type: "SET_DROP_DOWN_VIEW", view }),
+      ),
     [dispatch],
   );
 
@@ -77,14 +105,19 @@ export const useUI = () => {
     sidebarView,
     displayModal,
     modalView,
+    displayDropDown,
+    dropDownView,
     openSidebar: () => openSidebar(),
     closeSidebar: () => closeSidebar(),
     openModal: () => openModal(),
     closeModal: () => closeModal(),
+    openDropDown: () => openDropDown(),
+    closeDropDown: () => closeDropDown(),
     toggleSidebar: () => toggleSidebar(),
     closeSidebarIfPresent: () => closeSidebarIfPresent(),
     setSidebarView: (view: SIDEBAR_VIEWS) => setSidebarView(view),
     setModalView: (view: MODAL_VIEWS) => setModalView(view),
+    setDropDownView: (view: DROP_DOWN_VIEWS) => setDropDownView(view),
   };
 
   return context;

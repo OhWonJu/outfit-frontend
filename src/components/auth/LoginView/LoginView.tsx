@@ -1,9 +1,10 @@
 import React, { FC, useEffect, useState, useCallback } from "react";
-import { validate } from "email-validator";
 import styled from "styled-components";
 import tw from "twin.macro";
+
 import useTheme from "@lib/hooks/useTheme";
-import css from "styled-jsx/css";
+import Login from "./Login";
+import OrderCode from "./OrderCode";
 
 type tabType = "MEMBER" | "NON-MEMBER";
 
@@ -56,6 +57,7 @@ const LoginView: React.FC = () => {
         </span>
       </div> */}
 
+      {/* Tab */}
       <div className="tab-wrapper flex flex-row justify-around w-full">
         <Tab
           _onClick={() => setTab("MEMBER")}
@@ -70,33 +72,27 @@ const LoginView: React.FC = () => {
           context="Non-member order check"
         />
       </div>
-
-      <div className="form-wrapper w-full my-5 sm:my-10">
+      {/* Form Section */}
+      <div className="form-wrapper w-full mt-5">
         {tab === "MEMBER" ? (
           <>
-            <form className="member-form flex flex-col mb-4 space-y-4">
-              <div className="space-y-2">
-                <label>Email</label>
-                <Input id="email" placeholder="" required />
-              </div>
-              <div className="space-y-2">
-                <label>Password</label>
-                <Input id="password" placeholder="" type="password" required />
-              </div>
-              <SubmitButton type="button">
-                <span className="font-semibold">Log In</span>
-              </SubmitButton>
-            </form>
+            <Login />
             <div className="login-util-wrapper flex flex-row w-full">
               <div className="flex flex-1 items-center">
                 <button
                   id="remember"
                   onClick={() => setRemember(prev => !prev)}
-                  className={`w-4 h-4 rounded-full ${
+                  className={`w-4 h-4 rounded-full shadow-inner ${
                     remember ? "bg-black" : "bg-gray-200"
                   }  transition`}
                 />
-                <label className="ml-2 text-sm" htmlFor="remember">
+                <label
+                  className="ml-2 text-sm cursor-pointer"
+                  htmlFor="remember"
+                  style={{
+                    color: remember ? theme.black_primary : theme.gray_primary,
+                  }}
+                >
                   Remember
                 </label>
               </div>
@@ -111,21 +107,13 @@ const LoginView: React.FC = () => {
           </>
         ) : tab === "NON-MEMBER" ? (
           <>
-            <form className="non-member-form flex flex-col space-y-4">
-              <div className="space-y-2">
-                <label>Order Code</label>
-                <Input id="orderCode" placeholder="" required />
-              </div>
-              <SubmitButton type="button" className="group">
-                <span className="font-semibold">Join</span>
-              </SubmitButton>
-            </form>
+            <OrderCode />
           </>
         ) : null}
       </div>
-
+      {/* SNS Section */}
       {tab === "MEMBER" && (
-        <div className="sns-sign-wrapper flex flex-col w-full space-y-4 relative">
+        <div className="sns-sign-wrapper flex flex-col w-full my-5 space-y-4 relative">
           <div
             className="absolute top-5 w-full border-t-[1.5px]"
             style={{ borderColor: theme.gray_light }}
@@ -143,7 +131,7 @@ const LoginView: React.FC = () => {
           </div>
           <Sns
             bgColor="#F1D100"
-            txColor={theme.text_color_primary}
+            txColor={theme.text_primary_color}
             context="KAKAO"
             _onClick={() =>
               window.open(
@@ -156,18 +144,18 @@ const LoginView: React.FC = () => {
           <Sns bgColor="#3C538C" txColor="#FCFCFC" context="FACEBOOK" />
           <Sns
             // bgColor="#F2F2F2"
-            txColor={theme.text_color_primary}
+            txColor={theme.text_primary_color}
             context="GOOGLE"
           />
           <Sns
             // bgColor="#F2F2F2"
-            txColor={theme.text_color_primary}
+            txColor={theme.text_primary_color}
             context="APPLE"
           />
         </div>
       )}
-
-      <div className="mt-5 sm:mt-10">
+      {/* Sign Up Section */}
+      <div className="sm:mt-5">
         <button style={{ color: theme.text_symbol_color }}>
           <span
             style={{ borderColor: theme.text_symbol_color }}
@@ -196,33 +184,33 @@ const TabButton = styled.button<any>`
   border-bottom-width: 2px;
   border-color: ${props =>
     props.$selected
-      ? props.theme.text_color_primary
+      ? props.theme.text_primary_color
       : props.theme.gray_primary};
 `;
 
 const TabButtonContext = styled.span<any>`
   color: ${props =>
     props.$selected
-      ? props.theme.text_color_primary
+      ? props.theme.text_primary_color
       : props.theme.gray_primary};
 
   ${tw`font-sansSrif text-base`};
 `;
 
-const Input = styled.input<any>`
+export const Input = styled.input<any>`
   width: 100%;
   background-color: ${props => props.theme.gray_light};
-  color: ${props => props.theme.text_color_primary};
+  color: ${props => props.theme.text_primary_color};
   border-width: 1px;
   border-color: transparent;
   line-height: 1rem;
   &:focus {
     border-color: ${props => props.theme.black_primary};
   }
-  ${tw`appearance-none px-4 py-3 rounded-md shadow-sm focus:outline-none focus:ring-black focus:ring-1`}
+  ${tw`appearance-none px-4 py-3 rounded-md shadow-sm box-border focus:outline-none focus:ring-black focus:ring-1`}
 `;
 
-const SubmitButton = styled.button<any>`
+export const SubmitButton = styled.button<any>`
   width: 100%;
   background-color: ${props => props.theme.gray_primary};
   color: ${props => props.theme.background_color};
@@ -235,7 +223,7 @@ const SubmitButton = styled.button<any>`
 const AccountHelpButton = styled.button<any>`
   color: ${props => props.theme.gray_primary};
   &:hover {
-    color: ${props => props.theme.$text_color_primary};
+    color: ${props => props.theme.$text_primary_color};
   }
 
   ${tw`text-sm`}

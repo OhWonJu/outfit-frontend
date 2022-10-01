@@ -1,12 +1,14 @@
 import { ReactNode } from "react";
 import dynamic from "next/dynamic";
 
-import { LoginView } from "@components/auth";
 import { Sidebar, LoadingDots, useUI } from "@components/ui";
 import { useAcceptCookies } from "@lib/hooks/useAcceptCookies";
 import Navbar from "../Navbar";
+import LoginView from "@components/auth/LoginView";
 import { CartSidebarView } from "@components/cart";
 import { MenuSidebarView } from "@components/menu";
+import SearchDropDown from "../Searchbar/SearchDropDown";
+import TestDropDown from "../NavDroupDown/TestDropDown";
 
 const Loading = () => (
   <div className="w-80 h-80 flex items-center text-center justify-center p-3">
@@ -98,6 +100,28 @@ const SidebarUI: React.FC = () => {
   ) : null;
 };
 // --------------------------------------------------------------------------------- //
+// Drop Down //
+const DropDownView: React.FC<{
+  dropDownView: string;
+  closeDropDown(): any;
+}> = ({ dropDownView, closeDropDown }) => {
+  return (
+    <>
+      {dropDownView === "SEARCH_VIEW" && (
+        <SearchDropDown onClose={closeDropDown} />
+      )}
+      {/* {dropDownView === "TEST_VIEW" && <TestDropDown onClose={closeDropDown} />} */}
+    </>
+  );
+};
+
+const DropDownUI: React.FC = () => {
+  const { displayDropDown, closeDropDown, dropDownView } = useUI();
+  return displayDropDown ? (
+    <DropDownView dropDownView={dropDownView} closeDropDown={closeDropDown} />
+  ) : null;
+};
+// ----------------------------------------------------------------------------------- //
 
 interface Props {
   children: ReactNode;
@@ -116,6 +140,7 @@ const Layout: React.FC<Props> = ({ children, pageProps }) => {
       <main>{children}</main>
       <ModalUI />
       <SidebarUI />
+      <DropDownUI />
     </div>
   );
 };

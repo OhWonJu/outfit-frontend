@@ -5,14 +5,17 @@ import type { AnyAction, CombinedState } from "@reduxjs/toolkit";
 // reducers //
 import sidebarReducer, { SidebarStateType } from "./sidebarReducer";
 import modalReducer, { ModalStateType } from "./modalReducer";
+import dropDownReducer, { dropDownStateType } from "./dropDownReducer";
 
 // actions //
 export { sidebarActions } from "./sidebarReducer";
 export { modalActions } from "./modalReducer";
+export { dropDownActions } from "./dropDownReducer";
 
 type ReducerState = {
   sidebar: SidebarStateType;
   modal: ModalStateType;
+  dropDown: dropDownStateType;
 };
 
 // 원래 "rootReducer"로 합쳐줄 필요 없이 "configureStore()"에서 합칠 수 있지만 "HYDRATE"를 위해서 사용
@@ -32,6 +35,7 @@ const rootReducer = (
       return combineReducers({
         sidebar: sidebarReducer,
         modal: modalReducer,
+        dropDown: dropDownReducer,
       })(state, action);
   }
 };

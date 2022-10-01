@@ -1,4 +1,4 @@
-import s from "./SingleLine.module.css"
+import s from "./SingleLine.module.css";
 
 const SingleLine = ({ ...props }) => {
   return (
@@ -8,9 +8,9 @@ const SingleLine = ({ ...props }) => {
       xmlns="http://www.w3.org/2000/svg"
       x="0px"
       y="0px"
-    //   width="100%"
+      //   width="100%"
       viewBox="0 0 704 992"
-      enable-background="new 0 0 704 992"
+      enableBackground="new 0 0 704 992"
       {...props}
     >
       <path
@@ -18,6 +18,8 @@ const SingleLine = ({ ...props }) => {
         fill="#000000"
         opacity="1.000000"
         stroke="none"
+        strokeWidth="5"
+        strokeLinecap="round"
         d="
 M247.399994,993.000000 
 	C247.443375,978.967834 241.527847,966.383118 237.833145,953.317749 

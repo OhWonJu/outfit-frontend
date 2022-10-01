@@ -61,9 +61,7 @@ const Sidebar: React.FC<SidebarProps> = ({
             className="h-full w-full sm:w-screen sm:max-w-md"
             style={{ backgroundColor: theme.container_bg_color }}
           >
-            <div className="" ref={contentRef}>
-              {children}
-            </div>
+            <div ref={contentRef}>{children}</div>
           </div>
         </section>
       </div>

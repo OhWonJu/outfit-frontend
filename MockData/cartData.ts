@@ -1,1 +1,1 @@
-export const cartData: number = 0;
+export const cartData: number = 102;

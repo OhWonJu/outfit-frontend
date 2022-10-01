@@ -1,47 +1,26 @@
-import { Logo, SingleLine } from "@components/icons";
 import type { NextPage } from "next";
 import Image from "next/image";
 import styled from "styled-components";
 import tw from "twin.macro";
 
-const BannerImage = () => (
-  <BannerWrapper>
-    <div className="absolute w-screen h-screen left-0 top-0">
-      <div className="relative w-full h-full pt-6">
-        <Image
-          priority
-          src="/mainPage/images/banner_demo.png"
-          style={{ marginTop: 100 }}
-          layout="fill"
-          objectFit="cover"
-          objectPosition="center"
-          alt={"banner"}
-        />
-      </div>
-    </div>
-    <div className="flex-1"></div>
-    <div className="flex-1 main--banner bg-sky-700 " />
-  </BannerWrapper>
-);
-
 const Home: NextPage = () => {
   return (
     <Container>
-      <div className="relative w-screen h-[80vh]">
-        <div className="absolute left-16 top-8 h-full">
+      {/* <div className="relative w-full h-[80vh]">
+        <div className="absolute left-[15%] top-8 h-full">
           <SingleLine className="w-full h-full" />
         </div>
-        <h2 className="absolute right-[43%] bottom-[21%] m-0 font-sansSrif text-4xl sm:text-5xl">
+        <h2 className="absolute right-[40%] bottom-[21%] m-0 font-sansSrif font-semibold text-4xl sm:text-5xl">
           Our fit
         </h2>
-        <h1 className="absolute right-[20%] bottom-[5%] m-0 font-sansSrif text-8xl sm:text-9xl">
+        <h1 className="absolute right-[20%] bottom-[5%] m-0 font-sansSrif font-semibold text-8xl sm:text-9xl">
           Out Fit
         </h1>
         <span className="absolute right-[20%] bottom-[4%] m-0 font-sansSrif sm:text-xl">
           Choose your fit
         </span>
       </div>
-      <div className="w-screen h-96 mt-10 bg-[#262626]"></div>
+      <div className="w-full h-[80vh] mt-10 bg-[#262626]"></div> */}
       <Wrapper></Wrapper>
 
       <Footer>
@@ -91,7 +70,7 @@ const Footer = styled.footer`
 `;
 
 const Base_Context = styled.div`
-  color: ${props => props.theme.text_color_primary};
+  color: ${props => props.theme.text_primary_color};
   /* font-size: 1.5rem; */
   font-weight: 300;
 `;

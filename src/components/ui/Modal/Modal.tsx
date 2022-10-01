@@ -24,8 +24,6 @@ const Modal: FC<ModalProps> = ({
 }) => {
   const ref = useRef() as React.MutableRefObject<HTMLDivElement>;
 
-  const theme = useTheme();
-
   const handleKey = useCallback(
     (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -48,10 +46,8 @@ const Modal: FC<ModalProps> = ({
     };
   }, [handleKey]);
 
-  console.log(mobileForm);
-
   return (
-    <div className="fixed bg-black bg-opacity-20 flex items-center inset-0 z-50 justify-center backdrop-blur-[1.2px]">
+    <div className="fixed bg-black bg-opacity-20 flex items-center inset-0 z-[100] justify-center backdrop-blur-[1.2px]">
       {/* <div
         className={`bg-[${theme.container_bg_color}] ${
           mobileForm ? "h-screen w-[100vh] sm:max-w-[420px]" : null
@@ -111,19 +107,14 @@ const ModalWrapper = styled.div<any>`
   ${props => {
     if (props.$mobileForm) {
       return css`
-        height: 100vh;
-        @media (max-width: 639px) {
-          width: 100vw;
-        }
-        @media (min-width: 640px) {
-          max-width: 420px;
-        }
         animation: ${props.$animation} 300ms
           cubic-bezier(0.25, 0.46, 0.45, 0.94) 1;
       `;
     }
   }};
 
-  ${tw`py-12 px-10 border relative`}/* ${props =>
+  ${tw`py-12 px-10 border relative`} /* ${props =>
     props.$mobileForm ? `${tw`overflow-auto`}` : null} */
+  ${props =>
+    props.$mobileForm && tw`h-[100%] w-[100%] sm:h-screen sm:max-w-[420px]`}
 `;
