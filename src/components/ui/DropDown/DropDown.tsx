@@ -21,7 +21,7 @@ const DropDown: React.FC<DropDownProps> = ({
   useEffect(() => {
     const dropDown = ref.current;
 
-    if (dropDown && hasBlur) {
+    if (dropDown) {
       disableBodyScroll(dropDown);
     }
 
@@ -38,17 +38,14 @@ const DropDown: React.FC<DropDownProps> = ({
       tabIndex={1}
     >
       <div className="absolute inset-0 overflow-hidden">
-        {hasBlur ? (
-          <div
-            onClick={onClose}
-            className="absolute inset-0 bg-black bg-opacity-20 duration-100 ease-linear backdrop-blur-[1.2px]"
-          />
-        ) : (
-          <div
-            onMouseEnter={onClose}
-            className="absolute inset-0 bg-opacity-0"
-          />
-        )}
+        <div
+          onMouseEnter={onClose}
+          className={`absolute inset-0 ${
+            hasBlur
+              ? "bg-black bg-opacity-20 duration-100 ease-linear backdrop-blur-[1.2px]"
+              : "absolute inset-0 bg-opacity-0"
+          }`}
+        />
         <section className="absolute inset-y-0 w-full h-[35%] flex outline-none">
           <InnerContainer>{children}</InnerContainer>
         </section>

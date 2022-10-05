@@ -167,7 +167,6 @@ const Navbar: FC<NavbarProps> = ({ links }) => {
               <div
                 className="absolute inline-flex right-[-5px] top-[11px] rounded-full whitespace-nowrap items-center justify-center"
                 style={{
-                  color: theme.text_secondary_color,
                   backgroundColor: theme.text_primary_color,
                 }}
               >
@@ -175,7 +174,12 @@ const Navbar: FC<NavbarProps> = ({ links }) => {
                   className="relative grid place-items-center w-5 h-5"
                   style={{ overflow: "hidden" }}
                 >
-                  <span className="absolute text-[0.5px] font-light text-ellipsis">
+                  <span
+                    style={{
+                      color: theme.text_secondary_color,
+                    }}
+                    className="absolute text-[0.5px] font-light text-ellipsis"
+                  >
                     {cartData <= 99 ? cartData : "99+"}
                   </span>
                 </div>

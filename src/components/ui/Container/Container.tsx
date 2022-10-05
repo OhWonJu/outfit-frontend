@@ -1,27 +1,32 @@
-import cn from 'clsx'
-import React, { FC } from 'react'
+import React, { FC } from "react";
+import tw from "twin.macro";
+import styled from "styled-components";
+
+// import { SideNav } from "@components/common";
+
 
 interface ContainerProps {
-  className?: string
-  children?: any
-  el?: HTMLElement
-  clean?: boolean
+  className?: string;
+  children?: any;
+  sideNavVisible?: boolean;
 }
 
 const Container: FC<ContainerProps> = ({
   children,
   className,
-  el = 'div',
-  clean = false, // Full Width Screen
+  sideNavVisible = true,
 }) => {
-  const rootClassName = cn(className, {
-    'mx-auto max-w-7xl px-6 w-full': !clean,
-  })
+  return (
+    <Wrapper className={className}>
+      {/* {sideNavVisible && <SideNav />} */}
+      {children}
+    </Wrapper>
+  );
+};
 
-  let Component: React.ComponentType<React.HTMLAttributes<HTMLDivElement>> =
-    el as any
+export default Container;
 
-  return <Component className={rootClassName}>{children}</Component>
-}
-
-export default Container
+const Wrapper = styled.div`
+  background-color: ${props => props.theme.background_color};
+  ${tw`min-h-screen sm:w-screen flex flex-row`}
+`;

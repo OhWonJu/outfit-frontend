@@ -33,7 +33,7 @@ const Collapse: FC<CollapseProps> = ({ title, children }) => {
       aria-expanded={isActive}
     >
       <div
-        className={"flex flex-row items-cente py-2"}
+        className={"flex flex-row items-cente my-2"}
         role="button"
         onClick={toggle}
       >
@@ -44,7 +44,7 @@ const Collapse: FC<CollapseProps> = ({ title, children }) => {
         />
         <span className={"pl-2 text-base font-medium"}>{title}</span>
       </div>
-      { /* @ts-ignore */ }
+      {/* @ts-ignore */}
       <a.div style={{ overflow: "hidden", ...animProps }}>
         <div ref={ref} className="overflow-hidden pl-8">
           {children}

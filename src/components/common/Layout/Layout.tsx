@@ -8,7 +8,6 @@ import LoginView from "@components/auth/LoginView";
 import { CartSidebarView } from "@components/cart";
 import { MenuSidebarView } from "@components/menu";
 import SearchDropDown from "../Searchbar/SearchDropDown";
-import TestDropDown from "../NavDroupDown/TestDropDown";
 
 const Loading = () => (
   <div className="w-80 h-80 flex items-center text-center justify-center p-3">
@@ -16,7 +15,7 @@ const Loading = () => (
   </div>
 );
 
-const SignUpView = dynamic(() => import("@components/auth/SignUpView"), {
+const SignUpView = dynamic(() => import("@components/auth/SignUpView/SignUpView"), {
   loading: Loading,
 });
 
@@ -129,14 +128,21 @@ interface Props {
     // pages?: Page[];
     // categories: Category[];
   };
+  path: string;
 }
 
-const Layout: React.FC<Props> = ({ children, pageProps }) => {
+// Nav bar Render되지 않는 예외 경로
+const NAV_INABLE_PATH = ["/join"];
+
+const Layout: React.FC<Props> = ({ children, pageProps, path }) => {
   const { acceptedCookies, onAcceptCookies } = useAcceptCookies();
+
+  // 더 최적화 할 방법은..?
+  const navAble = !NAV_INABLE_PATH.includes(path);
 
   return (
     <div>
-      <Navbar />
+      {navAble && <Navbar />}
       <main>{children}</main>
       <ModalUI />
       <SidebarUI />

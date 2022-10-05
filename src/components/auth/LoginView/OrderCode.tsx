@@ -1,6 +1,8 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Input, SubmitButton } from "./LoginView";
+
+import Input from "@components/ui/Input";
+import { SubmitButton } from "./LoginView";
 
 export default function OrderCode() {
   const { register, handleSubmit, getValues } = useForm();
@@ -16,9 +18,9 @@ export default function OrderCode() {
       <div className="space-y-2">
         <label>Order Code</label>
         <Input
-          {...register("orderCode", { required: true })}
           id="orderCode"
-          placeholder=""
+          register={register("orderCode", { required: true })}
+          required
         />
       </div>
       <SubmitButton className="group">

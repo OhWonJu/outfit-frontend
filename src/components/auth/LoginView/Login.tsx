@@ -1,7 +1,11 @@
 import React from "react";
 import { FieldErrors, useForm } from "react-hook-form";
-import { validate } from "email-validator";
-import { Input, SubmitButton } from "./LoginView";
+import { validate as emailVaildate } from "email-validator";
+
+import useTheme from "@lib/hooks/useTheme";
+import { Input, InputLabel } from "@components/ui";
+
+import { SubmitButton } from "./LoginView";
 
 interface LoginFormProps {
   email: string;
@@ -9,7 +13,16 @@ interface LoginFormProps {
 }
 
 export default function Login() {
-  const { register, handleSubmit } = useForm<LoginFormProps>();
+  const theme = useTheme();
+
+  // React Form Hook //
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginFormProps>({
+    mode: "onChange",
+  });
 
   const onValid = (data: LoginFormProps) => {
     console.log("valid Action", data);
@@ -17,36 +30,51 @@ export default function Login() {
   const onInvaild = (errors: FieldErrors) => {
     console.log(errors);
   };
+  // --------------------------------------------- //
 
   return (
     <form
       onSubmit={handleSubmit(onValid, onInvaild)}
-      className="member-form flex flex-col mb-4 space-y-4"
+      className="member-form flex flex-col my-4 space-y-4"
     >
+      {/* Email Form */}
       <div className="space-y-2">
-        <label>Email</label>
+        <InputLabel title="Email" help={errors.email?.message} />
         <Input
-          {...register("email", { required: "Email is required" })}
+          register={register("email", {
+            required: "Email is required",
+            validate: {
+              emailFormCheck: value =>
+                emailVaildate(value) || "Check your email form",
+            },
+          })}
           id="email"
           type="email"
-          placeholder=""
+          required
+          isInvalid={Boolean(errors.email?.message)}
         />
       </div>
+      {/* Password Form */}
       <div className="space-y-2">
-        <label>Password</label>
+        <InputLabel title="Password" help={errors.password?.message} />
         <Input
-          {...register("password", {
+          register={register("password", {
             required: "Password is required",
             minLength: {
               message: "Password Should be longer then 8 chars",
               value: 8,
             },
+            validate: {
+              // patternCheck: () => true
+            },
           })}
           id="password"
           type="password"
-          placeholder=""
+          required
+          isInvalid={Boolean(errors.password?.message)}
         />
       </div>
+      {/* Submit Btn */}
       <SubmitButton>
         <span className="font-semibold">Log In</span>
       </SubmitButton>

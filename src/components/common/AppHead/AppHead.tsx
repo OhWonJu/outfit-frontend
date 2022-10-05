@@ -1,9 +1,9 @@
 import Head from "next/head";
 
-const AppHead = () => {
+const AppHead = ({ title = "OUTFIT" }) => {
   return (
     <Head>
-      <title>OUTFIT</title>
+      <title>{title}</title>
       <meta name="description" content="OUTFIT" />
     </Head>
   );

@@ -1,10 +1,13 @@
-import React, { FC, useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
 
 import useTheme from "@lib/hooks/useTheme";
 import Login from "./Login";
 import OrderCode from "./OrderCode";
+import { property } from "lodash";
+import Link from "@components/ui/Link";
+import { useUI } from "@components/ui";
 
 type tabType = "MEMBER" | "NON-MEMBER";
 
@@ -39,12 +42,14 @@ const Sns: React.FC<{
     </SNSLogIn>
   );
 };
-
+/**
+ * input valid 관련 border css는 login에서는 하지말구 signUp 에서.
+ */
 const LoginView: React.FC = () => {
   const theme = useTheme();
 
+  const { closeModal, closeSidebar } = useUI();
   const [tab, setTab] = useState<tabType>("MEMBER");
-
   const [remember, setRemember] = useState(false);
 
   return (
@@ -118,7 +123,7 @@ const LoginView: React.FC = () => {
             className="absolute top-5 w-full border-t-[1.5px]"
             style={{ borderColor: theme.gray_light }}
           />
-          <div className="relative -top-[0.45rem] text-center">
+          <div className="relative -top-[0.3rem] text-center">
             <span
               className="px-2 text-sm"
               style={{
@@ -156,17 +161,29 @@ const LoginView: React.FC = () => {
       )}
       {/* Sign Up Section */}
       <div className="sm:mt-5">
-        <button style={{ color: theme.text_symbol_color }}>
+        <Link
+          href={"/join"}
+          onClick={() => {
+            closeModal();
+            closeSidebar();
+          }}
+        >
           <span
-            style={{ borderColor: theme.text_symbol_color }}
+            style={{
+              color: theme.text_symbol_color,
+              borderColor: theme.text_symbol_color,
+            }}
             className="text-xs font-semibold font-sansSrif border rounded-md px-1 py-1"
           >
             JOIN US!
           </span>
-          <span className="ml-3 text-xs font-semibold font-sansSrif">
+          <span
+            style={{ color: theme.text_symbol_color }}
+            className="ml-3 text-xs font-semibold font-sansSrif"
+          >
             FOR MORE BENEFIT
           </span>
-        </button>
+        </Link>
       </div>
     </Container>
   );
@@ -201,19 +218,23 @@ export const Input = styled.input<any>`
   width: 100%;
   background-color: ${props => props.theme.gray_light};
   color: ${props => props.theme.text_primary_color};
-  border-width: 1px;
+  border-width: 1.4px;
   border-color: transparent;
   line-height: 1rem;
   &:focus {
-    border-color: ${props => props.theme.black_primary};
+    border-color: ${props =>
+      props.isInvalid ? props.theme.red_primary : props.theme.black_primary};
   }
-  ${tw`appearance-none px-4 py-3 rounded-md shadow-sm box-border focus:outline-none focus:ring-black focus:ring-1`}
+  border-color: ${props => props.isInvalid && props.theme.red_primary};
+  ${tw`appearance-none px-4 py-3 rounded-md shadow-sm box-border focus:outline-none focus:ring-black focus:ring-0`};
 `;
 
 export const SubmitButton = styled.button<any>`
   width: 100%;
   background-color: ${props => props.theme.gray_primary};
-  color: ${props => props.theme.background_color};
+  & > span {
+    color: ${props => props.theme.text_secondary_color};
+  }
   &:hover {
     background-color: ${props => props.theme.black_primary};
   }
