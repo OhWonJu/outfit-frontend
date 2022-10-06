@@ -9,6 +9,7 @@ import {
   dropDownActions,
   modalActions,
   sidebarActions,
+  windowActions,
 } from "@lib/store/reducers";
 
 // type
@@ -17,6 +18,7 @@ import type { RootState } from "@lib/store/store";
 import type { SIDEBAR_VIEWS } from "@lib/store/types/sidebarType";
 import type { MODAL_VIEWS } from "@lib/store/types/modalType";
 import type { DROP_DOWN_VIEWS } from "@lib/store/types/dropDownType";
+import type { WINDOW_VIEWS } from "@lib/store/types/windowType";
 
 export const useUI = () => {
   const dispatch = useDispatch();
@@ -30,6 +32,9 @@ export const useUI = () => {
   );
   const { displayDropDown, dropDownView } = useSelector(
     ({ dropDown }: RootState) => dropDown,
+  );
+  const { displayWindow, windowView } = useSelector(
+    ({ window }: RootState) => window,
   );
   // --------------------------------------------------- //
 
@@ -60,6 +65,16 @@ export const useUI = () => {
   const closeDropDown = useCallback(
     () =>
       dispatch(dropDownActions.dropDownReducer({ type: "CLOSE_DROP_DOWN" })),
+    [dispatch],
+  );
+
+  const openWindow = useCallback(
+    () => dispatch(windowActions.windowReducer({ type: "OPEN_WINDOW" })),
+    [dispatch],
+  );
+
+  const closeWindow = useCallback(
+    () => dispatch(windowActions.windowReducer({ type: "CLOSE_WINDOW" })),
     [dispatch],
   );
 
@@ -100,6 +115,12 @@ export const useUI = () => {
     [dispatch],
   );
 
+  const setWindowView = useCallback(
+    (view: WINDOW_VIEWS) =>
+      dispatch(windowActions.windowReducer({ type: "SET_WINDOW", view })),
+    [dispatch],
+  );
+
   const context = {
     displaySidebar,
     sidebarView,
@@ -107,17 +128,22 @@ export const useUI = () => {
     modalView,
     displayDropDown,
     dropDownView,
+    displayWindow,
+    windowView,
     openSidebar: () => openSidebar(),
     closeSidebar: () => closeSidebar(),
     openModal: () => openModal(),
     closeModal: () => closeModal(),
     openDropDown: () => openDropDown(),
     closeDropDown: () => closeDropDown(),
+    openWindow: () => openWindow(),
+    closeWindow: () => closeWindow(),
     toggleSidebar: () => toggleSidebar(),
     closeSidebarIfPresent: () => closeSidebarIfPresent(),
     setSidebarView: (view: SIDEBAR_VIEWS) => setSidebarView(view),
     setModalView: (view: MODAL_VIEWS) => setModalView(view),
     setDropDownView: (view: DROP_DOWN_VIEWS) => setDropDownView(view),
+    setWindowView: (view: WINDOW_VIEWS) => setWindowView(view),
   };
 
   return context;

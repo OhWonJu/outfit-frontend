@@ -16,5 +16,6 @@ export { default as Modal } from "./Modal";
 export { default as Sidebar } from "./Sidebar";
 // export { default as Skeleton } from './Skeleton'
 // export { default as Text } from './Text'
+export { default as Window } from "./Window";
 // export * from './Dropdown/Dropdown'
 export { useUI } from "./context";

@@ -15,9 +15,12 @@ const Loading = () => (
   </div>
 );
 
-const SignUpView = dynamic(() => import("@components/auth/SignUpView/SignUpView"), {
-  loading: Loading,
-});
+const SignUpView = dynamic(
+  () => import("@components/auth/SignUpView/SignUpView"),
+  {
+    loading: Loading,
+  },
+);
 
 const ForgotPassword = dynamic(
   () => import("@components/auth/ForgotPassword"),

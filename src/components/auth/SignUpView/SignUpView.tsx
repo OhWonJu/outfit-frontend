@@ -12,6 +12,7 @@ import { Input, InputLabel } from "@components/ui";
 import { MOBILEABLE_CONTAINER_HORIZONTAL_SPACE } from "src/constants";
 import PolicyListView from "./PolicyListView";
 import useTheme from "@lib/hooks/useTheme";
+import Header from "./Header";
 
 interface Props {}
 
@@ -26,6 +27,8 @@ const SignUpView: FC<Props> = () => {
   const theme = useTheme();
 
   const { setModalView, openModal } = useUI();
+
+  const [policiesAccept, setPoliciesAccept] = useState(false);
 
   // React Form Hook //
   const {
@@ -56,14 +59,7 @@ const SignUpView: FC<Props> = () => {
       <AppHead title="Join | OUTFIT" />
       <div className="flex w-full h-full justify-center items-center">
         <Wrapper>
-          <Header>
-            <div>
-              <h1 className="font-bold text-5xl">OUT FIT</h1>
-            </div>
-            <div>
-              <h3 className="font-medium">Join us! for your best out fit</h3>
-            </div>
-          </Header>
+          <Header />
           {/* FORM */}
           <InnerWrapper className={MOBILEABLE_CONTAINER_HORIZONTAL_SPACE}>
             <form
@@ -93,7 +89,11 @@ const SignUpView: FC<Props> = () => {
                       backgroundColor: "transparent",
                     }}
                   />
-                  <TempButton className="shadow-md focus:shadow-inner">
+                  <TempButton
+                    type="button"
+                    // onClick={() => console.log("ASD")}
+                    className="shadow-md focus:shadow-inner"
+                  >
                     <span className="text-sm font-semibol">중복 확인</span>
                   </TempButton>
                 </Row>
@@ -175,11 +175,21 @@ const SignUpView: FC<Props> = () => {
               </InputWrapper>
             </form>
           </InnerWrapper>
-          {/* POLICY */}
+          {/* ETC ... */}
           <InnerWrapper className={MOBILEABLE_CONTAINER_HORIZONTAL_SPACE}>
-            <PolicyListView />
+            {/* POLICY */}
+            <PolicyListView setPoliciesAccept={setPoliciesAccept} />
+            {/* 인증 및 SUBMIT */}
+            <div className="flex justify-center items-center mt-5">
+              <LogInButton
+                type="submit"
+                onClick={handleSubmit(onValid, onInvaild)}
+              >
+                <span className="font-semibold">본인인증하고 가입하기</span>
+              </LogInButton>
+            </div>
             {/* REDIRECT TO LOG IN */}
-            <div className="sign-wrapper flex flex-col w-full my-5 space-y-4 relative">
+            <div className="sign-wrapper flex flex-col w-full mt-10 mb-5 space-y-4 relative">
               <div
                 className="absolute top-5 w-full border-t-[1.5px]"
                 style={{ borderColor: theme.gray_light }}
@@ -216,11 +226,7 @@ const SignUpView: FC<Props> = () => {
 export default SignUpView;
 
 const Wrapper = styled.div`
-  ${tw`flex flex-col min-h-screen w-full sm:max-w-[640px] items-center py-12 px-10`}
-`;
-
-const Header = styled.div`
-  ${tw`flex flex-col items-center pb-10`}
+  ${tw`flex flex-col min-h-screen w-full sm:max-w-[640px] items-center py-6 sm:px-10`}
 `;
 
 const InnerWrapper = styled.div`
