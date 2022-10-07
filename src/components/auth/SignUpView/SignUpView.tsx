@@ -189,7 +189,7 @@ const SignUpView: FC<Props> = () => {
               </LogInButton>
             </div>
             {/* REDIRECT TO LOG IN */}
-            <div className="sign-wrapper flex flex-col w-full mt-10 mb-5 space-y-4 relative">
+            <div className="sign-wrapper flex flex-col w-full mt-14 mb-5 space-y-4 relative">
               <div
                 className="absolute top-5 w-full border-t-[1.5px]"
                 style={{ borderColor: theme.gray_light }}

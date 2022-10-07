@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import ReactDom, { createPortal } from "react-dom";
+import { useUI } from "@components/ui";
 
 interface WindowProps {
   className?: string;
@@ -14,6 +15,8 @@ const Window: React.FC<WindowProps> = ({
   children,
   onClose,
 }) => {
+  const { displayWindow } = useUI();
+
   const [container, setContainer] = useState<HTMLDivElement>();
   const newWindow = useRef<any>(null);
 
@@ -30,11 +33,21 @@ const Window: React.FC<WindowProps> = ({
       // Append container
       newWindow.current.document.body.appendChild(container);
 
+      newWindow.current.addEventListener(
+        "beforeunload",
+        function (event: Event) {
+          onClose();
+        },
+      );
+
       // Save reference to window for cleanup
       const curWindow = newWindow.current;
 
       // Return cleanup function
-      return () => curWindow.close();
+      return () => {
+        curWindow.close();
+        onClose();
+      };
     }
   }, [container]);
 

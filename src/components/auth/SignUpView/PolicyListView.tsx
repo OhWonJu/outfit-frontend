@@ -5,6 +5,7 @@ import { useUI, Window } from "@components/ui";
 import { Col, Row } from "src/styles/GlobalStyle";
 import { Check } from "@components/icons";
 import Policy from "@components/policy";
+import { WINDOW_VIEWS } from "@lib/store/types/windowType";
 
 // Policy Window View //
 const WindowView: React.FC<{
@@ -13,12 +14,7 @@ const WindowView: React.FC<{
 }> = ({ windowView, closeWindow }) => {
   return (
     <>
-      {windowView === "POLICY_TEST1" && (
-        <Window onClose={closeWindow}>
-          <Policy />
-        </Window>
-      )}
-      {windowView === "POLICY_TEST2" && (
+      {windowView.includes("POLICY") && (
         <Window onClose={closeWindow}>
           <Policy />
         </Window>
@@ -44,11 +40,34 @@ const PolicyListView: React.FC<PolicyListViewProps> = ({
 }) => {
   const theme = useTheme();
 
-  const policy_context_list = [
-    "[필수] 개인정보 수집 및 이용 동의",
-    "[필수] 무신사, 무신사 스토어 이용 악관",
-    "[필수] 만 14세 미만 가입 제한",
-    "[선택] 마케팅 활용 및 광고성 정보 수신 동의",
+  // UI //
+  const { setWindowView, openWindow, closeWindow, displayWindow } = useUI();
+
+  const policy_context_list: Array<{
+    context: string;
+    policy: WINDOW_VIEWS;
+    required: boolean;
+  }> = [
+    {
+      context: "[필수] 개인정보 수집 및 이용 동의",
+      policy: "POLICY_TEST1",
+      required: true,
+    },
+    {
+      context: "[필수] 아웃핏, 아웃핏 스토어 이용 악관",
+      policy: "POLICY_TEST2",
+      required: true,
+    },
+    {
+      context: "[필수] 만 14세 미만 가입 제한",
+      policy: "POLICY_TEST3",
+      required: true,
+    },
+    {
+      context: "[선택] 마케팅 활용 및 광고성 정보 수신 동의",
+      policy: "POLICY_TEST4",
+      required: false,
+    },
   ];
 
   const [policyCheck, setPolicyCheck] = useState<Array<boolean>>([]);
@@ -60,7 +79,7 @@ const PolicyListView: React.FC<PolicyListViewProps> = ({
   }, []);
 
   useEffect(() => {
-    if (policyCheck.every(value => value === true)) {
+    if (policyCheck.every(isTrue => isTrue)) {
       setAllCheck(true);
       setPoliciesAccept(true);
     } else {
@@ -92,13 +111,23 @@ const PolicyListView: React.FC<PolicyListViewProps> = ({
     }
   };
 
+  const handleShowPolicy = (view: WINDOW_VIEWS) => {
+    setWindowView(view);
+
+    if (displayWindow) {
+      closeWindow();
+    }
+    setTimeout(() => openWindow(), 100);
+    return;
+  };
+
   return (
     <>
       <WindowUI />
       <div className="justify-center items-center">
         <Row className="items-center">
           <button
-            id="remember"
+            id="checkAll"
             onClick={() => {
               setAllCheck(prev => !prev);
               toggleAllPolicy();
@@ -115,16 +144,17 @@ const PolicyListView: React.FC<PolicyListViewProps> = ({
           </button>
           <label
             className="ml-2 mt-1 text-lg font-semibold cursor-pointer"
-            htmlFor="remember"
+            htmlFor="checkAll"
           >
             Check all Policy
           </label>
         </Row>
-        <Col className="my-5">
+        <Col className="mt-4 mb-5 ml-[3px]">
           <ul className="space-y-5">
-            {policy_context_list.map((context, index) => (
+            {policy_context_list.map((policy, index) => (
               <li key={index}>
-                <Row>
+                <Row className="space-x-2 text-sm">
+                  {/* Accept Polciy */}
                   <button onClick={() => togglePolicyAccept(index)}>
                     <Row className="space-x-2">
                       <Check
@@ -136,9 +166,25 @@ const PolicyListView: React.FC<PolicyListViewProps> = ({
                         }
                       />
                       <span style={{ color: theme.gray_primary }}>
-                        {context}
+                        {policy.context}
                       </span>
                     </Row>
+                  </button>
+                  {/* Show Policy PDF? */}
+                  <button
+                    onClick={() => {
+                      handleShowPolicy(policy.policy);
+                    }}
+                  >
+                    <span
+                      style={{
+                        color: theme.gray_primary,
+                        textDecorationLine: "underline",
+                        textUnderlineOffset: 3,
+                      }}
+                    >
+                      자세히
+                    </span>
                   </button>
                 </Row>
               </li>

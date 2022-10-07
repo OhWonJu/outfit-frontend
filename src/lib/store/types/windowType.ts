@@ -1,4 +1,4 @@
-export type WINDOW_VIEWS = "POLICY_TEST1" | "POLICY_TEST2";
+export type WINDOW_VIEWS = "POLICY_TEST1" | "POLICY_TEST2" | "POLICY_TEST3" | "POLICY_TEST4";
 
 export type WINDOW_ACTION =
   | {

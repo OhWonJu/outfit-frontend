@@ -1,4 +1,5 @@
 import React from "react";
+import { SYMBOL_TEXT } from "src/constants";
 import styled, { keyframes } from "styled-components";
 import tw from "twin.macro";
 
@@ -6,7 +7,7 @@ export default function Header() {
   return (
     <Wrapper>
       <div>
-        <H1>OUT FIT</H1>
+        <H1>{SYMBOL_TEXT}</H1>
       </div>
       <div>
         <H3>Join us! for your best out fit</H3>

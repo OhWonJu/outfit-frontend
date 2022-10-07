@@ -1,3 +1,5 @@
+export const SYMBOL_TEXT: string = "OUT FIT";
+
 export const NAV_HEIGHT: number = 60;
 
 export const BORDER_TINE_WIDTH: number = 1;
