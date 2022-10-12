@@ -12,10 +12,12 @@ export { default as LoadingDots } from "./LoadingDots";
 // export { default as Marquee } from './Marquee'
 export { default as Modal } from "./Modal";
 // export { default as Quantity } from './Quantity'
+export { default as RangeSlider } from "./RangeSlider";
 // export { default as Rating } from './Rating'
 export { default as Sidebar } from "./Sidebar";
 // export { default as Skeleton } from './Skeleton'
 // export { default as Text } from './Text'
+export { default as VerticalSidebar } from "./VerticalSidebar";
 export { default as Window } from "./Window";
 // export * from './Dropdown/Dropdown'
 export { useUI } from "./context";

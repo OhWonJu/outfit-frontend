@@ -56,12 +56,13 @@ const SignUpView: FC<Props> = () => {
 
   return (
     <>
-      <AppHead title="Join | OUTFIT" />
       <div className="flex w-full h-full justify-center items-center">
         <Wrapper>
+          {/* Animated Header */}
           <Header />
-          {/* FORM */}
+          {/* Wrapper for Mobile able view */}
           <InnerWrapper className={MOBILEABLE_CONTAINER_HORIZONTAL_SPACE}>
+            {/* SIGN UP FORM */}
             <form
               onSubmit={handleSubmit(onValid, onInvaild)}
               className="member-form flex flex-col my-4 space-y-8"
@@ -174,9 +175,6 @@ const SignUpView: FC<Props> = () => {
                 />
               </InputWrapper>
             </form>
-          </InnerWrapper>
-          {/* ETC ... */}
-          <InnerWrapper className={MOBILEABLE_CONTAINER_HORIZONTAL_SPACE}>
             {/* POLICY */}
             <PolicyListView setPoliciesAccept={setPoliciesAccept} />
             {/* 인증 및 SUBMIT */}

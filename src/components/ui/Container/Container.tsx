@@ -1,24 +1,36 @@
 import React, { FC } from "react";
-import tw from "twin.macro";
+import { VerticalSidebar } from "@components/ui";
+
 import styled from "styled-components";
+import tw from "twin.macro";
 
-// import { SideNav } from "@components/common";
-
+// Vertical Side bar //
+const VerticalSidebarUI: React.FC<{
+  children?: any;
+}> = ({ children }) => {
+  return <VerticalSidebar>{children}</VerticalSidebar>;
+};
+// ---------------------------------------------------- //
 
 interface ContainerProps {
   className?: string;
   children?: any;
-  sideNavVisible?: boolean;
+  verticalSidebarVisible?: boolean;
+  verticalSidebarChildren?: any;
 }
 
 const Container: FC<ContainerProps> = ({
   children,
   className,
-  sideNavVisible = true,
+  verticalSidebarVisible = true,
+  verticalSidebarChildren,
 }) => {
   return (
     <Wrapper className={className}>
-      {/* {sideNavVisible && <SideNav />} */}
+      {/* 왼편 사이드 바 */}
+      {verticalSidebarVisible && (
+        <VerticalSidebarUI>{verticalSidebarChildren}</VerticalSidebarUI>
+      )}
       {children}
     </Wrapper>
   );

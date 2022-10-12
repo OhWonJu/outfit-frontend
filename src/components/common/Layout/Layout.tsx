@@ -29,6 +29,10 @@ const ForgotPassword = dynamic(
   },
 );
 
+// ------------ UI Protocol?? ------------ //
+// UI -> View(어떤 뷰) -> UI Component(공통 액션 처리) -> <UILayout>{Component}</UILayout>(실제 개별 UI)
+// ---------------------------------------------------------------------------------------------- //
+
 // Modal //
 const Modal = dynamic(() => import("@components/ui/Modal"), {
   loading: Loading,
