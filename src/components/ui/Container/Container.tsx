@@ -1,8 +1,8 @@
 import React, { FC } from "react";
-import { VerticalSidebar } from "@components/ui";
-
 import styled from "styled-components";
 import tw from "twin.macro";
+
+import { VerticalSidebar } from "@components/ui";
 
 // Vertical Side bar //
 const VerticalSidebarUI: React.FC<{
@@ -17,6 +17,7 @@ interface ContainerProps {
   children?: any;
   verticalSidebarVisible?: boolean;
   verticalSidebarChildren?: any;
+  [key: string]: any;
 }
 
 const Container: FC<ContainerProps> = ({
@@ -24,14 +25,15 @@ const Container: FC<ContainerProps> = ({
   className,
   verticalSidebarVisible = true,
   verticalSidebarChildren,
+  ...rest
 }) => {
   return (
-    <Wrapper className={className}>
+    <Wrapper className={className} {...rest}>
       {/* 왼편 사이드 바 */}
       {verticalSidebarVisible && (
         <VerticalSidebarUI>{verticalSidebarChildren}</VerticalSidebarUI>
       )}
-      {children}
+      <div className="w-full h-full">{children}</div>
     </Wrapper>
   );
 };

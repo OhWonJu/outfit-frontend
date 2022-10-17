@@ -47,7 +47,7 @@ const Modal: FC<ModalProps> = ({
   }, [handleKey]);
 
   return (
-    <div className="fixed bg-black bg-opacity-20 flex items-center inset-0 z-[100] justify-center backdrop-blur-[1.2px]">
+    <div className="fixed bg-black bg-opacity-10 flex items-center inset-0 z-[100] justify-center backdrop-blur-[1.2px]">
       {/* <div
         className={`bg-[${theme.container_bg_color}] ${
           mobileForm ? "h-screen w-[100vh] sm:max-w-[420px]" : null
@@ -113,7 +113,7 @@ const ModalWrapper = styled.div<any>`
     }
   }};
 
-  ${tw`py-12 px-10 border relative`} /* ${props =>
+  ${tw`py-12 px-10 border relative shadow-md`} /* ${props =>
     props.$mobileForm ? `${tw`overflow-auto`}` : null} */
   ${props =>
     props.$mobileForm && tw`h-[100%] w-[100%] sm:h-screen sm:max-w-[420px]`}

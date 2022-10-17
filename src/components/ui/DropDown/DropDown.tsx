@@ -42,11 +42,11 @@ const DropDown: React.FC<DropDownProps> = ({
           onMouseEnter={onClose}
           className={`absolute inset-0 ${
             hasBlur
-              ? "bg-black bg-opacity-20 duration-100 ease-linear backdrop-blur-[1.2px]"
+              ? "bg-black bg-opacity-10 duration-100 ease-linear backdrop-blur-[1.2px]"
               : "absolute inset-0 bg-opacity-0"
           }`}
         />
-        <section className="absolute inset-y-0 w-full h-[35%] flex outline-none">
+        <section className="absolute inset-y-0 w-full min-h-[35%] max-h-[45%] h-fit flex outline-none">
           <InnerContainer>{children}</InnerContainer>
         </section>
       </div>
@@ -57,7 +57,7 @@ const DropDown: React.FC<DropDownProps> = ({
 export default DropDown;
 
 const InnerContainer = styled.div<any>`
-  ${tw`h-full w-full shadow-md cursor-default`}
+  ${tw`w-full shadow-md cursor-default`}
   background-color: ${props => props.theme.background_color};
   border-top-width: ${BORDER_TINE_WIDTH}px;
   border-color: ${props => props.theme.gray_ligth};

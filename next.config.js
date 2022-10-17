@@ -5,6 +5,10 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
+  images: {
+    // for test 
+    domains: ["static.nike.com"],
+  },
 };
 
 module.exports = nextConfig;

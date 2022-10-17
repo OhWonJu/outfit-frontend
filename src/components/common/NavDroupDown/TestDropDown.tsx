@@ -1,5 +1,5 @@
-import { DropDown } from "@components/ui";
 import React from "react";
+import { DropDown } from "@components/ui";
 
 interface TestDropDownProps {
   onClose?: () => void;
@@ -7,8 +7,8 @@ interface TestDropDownProps {
 
 const TestDropDown: React.FC<TestDropDownProps> = ({ onClose }) => {
   return (
-    <DropDown onClose={onClose} hasBlur={false}>
-      <div>testing</div>
+    <DropDown onClose={onClose}>
+      <div className="">testing</div>
     </DropDown>
   );
 };

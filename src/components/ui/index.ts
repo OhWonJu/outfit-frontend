@@ -15,6 +15,7 @@ export { default as Modal } from "./Modal";
 export { default as RangeSlider } from "./RangeSlider";
 // export { default as Rating } from './Rating'
 export { default as Sidebar } from "./Sidebar";
+export { default as Tag } from "./Tag";
 // export { default as Skeleton } from './Skeleton'
 // export { default as Text } from './Text'
 export { default as VerticalSidebar } from "./VerticalSidebar";

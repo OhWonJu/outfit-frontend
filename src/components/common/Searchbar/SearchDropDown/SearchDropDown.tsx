@@ -4,6 +4,7 @@ import tw from "twin.macro";
 
 import useTheme from "@lib/hooks/useTheme";
 import DropDown from "@components/ui/DropDown";
+import { Tag } from "@components/ui";
 
 // MOCK DATA //
 const cardData = [
@@ -49,14 +50,6 @@ const curr = [
 ];
 // --------------------------------- //
 
-const Card: React.FC<any> = ({ item }) => {
-  return (
-    <CardBtn>
-      <span className="font-semibold group-hover:text-white">{item}</span>
-    </CardBtn>
-  );
-};
-
 interface SearchDropDownProps {
   onClose: () => void;
 }
@@ -64,7 +57,7 @@ interface SearchDropDownProps {
 const SearchDropDown: React.FC<SearchDropDownProps> = ({ onClose }) => {
   return (
     <DropDown onClose={onClose}>
-      <div className="py-7 flex flex-col w-full h-full overflow-y-scroll px-10 xmd:px-0 xmd:justify-between xmd:flex-row ">
+      <div className="py-7 flex flex-col w-full h-full overflow-y-scroll px-10 xmd:px-0 xmd:justify-between xmd:flex-row \">
         {/*  */}
         <div className="search_current flex flex-1 flex-col px-2 xmd:items-end xmd:flex-[1] xmd:pr-16">
           <div className="xmd:w-[45%]">
@@ -87,7 +80,7 @@ const SearchDropDown: React.FC<SearchDropDownProps> = ({ onClose }) => {
           <h2 className="font-semibold text-lg">Recommed Keywords</h2>
           <div className="mt-5 flex flex-wrap">
             {cardData.map((v, i) => (
-              <Card key={i} item={v} />
+              <Tag key={i} context={v} />
             ))}
           </div>
         </div>
@@ -103,16 +96,5 @@ const Span = styled.span<any>`
   color: ${props => props.theme.gray_primary};
   :hover {
     color: ${props => props.theme.text_primary_color};
-  }
-`;
-
-const CardBtn = styled.button<any>`
-  ${tw`p-3 mr-2 mb-2 flex rounded-full hover:bg-black items-center`}
-  background-color: ${props => props.theme.gray_light};
-  color: ${props => props.theme.gray_primary};
-
-  :hover {
-    background-color: ${props => props.theme.text_primary_color};
-    color: ${props => props.theme.text_secondary_color};
   }
 `;

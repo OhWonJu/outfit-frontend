@@ -7,7 +7,7 @@ interface TestDropDownProps {
 
 const TestDropDown2: React.FC<TestDropDownProps> = ({ onClose }) => {
   return (
-    <DropDown onClose={onClose} hasBlur={false}>
+    <DropDown onClose={onClose}>
       <div>testing2</div>
     </DropDown>
   );

@@ -17,7 +17,7 @@ const VerticalSidebar: React.FC<SidebarProps> = ({ children }) => {
       }}
       tabIndex={1}
     >
-      <div>{children}</div>
+      <div className="w-full h-full">{children}</div>
     </aside>
   );
 };

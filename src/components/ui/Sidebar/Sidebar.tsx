@@ -49,7 +49,7 @@ const Sidebar: React.FC<SidebarProps> = ({
     >
       <div className="absolute inset-0 overflow-hidden">
         <div
-          className="absolute inset-0 bg-black bg-opacity-20 duration-100 ease-linear backdrop-blur-[1.2px]"
+          className="absolute inset-0 bg-black bg-opacity-10 duration-100 ease-linear backdrop-blur-[1.2px]"
           onClick={onClose}
         />
         <section
@@ -58,7 +58,7 @@ const Sidebar: React.FC<SidebarProps> = ({
           } w-full sm:w-auto max-w-full flex outline-none`}
         >
           <div
-            className="h-full w-full sm:w-screen sm:max-w-md"
+            className="h-full w-full sm:w-screen sm:max-w-md shadow-md"
             style={{ backgroundColor: theme.container_bg_color }}
           >
             <div ref={contentRef}>{children}</div>

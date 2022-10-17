@@ -250,9 +250,9 @@ const AccountHelpButton = styled.button<any>`
   ${tw`text-sm`}
 `;
 
-const SNSLogIn = styled.div<any>`
+export const SNSLogIn = styled.button<any>`
   width: 100%;
   background-color: ${props => props.$bgColor};
   color: ${props => props.theme.$txColor};
-  ${tw`px-4 py-3 rounded-md flex justify-center items-center shadow hover:shadow-inner transition-shadow`}
+  ${tw`px-4 py-4 rounded-md flex justify-center items-center shadow hover:shadow-inner transition-shadow`}
 `;

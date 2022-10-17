@@ -7,7 +7,6 @@ import tw from "twin.macro";
 import { Row } from "src/styles/GlobalStyle";
 import { Info } from "@components/icons";
 import { useUI } from "@components/ui/context";
-import AppHead from "@components/common/AppHead";
 import { Input, InputLabel } from "@components/ui";
 import { MOBILEABLE_CONTAINER_HORIZONTAL_SPACE } from "src/constants";
 import PolicyListView from "./PolicyListView";
@@ -65,7 +64,7 @@ const SignUpView: FC<Props> = () => {
             {/* SIGN UP FORM */}
             <form
               onSubmit={handleSubmit(onValid, onInvaild)}
-              className="member-form flex flex-col my-4 space-y-8"
+              className="member-form flex flex-col mt-4 mb-8 space-y-8"
             >
               {/* USER NAME */}
               <InputWrapper>
