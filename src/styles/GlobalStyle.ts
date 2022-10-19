@@ -11,6 +11,26 @@ export const GlobalStyle = createGlobalStyle<any>`
     body {
         min-width: 420px;
     }
+
+    html,
+    body {
+      height: 100%;
+      box-sizing: border-box;
+      touch-action: manipulation;
+      /* font-family: var(--font-sans); */
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      /* background-color: var(--primary); */
+      /* color: var(--text-primary); */
+      overscroll-behavior-x: none;
+    }
+
+    body {
+      position: relative;
+      min-height: 100%;
+      margin: 0;
+    }   
 `;
 
 export const Col = styled.div`

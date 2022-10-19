@@ -1,4 +1,4 @@
-export const SYMBOL_TEXT: string = "OUT FIT";
+export const SYMBOL_TEXT: string = "OURFIT";
 
 export const NAV_HEIGHT: number = 60;
 
@@ -13,3 +13,5 @@ export const MOBILEABLE_CONTAINER_HORIZONTAL_SPACE: string =
   "w-[100%] sm:max-w-[420px]";
 export const MOBILEABLE_CONTAINER_VERTICAL_SPACE: string =
   "h-[100%] sm:h-screen";
+
+export const ICON_BUTTON_BLACK_OPACTIY: number = 50;

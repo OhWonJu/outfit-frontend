@@ -208,13 +208,14 @@ export default Navbar;
 
 // Styles //
 const NavbarRoot = styled.header<any>`
+  height: ${NAV_HEIGHT}px;
   background-color: ${props =>
     props.$scrolled ? props.theme.background_color : "transparent"};
-  height: ${NAV_HEIGHT}px;
 
   ${props => props.$scrolled && tw`shadow-md`}
+  /* ${tw`shadow-md`} */
   ${tw`
-    transition-all duration-300 flex items-center px-5 fixed w-full z-50 border-transparent
+     sticky top-0 px-5 w-full z-50 border-transparent transition-shadow duration-300
   `}
 `;
 

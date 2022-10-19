@@ -3,6 +3,7 @@ import styled from "styled-components";
 import tw from "twin.macro";
 
 import { VerticalSidebar } from "@components/ui";
+import { BORDER_BASE_WIDTH } from "src/constants";
 
 // Vertical Side bar //
 const VerticalSidebarUI: React.FC<{
@@ -33,7 +34,7 @@ const Container: FC<ContainerProps> = ({
       {verticalSidebarVisible && (
         <VerticalSidebarUI>{verticalSidebarChildren}</VerticalSidebarUI>
       )}
-      <div className="w-full h-full">{children}</div>
+      <div className="w-full h-full px-8 md:px-14">{children}</div>
     </Wrapper>
   );
 };
@@ -42,5 +43,7 @@ export default Container;
 
 const Wrapper = styled.div`
   background-color: ${props => props.theme.background_color};
-  ${tw`min-h-screen sm:w-screen flex flex-row`}
+  border-top-width: ${BORDER_BASE_WIDTH}px;
+  border-color: ${props => props.theme.gray_light};
+  ${tw`min-h-screen sm:w-full flex flex-row`}
 `;

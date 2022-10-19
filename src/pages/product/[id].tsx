@@ -1,29 +1,33 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef } from "react";
 
-import useTheme from "@lib/hooks/useTheme";
 import { NAV_HEIGHT, PRODUCT_PADDING } from "src/constants";
 import { Container } from "@components/ui";
 import { ProductCarousel, ProductInfo } from "@components/product";
 
-import { thumbFiles, productData } from "../../../MockData/productData";
+import { product_01_Data } from "../../../MockData/productData";
 
 const Product = () => {
-  const theme = useTheme();
+  const contentRef = useRef() as React.MutableRefObject<HTMLDivElement>;
 
   return (
     <Container
       verticalSidebarVisible={false}
       style={{
-        paddingTop: NAV_HEIGHT + PRODUCT_PADDING,
+        paddingTop: PRODUCT_PADDING,
         paddingBottom: PRODUCT_PADDING,
       }}
     >
-      <div className="flex flex-col items-center">
-        <ProductCarousel imageUrls={thumbFiles} className="mb-16" />
-        <div className="max-w-[1200px]">
-          <ProductInfo {...productData} />
+      <div ref={contentRef} className="flex flex-col items-center">
+        <ProductCarousel
+          parentRef={contentRef}
+          imageUrls={product_01_Data.thumbFiles}
+          className="mb-16"
+        />
+        <div className="max-w-[1200px] mb-16">
+          <ProductInfo {...product_01_Data} />
         </div>
         {/* More... */}
+        <div>More infos</div>
       </div>
     </Container>
   );

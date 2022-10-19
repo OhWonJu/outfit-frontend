@@ -3,7 +3,7 @@ import { disableBodyScroll, clearAllBodyScrollLocks } from "body-scroll-lock";
 import styled from "styled-components";
 import tw from "twin.macro";
 
-import { BORDER_TINE_WIDTH, NAV_HEIGHT } from "src/constants";
+import { BORDER_BASE_WIDTH, NAV_HEIGHT } from "src/constants";
 
 interface DropDownProps {
   children?: any;
@@ -59,6 +59,6 @@ export default DropDown;
 const InnerContainer = styled.div<any>`
   ${tw`w-full shadow-md cursor-default`}
   background-color: ${props => props.theme.background_color};
-  border-top-width: ${BORDER_TINE_WIDTH}px;
+  border-top-width: ${BORDER_BASE_WIDTH}px;
   border-color: ${props => props.theme.gray_ligth};
 `;

@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 
 import { Sidebar, LoadingDots, useUI } from "@components/ui";
@@ -8,6 +8,7 @@ import LoginView from "@components/auth/LoginView";
 import { CartSidebarView } from "@components/cart";
 import { MenuSidebarView } from "@components/menu";
 import SearchDropDown from "../Searchbar/SearchDropDown";
+import useTheme from "@lib/hooks/useTheme";
 
 const Loading = () => (
   <div className="w-80 h-80 flex items-center text-center justify-center p-3">
@@ -142,15 +143,24 @@ interface Props {
 const NAV_INABLE_PATH = ["/join"];
 
 const Layout: React.FC<Props> = ({ children, pageProps, path }) => {
+  const theme = useTheme();
   const { acceptedCookies, onAcceptCookies } = useAcceptCookies();
+
+  const [display, setDisplay] = useState(false);
 
   // 더 최적화 할 방법은..?
   const navAble = !NAV_INABLE_PATH.includes(path);
 
   return (
-    <div>
+    <div
+      className="h-full mx-auto transition-colors duration-150"
+      style={{
+        backgroundColor: theme.background_color,
+        maxWidth: 2460,
+      }}
+    >
       {navAble && <Navbar />}
-      <main>{children}</main>
+      <main className="fit">{children}</main>
       <ModalUI />
       <SidebarUI />
       <DropDownUI />

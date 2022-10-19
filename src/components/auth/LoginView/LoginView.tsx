@@ -33,12 +33,12 @@ const Sns: React.FC<{
   bgColor?: string;
   txColor?: string;
   context: string;
-}> = ({ _onClick = () => null, bgColor, txColor, context }) => {
+}> = ({ _onClick = (): void => null, bgColor, txColor, context }) => {
   return (
     <SNSLogIn onClick={_onClick} $bgColor={bgColor}>
-      <button className="font-medium text-base" style={{ color: txColor }}>
+      <span className="font-medium text-base" style={{ color: txColor }}>
         {context}
-      </button>
+      </span>
     </SNSLogIn>
   );
 };

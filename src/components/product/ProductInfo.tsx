@@ -8,10 +8,12 @@ import { Col, Row } from "src/styles/GlobalStyle";
 import { SNSLogIn, SubmitButton } from "@components/auth/LoginView/LoginView";
 import { Check } from "@components/icons";
 import { Tag } from "@components/ui";
+import { stringify } from "querystring";
 
 interface ProductInfoProps {
   id: string;
   name: string;
+  type: string;
   price: number;
   discount: {
     able: boolean;
@@ -19,6 +21,7 @@ interface ProductInfoProps {
   };
   kategorie: Array<string>;
   context: string;
+  size: Array<{}>;
   stock: Array<{ option: number; quantity: number }>;
   colorCode: Array<{ name: string; code: string }>;
 }
@@ -26,10 +29,12 @@ interface ProductInfoProps {
 const ProductInfo: React.FC<ProductInfoProps> = ({
   id,
   name,
+  type,
   price,
   discount,
   kategorie,
   context,
+  size,
   stock,
   colorCode,
 }) => {
@@ -39,23 +44,23 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
   const [selectColor, setSelectColor] = useState<number>(null);
 
   return (
-    <Row className="w-full">
-      {/*  INFO Cal */}
-      <Col className="relative max-w-[750px] mr-16">
+    <div className="flex flex-col xmd:flex-row w-full">
+      {/*  INFO Col */}
+      <Col className="relative xmd:max-w-[750px] xmd:mr-16">
         <h1 className="m-0 mb-1 font-semibold">{name}</h1>
         {/* Tags */}
         <Row className="mb-5">
-          {kategorie.map(data => (
-            <Tag context={data} className="mr-1 mb-0 text-xs" />
+          {kategorie.map((data, index) => (
+            <Tag key={index} context={data} className="mr-1 mb-0 text-xs" />
           ))}
         </Row>
         {/* PRICE */}
-        <Row className="mb-10 items-center">
+        <div className="flex flex-col sm:flex-row mb-10 sm:items-center">
           <Price $disable={discount.able}>
             {price.toLocaleString("ko-KR")} 원
           </Price>
           {discount.able && (
-            <Row className="pl-3">
+            <Row className="sm:pl-3">
               <DiscountPrice>
                 {(
                   price - Math.floor(price / (100 - discount.percent))
@@ -65,11 +70,14 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
               <DiscountPercent>{discount.percent}% 할인</DiscountPercent>
             </Row>
           )}
-        </Row>
-        <span className="leading-6  max-w-[90%]">{context}</span>
+        </div>
+        <span className="leading-6 max-w-[90%] mb-16 xmd:mb-0">{context}</span>
+        <span className="mb-16 xmd:mb-0 xmd:absolute bottom-0 left-0">
+          {JSON.stringify(size)}
+        </span>
       </Col>
       {/* OPTONS & ACTION BUTTOn COL */}
-      <Col className="max-w-[450px] ml-5">
+      <Col className="xmd:max-w-[450px] xmd:ml-5">
         {/* size choose */}
         <Col className="mb-5">
           <h2 className="font-semibold text-xl mb-3">사이즈 선택</h2>
@@ -92,6 +100,7 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
           <Row className="flex-wrap">
             {colorCode.map((data, index) => (
               <ColorButton
+                key={index}
                 $bgColor={data.code}
                 selected={index === selectColor}
                 onClick={() => setSelectColor(index)}
@@ -123,7 +132,7 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
         </SubmitButton>
         <SNSLogIn>Pin to wishlist</SNSLogIn>
       </Col>
-    </Row>
+    </div>
   );
 };
 
@@ -189,23 +198,50 @@ const animation = keyframes`
   }
 `;
 
+const animation_vertical = keyframes`
+  0% {
+    opacity: 0;
+    transform: translateY(-30px)
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+`;
 const DiscountPrice = styled.span`
   opacity: 0;
-  animation: ${animation} 1000ms ease-out 1;
-  animation-delay: 300ms;
-  animation-fill-mode: forwards;
+  @media screen and (max-width: 640px) {
+    animation: ${animation_vertical} 800ms ease-out 1;
+    animation-delay: 300ms;
+    animation-fill-mode: forwards;
+  }
+  @media screen and (min-width: 641px) {
+    animation: ${animation} 800ms ease-out 1;
+    animation-delay: 300ms;
+    animation-fill-mode: forwards;
+  }
 
   ${tw`font-bold text-3xl`}
 `;
 
+const animation_precent = keyframes`
+  0% {
+    opacity: 0;
+    transform: translateX(-40px)
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+`;
 const DiscountPercent = styled.span`
   color: ${props => props.theme.red_primary};
 
   opacity: 0;
-  animation: ${animation} 1000ms ease-out 1;
+  animation: ${animation_precent} 700ms ease-out 1;
   animation-delay: 1000ms;
   animation-fill-mode: forwards;
 
   ${tw`px-2 p-1 font-semibold`};
 `;
-// ---------------------------------------------- //
+// ------------------------------------------------ //

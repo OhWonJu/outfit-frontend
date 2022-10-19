@@ -1,15 +1,17 @@
 import Head from "next/head";
 
-const AppHead = ({ title = "OUTFIT" }) => {
+import { SYMBOL_TEXT } from "src/constants";
+
+const AppHead = ({ title = SYMBOL_TEXT }) => {
   return (
     <Head>
       <title>{title}</title>
-      <meta name="description" content="OUTFIT" />
+      <meta name="description" content="OURFIT" />
       {/* FONT */}
-      <link
+      {/* <link
         rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-      />
+      /> */}
     </Head>
   );
 };
