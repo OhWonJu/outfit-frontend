@@ -1,4 +1,4 @@
-import React, { MutableRefObject, useCallback, useState } from "react";
+import React, { MutableRefObject, useRef, useState } from "react";
 import Image from "next/image";
 // import {
 //   clearAllBodyScrollLocks,
@@ -30,6 +30,7 @@ const ProductCarousel: React.FC<ProductCarouselProps> = ({
   const theme = useTheme();
 
   // const [hoverRef, isHovered] = useHover<HTMLDivElement>();
+  const carouselRef = useRef() as MutableRefObject<HTMLDivElement>;
 
   const [slideIdx, setSlideIdx] = useState<number>(0);
   const [scrolled, setScrolled] = useState<boolean>(false);
@@ -61,18 +62,19 @@ const ProductCarousel: React.FC<ProductCarouselProps> = ({
     return next;
   };
 
-  const clickHandler = (next: number) => {
+  const clickHandler = (next: number): any => {
     setSlideIdx(next);
   };
 
   const throttleClickHandler = throttle(
     (condition: Function, index?: number) => {
       const next = condition();
-      clickHandler(next != null ? next : index);
+      return clickHandler(next != null ? next : index);
     },
     500,
-    { leading: false },
+    { leading: true },
   );
+
   // -------------------------------------------- //
 
   // body scroll rock //
@@ -94,17 +96,17 @@ const ProductCarousel: React.FC<ProductCarouselProps> = ({
   return (
     <div
       className={cn(
-        "flex flex-row w-full sm:max-w-[1200px] sm:max-h-[600px]",
+        "flex flex-row w-full md:max-w-[1200px] md:max-h-[600px]",
         {},
         className,
       )}
     >
       {/* CAROUSEL */}
-      <div className="relative w-full sm:w-[50%] h-[100%]">
+      <div className="relative w-full md:w-[50%] h-[100%]">
         <Carousel
+          innerRef={carouselRef}
           withoutControls={true}
           slideIndex={slideIdx}
-          afterSlide={index => setSlideIdx(index)}
         >
           {imageUrls.map((data, index) => (
             <Image
@@ -120,7 +122,7 @@ const ProductCarousel: React.FC<ProductCarouselProps> = ({
         </Carousel>
         {/* CAROUSEL CONTROLLER */}
         <div
-          className="sm:hidden absolute top-[45%] left-2 flex sitems-center rounded-full "
+          className="md:hidden absolute top-[45%] left-2 flex sitems-center rounded-full "
           style={{
             backgroundColor: theme.black_primary + ICON_BUTTON_BLACK_OPACTIY,
           }}
@@ -138,7 +140,7 @@ const ProductCarousel: React.FC<ProductCarouselProps> = ({
           )}
         </div>
         <div
-          className="sm:hidden absolute top-[45%] right-2 flex items-center rounded-full "
+          className="md:hidden absolute top-[45%] right-2 flex items-center rounded-full "
           style={{
             backgroundColor: theme.black_primary + ICON_BUTTON_BLACK_OPACTIY,
           }}
@@ -160,21 +162,24 @@ const ProductCarousel: React.FC<ProductCarouselProps> = ({
       {/* IMAGE LIST */}
       <div
         // ref={hoverRef}
-        className="relative hidden sm:flex flex-row flex-wrap overflow-y-scroll scrollbar-hide overscroll-y-contain w-[50%]"
+        className="relative hidden md:block md:w-[50%] aspect-square overflow-y-scroll scrollbar-hide overscroll-y-contain "
         onScroll={_handleScroll}
       >
-        {imageUrls.map((data, index) => (
-          <Image
-            onClick={() => throttleClickHandler((): any => null, index)}
-            key={index}
-            src={data.url}
-            width={200}
-            height={200}
-            alt="product image"
-            objectFit="cover"
-            draggable={false}
-          />
-        ))}
+        <div className="grid grid-cols-3">
+          {imageUrls.map((data, index) => (
+            <Image
+              onClick={() => throttleClickHandler((): any => null, index)}
+              key={index}
+              src={data.url}
+              width={200}
+              height={200}
+              alt="product image"
+              layout="responsive"
+              objectFit="cover"
+              draggable={false}
+            />
+          ))}
+        </div>
         {/* Notic for scroll */}
         <div
           className={`absolute left-[48%] bottom-[10px] p-2 flex items-center rounded-full transition-opacity duration-500 ${

@@ -5,7 +5,7 @@ import tw from "twin.macro";
 import { throttle } from "lodash";
 
 import useTheme from "@lib/hooks/useTheme";
-import { NAV_HEIGHT } from "src/constants";
+import { NAV_HEIGHT, SYMBOL_TEXT } from "src/constants";
 import { useUI } from "@components/ui";
 import Searchbar from "../Searchbar";
 import { Menu, Search, ShoppingBag } from "@components/icons";
@@ -69,7 +69,9 @@ const Navbar: FC<NavbarProps> = ({ links }) => {
           } relative z-20 order-2 min-w-[74px] flex-1 xmd:order-none w-[74px] h-[20px] xmd:col-start-1 xmd:col-span-2`}
         >
           <button className="logo--link w-full h-full">
-            <span className="text-sm font-extrabold font-sansSrif">OUTFIT</span>
+            <span className="text-sm font-extrabold font-sansSrif">
+              {SYMBOL_TEXT}
+            </span>
           </button>
         </div>
 

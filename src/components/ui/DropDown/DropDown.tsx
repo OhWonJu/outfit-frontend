@@ -32,7 +32,7 @@ const DropDown: React.FC<DropDownProps> = ({
 
   return (
     <div
-      className="fixed inset-0 z-50 box-border outline-none h-full"
+      className="fixed inset-0 h-full z-50 box-border outline-none"
       style={{ marginTop: NAV_HEIGHT }}
       ref={ref}
       tabIndex={1}
@@ -46,13 +46,13 @@ const DropDown: React.FC<DropDownProps> = ({
               : "absolute inset-0 bg-opacity-0"
           }`}
         />
-        <section className="absolute inset-y-0 w-full min-h-[35%] max-h-[45%] h-fit flex outline-none">
+        <section className="absolute inset-y-0 w-full max-w-full min-h-[35%] max-h-[45%] h-fit flex outline-none">
           <InnerContainer>{children}</InnerContainer>
         </section>
       </div>
-    </div>
+    </div> 
   );
-};
+}; 
 
 export default DropDown;
 
