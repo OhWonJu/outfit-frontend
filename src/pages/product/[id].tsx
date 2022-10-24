@@ -7,12 +7,14 @@ import { ProductCarousel, ProductInfo } from "@components/product";
 import { product_01_Data } from "../../../MockData/productData";
 import ProductTabs from "@components/product/ProductTabs";
 import Footer from "@components/Footer/Footer";
+import AppHead from "@components/common/AppHead";
 
 const Product = () => {
   const contentRef = useRef() as React.MutableRefObject<HTMLDivElement>;
 
   return (
     <>
+      <AppHead title={product_01_Data.name} />
       <Container
         verticalSidebarVisible={false}
         style={{

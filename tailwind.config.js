@@ -2,7 +2,12 @@
 module.exports = {
   content: ["./src/**/*.{ts,tsx}"],
   theme: {
-    extend: { fontFamily: { sansSrif: "sans-serif" } },
+    extend: {
+      fontFamily: { sansSrif: "sans-serif" },
+      aspectRatio: {
+        "2/1": "2 / 1",
+      },
+    },
     screens: {
       sm: "640px",
       // => @media (min-width: 640px) { ... }

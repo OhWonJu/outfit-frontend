@@ -1,17 +1,19 @@
-import useTheme from "@lib/hooks/useTheme";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import { throttle } from "lodash";
 import { Tab, Tabs } from "@mui/material";
 import { Box } from "@mui/system";
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import styled from "styled-components";
+import tw from "twin.macro";
+
+import useTheme from "@lib/hooks/useTheme";
+import { Container } from "@components/ui";
+import { ProductReview } from "./ProductReview";
+
 import {
   BORDER_BASE_WIDTH,
   CONTAINER_PADDING_HORIZONTAIL,
   NAV_HEIGHT,
 } from "src/constants";
-import styled from "styled-components";
-import cn from "clsx";
-import tw from "twin.macro";
-import { Container } from "@components/ui";
-import { throttle } from "lodash";
 
 const TAB_HEIGHT: number = 50;
 
@@ -35,11 +37,13 @@ const ProductTabs: React.FC<ProductTabsProps> = ({ id, reviewCount }) => {
   const [screenValue, setScreenValue] = useState<number>(0);
 
   // scroll to some element //
+  // SECTIONS REF -----------------------------------------------------
   const detailRef = useRef() as React.MutableRefObject<HTMLDivElement>;
   const reviewRef = useRef() as React.MutableRefObject<HTMLDivElement>;
   const qnaRef = useRef() as React.MutableRefObject<HTMLDivElement>;
   const refArray = [detailRef, reviewRef, qnaRef];
 
+  // GET SECTIONS TOP -------------------------------------------------
   let sectionsTop: Array<number> = [];
   useEffect(() => {
     refArray.forEach(section => {
@@ -47,9 +51,7 @@ const ProductTabs: React.FC<ProductTabsProps> = ({ id, reviewCount }) => {
     });
   }, [refArray]);
 
-  // const scrollToHandler = (ref: React.MutableRefObject<HTMLDivElement>) => {
-  //   ref.current.scrollIntoView({ behavior: "smooth", block: "start" });
-  // };
+  // TABS SCROLL ACTION ---------------------------------------------------------
   function scrollToTargetAdjusted(ref: React.MutableRefObject<HTMLDivElement>) {
     const offsetPosition = getElementPosition(ref.current);
 
@@ -65,6 +67,7 @@ const ProductTabs: React.FC<ProductTabsProps> = ({ id, reviewCount }) => {
     scrollToTargetAdjusted(refArray[value]);
   };
 
+  // SCROLL EVENT //
   const throttledScroll = useMemo(
     () =>
       throttle(() => {
@@ -83,6 +86,7 @@ const ProductTabs: React.FC<ProductTabsProps> = ({ id, reviewCount }) => {
       window.removeEventListener("scroll", throttledScroll);
     };
   }, [throttledScroll]);
+  // -------------------------------------------------------- //
 
   return (
     <div>
@@ -136,13 +140,13 @@ const ProductTabs: React.FC<ProductTabsProps> = ({ id, reviewCount }) => {
         </Box>
       </div>
       <Container verticalSidebarVisible={false} style={{ borderTopWidth: 0 }}>
-        <section ref={detailRef} className="h-[1000px] bg-red-400">
+        <section ref={detailRef} className="h-[1000px] bg-red-400 ">
           Detail screen
         </section>
-        <section ref={reviewRef} className="h-[500px] bg-yellow-400">
-          Review screen
+        <section ref={reviewRef} className="pt-16">
+          <ProductReview productId={id} />
         </section>
-        <section ref={qnaRef} className="h-[500px] bg-blue-400">
+        <section ref={qnaRef} className="h-[500px] bg-blue-400 pt-16">
           Q & A screen
         </section>
       </Container>
