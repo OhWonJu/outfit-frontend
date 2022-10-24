@@ -1,15 +1,18 @@
 export const product_01_Data = {
   id: "test_p_01",
   name: "나이키 에어 포스 1 '07 LV8 넥스트 네이처",
+  brand: "NIKE",
   type: "shoes",
   price: 139000,
   discount: {
     able: true,
     percent: 10,
   },
-  kategorie: ["남성", "신발"],
+  kategorie: ["남성", "신발", "신상품", "나이키", "에어포스", "넥스트 네이처"],
   context:
     "다음 휴가에서 영감을 받은 새로운 디자인으로 스타일을 뽐내 보세요. 여름에 어울리는 통기성 좋은 메쉬 스우시 포인트가 양말을 돋보이게 해줍니다. 무게 기준 20% 이상 재생 소재로 제작되어 멋스러운 스타일을 연출하며 환경 보호에도 동참할 수 있습니다.",
+  grade: 4.67,
+  reviewCount: 0,
   size: [
     { size: 240, width: 0, toecap: 0, heel: 0 },
     { size: 245, width: 0, toecap: 0, heel: 0 },

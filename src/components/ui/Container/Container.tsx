@@ -45,5 +45,5 @@ const Wrapper = styled.div`
   background-color: ${props => props.theme.background_color};
   border-top-width: ${BORDER_BASE_WIDTH}px;
   border-color: ${props => props.theme.gray_light};
-  ${tw`min-h-screen sm:w-full flex flex-row`}
+  ${tw`sm:w-full flex flex-row`}
 `;

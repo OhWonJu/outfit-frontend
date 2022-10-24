@@ -3,6 +3,8 @@ import Image from "next/image";
 import styled from "styled-components";
 import tw from "twin.macro";
 
+import Footer from "@components/Footer/Footer";
+
 const Home: NextPage = () => {
   return (
     <Container>
@@ -23,11 +25,7 @@ const Home: NextPage = () => {
       <div className="w-full h-[80vh] mt-10 bg-[#262626]"></div> */}
       <Wrapper></Wrapper>
 
-      <Footer>
-        <div className="w-full h-full flex items-center justify-center">
-          <h2 className="text-zinc-300">@outfit</h2>
-        </div>
-      </Footer>
+      <Footer />
     </Container>
   );
 };
@@ -59,13 +57,6 @@ const Wrapper = styled.div`
   flex: 5;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: center;
-`;
-const Footer = styled.footer`
-  display: flex;
-  flex: 1;
-  width: 100%;
-  justify-content: center;
   align-items: center;
 `;
 

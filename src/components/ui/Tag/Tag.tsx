@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import cn from "clsx";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import tw from "twin.macro";
 
 interface TagProps {
@@ -16,6 +16,8 @@ const Tag: React.FC<TagProps> = ({
   onClick = (): any => null,
   ...rest
 }) => {
+  const [pressed, setPressed] = useState<boolean>(false);
+
   const rootClassName = cn(
     "p-3 mr-2 mb-2 flex rounded-full items-center",
     {},
@@ -23,7 +25,15 @@ const Tag: React.FC<TagProps> = ({
   );
 
   return (
-    <CardBtn className={rootClassName} onClick={onClick} {...rest}>
+    <CardBtn
+      className={rootClassName}
+      pressed={pressed}
+      onClick={() => {
+        onClick();
+        setPressed(!pressed);
+      }}
+      {...rest}
+    >
       <Span>{context}</Span>
     </CardBtn>
   );
@@ -34,6 +44,17 @@ export default Tag;
 const CardBtn = styled.button<any>`
   background-color: ${props => props.theme.gray_light};
   color: ${props => props.theme.gray_primary};
+
+  ${props => {
+    if (props.pressed) {
+      return css`
+        background-color: ${props => props.theme.text_primary_color};
+        & > span {
+          color: ${props => props.theme.text_secondary_color};
+        }
+      `;
+    }
+  }}
 
   :hover {
     background-color: ${props => props.theme.text_primary_color};

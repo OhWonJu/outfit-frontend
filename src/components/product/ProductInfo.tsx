@@ -6,13 +6,13 @@ import { BORDER_BASE_WIDTH } from "src/constants";
 import useTheme from "@lib/hooks/useTheme";
 import { Col, Row } from "src/styles/GlobalStyle";
 import { SNSLogIn, SubmitButton } from "@components/auth/LoginView/LoginView";
-import { Check } from "@components/icons";
+import { Check, ChevronRight, Star } from "@components/icons";
 import { Tag } from "@components/ui";
-import { stringify } from "querystring";
 
 interface ProductInfoProps {
   id: string;
   name: string;
+  brand: string;
   type: string;
   price: number;
   discount: {
@@ -21,6 +21,8 @@ interface ProductInfoProps {
   };
   kategorie: Array<string>;
   context: string;
+  grade: number;
+  reviewCount: number;
   size: Array<{}>;
   stock: Array<{ option: number; quantity: number }>;
   colorCode: Array<{ name: string; code: string }>;
@@ -29,11 +31,14 @@ interface ProductInfoProps {
 const ProductInfo: React.FC<ProductInfoProps> = ({
   id,
   name,
+  brand,
   type,
   price,
   discount,
   kategorie,
   context,
+  grade,
+  reviewCount,
   size,
   stock,
   colorCode,
@@ -43,16 +48,53 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
   const [selectSize, setSelectSize] = useState<number>(null);
   const [selectColor, setSelectColor] = useState<number>(null);
 
+  // tag //
+  const [tagSelected, setTagSelected] = useState<Array<string>>([]);
+  const _tagClickHandler = (tag: string) => {
+    if (tagSelected.includes(tag)) {
+      setTagSelected(tagSelected.filter(t => t !== tag));
+    } else {
+      setTagSelected(prev => [...prev, tag]);
+    }
+  };
+  // ----------------------------------------------------------------- //
+
   return (
     <div className="flex flex-col xmd:flex-row w-full">
       {/*  INFO Col */}
       <Col className="relative xmd:max-w-[750px] xmd:mr-16">
+        <Row className="justify-between">
+          <h2 className="m-0 font-bold text-xl">{brand}</h2>
+          <Row className="items-center">
+            <div className="pb-[6px] pr-[2px]">
+              <Star className="w-4 h-4" />
+            </div>
+            <span className="pr-3 font-semibold">{grade}</span>
+            <span
+              className="font-semibold"
+              style={{
+                color: theme.gray_primary,
+                textDecoration: "underline",
+                textDecorationColor: theme.gray_dark,
+                textDecorationThickness: 1,
+              }}
+            >
+              후기 {reviewCount}개
+            </span>
+          </Row>
+        </Row>
         <h1 className="m-0 mb-1 font-semibold">{name}</h1>
         {/* Tags */}
-        <Row className="mb-5">
+        <Row className="relative mb-5 flex-wrap">
           {kategorie.map((data, index) => (
-            <Tag key={index} context={data} className="mr-1 mb-0 text-xs" />
+            <Tag
+              key={index}
+              context={data}
+              onClick={() => _tagClickHandler(data)}
+              className="mr-1 mb-0 text-xs"
+            />
           ))}
+          {tagSelected.length > 0 && <TagSearchButton tags={tagSelected} />}
         </Row>
         {/* PRICE */}
         <div className="flex flex-col sm:flex-row mb-10 sm:items-center">
@@ -178,7 +220,7 @@ const OptionButton = styled.button<any>`
     }
   }}
 
-  ${tw`rounded-md w-20 h-14 mr-[0.4rem] mb-3 text-center text-lg`}
+  ${tw`rounded-md w-20 h-12 mr-[0.4rem] mb-3 text-center text-lg`}
 `;
 
 const ColorButton = styled.button<any>`
@@ -245,3 +287,46 @@ const DiscountPercent = styled.span`
   ${tw`px-2 p-1 font-semibold`};
 `;
 // ------------------------------------------------ //
+
+const TagSearchButton: React.FC<{
+  tags: Array<string>;
+}> = ({ tags }) => {
+  const theme = useTheme();
+  return (
+    <TagSearchContainer className="shadow-lg">
+      <TagSpanWrapper>
+        {tags.map(tag => (
+          <span key={tag}>{tag}</span>
+        ))}
+      </TagSpanWrapper>
+      <button className="flex flex-row items-center pl-2 ">
+        <span
+          className="min-w-[25px] text-center"
+          style={{ color: theme.white_primary }}
+        >
+          검색
+        </span>
+        <ChevronRight
+          className="w-4 h-4"
+          stroke={theme.white_primary}
+          strokeWidth={2}
+        />
+      </button>
+    </TagSearchContainer>
+  );
+};
+
+const TagSearchContainer = styled.div`
+  background-color: ${props => props.theme.blue_priamry};
+  color: ${props => props.theme.white_primary};
+  ${tw`absolute top-[100%] flex flex-row p-2 rounded-lg text-sm z-50`}
+`;
+
+const TagSpanWrapper = styled.div`
+  border-right-width: 1.4px;
+  border-color: ${props => props.theme.white_primary};
+  & > span {
+    color: ${props => props.theme.white_primary};
+  }
+  ${tw`space-x-2 space-y-2 pr-2`}
+`;

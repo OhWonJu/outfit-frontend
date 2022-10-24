@@ -9,6 +9,8 @@ import { CartSidebarView } from "@components/cart";
 import { MenuSidebarView } from "@components/menu";
 import SearchDropDown from "../Searchbar/SearchDropDown";
 import useTheme from "@lib/hooks/useTheme";
+import { Cross } from "@components/icons";
+import { TestDropDown, TestDropDown2 } from "../NavDroupDown";
 
 const Loading = () => (
   <div className="w-80 h-80 flex items-center text-center justify-center p-3">
@@ -117,6 +119,10 @@ const DropDownView: React.FC<{
       {dropDownView === "SEARCH_VIEW" && (
         <SearchDropDown onClose={closeDropDown} />
       )}
+      {dropDownView === "TEST_VIEW" && <TestDropDown onClose={closeDropDown} />}
+      {dropDownView === "TEST_VIEW2" && (
+        <TestDropDown2 onClose={closeDropDown} />
+      )}
       {/* {dropDownView === "TEST_VIEW" && <TestDropDown onClose={closeDropDown} />} */}
     </>
   );
@@ -141,15 +147,19 @@ interface Props {
 
 // Nav bar Render되지 않는 예외 경로
 const NAV_INABLE_PATH = ["/join"];
+const LOGO_VISIVLE = [];
 
 const Layout: React.FC<Props> = ({ children, pageProps, path }) => {
   const theme = useTheme();
   const { acceptedCookies, onAcceptCookies } = useAcceptCookies();
 
-  const [display, setDisplay] = useState(false);
+  // const [display, setDisplay] = useState(false);
+  const [adView, setAdView] = useState(true);
 
   // 더 최적화 할 방법은..?
   const navAble = !NAV_INABLE_PATH.includes(path);
+
+  const logoVisible = path != "/";
 
   return (
     <div
@@ -159,7 +169,22 @@ const Layout: React.FC<Props> = ({ children, pageProps, path }) => {
         maxWidth: 2460,
       }}
     >
-      {navAble && <Navbar />}
+      {navAble && <Navbar logoVisible={logoVisible} />}
+      {/* NAV STICKY AD */}
+      {/* {adView && navAble && (
+        <div className="w-screen sticky top-[60px] h-10 flex flex-row justify-between items-center bg-orange-400 px-8 py-2 z-50">
+          <span
+            className="font-bold text-base"
+            style={{ color: theme.black_primary }}
+          >
+            회원 가입 EVENT. 신규 가입 후 바로 사용 가능한 15% 할인 쿠폰 / made
+            by OUTFIT 스텐다드 상품 1+1 구매 기회
+          </span>
+          <button onClick={() => setAdView(false)}>
+            <Cross stroke={theme.black_primary} strokeWidth={2} />
+          </button>
+        </div>
+      )} */}
       <main className="fit">{children}</main>
       <ModalUI />
       <SidebarUI />

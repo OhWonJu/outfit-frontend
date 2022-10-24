@@ -16,13 +16,31 @@ const DropDown: React.FC<DropDownProps> = ({
   hasBlur = true,
   onClose,
 }) => {
-  const ref = useRef() as React.MutableRefObject<HTMLDivElement>;
+  // const ref = useRef() as React.MutableRefObject<HTMLDivElement>;
+  const dropDownRef = useRef() as React.MutableRefObject<HTMLDivElement>;
+  const contentRef = useRef() as React.MutableRefObject<HTMLDivElement>;
+
+  // useEffect(() => {
+  //   const dropDown = ref.current;
+
+  //   if (dropDown) {
+  //     disableBodyScroll(dropDown);
+  //   }
+
+  //   return () => {
+  //     clearAllBodyScrollLocks();
+  //   };
+  // }, []);
 
   useEffect(() => {
-    const dropDown = ref.current;
+    if (dropDownRef.current) {
+      dropDownRef.current.focus();
+    }
 
-    if (dropDown) {
-      disableBodyScroll(dropDown);
+    const contentElement = contentRef.current;
+
+    if (contentElement) {
+      disableBodyScroll(contentElement, { reserveScrollBarGap: true });
     }
 
     return () => {
@@ -32,9 +50,9 @@ const DropDown: React.FC<DropDownProps> = ({
 
   return (
     <div
-      className="fixed inset-0 h-full z-50 box-border outline-none"
+      className="fixed inset-0 h-full z-[100] box-border outline-none"
+      ref={dropDownRef}
       style={{ marginTop: NAV_HEIGHT }}
-      ref={ref}
       tabIndex={1}
     >
       <div className="absolute inset-0 overflow-hidden">
@@ -47,12 +65,12 @@ const DropDown: React.FC<DropDownProps> = ({
           }`}
         />
         <section className="absolute inset-y-0 w-full max-w-full min-h-[35%] max-h-[45%] h-fit flex outline-none">
-          <InnerContainer>{children}</InnerContainer>
+          <InnerContainer ref={contentRef}>{children}</InnerContainer>
         </section>
       </div>
-    </div> 
+    </div>
   );
-}; 
+};
 
 export default DropDown;
 

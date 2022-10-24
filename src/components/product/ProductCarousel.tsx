@@ -13,7 +13,6 @@ import { IconButton } from "@mui/material";
 import useTheme from "@lib/hooks/useTheme";
 import { ChevronDown, ChevronLeft, ChevronRight } from "@components/icons";
 import { ICON_BUTTON_BLACK_OPACTIY } from "src/constants";
-import { display } from "@mui/system";
 // import useHover from "@lib/hooks/useHover";
 
 interface ProductCarouselProps {
@@ -74,7 +73,6 @@ const ProductCarousel: React.FC<ProductCarouselProps> = ({
     500,
     { leading: true },
   );
-
   // -------------------------------------------- //
 
   // body scroll rock //
@@ -102,7 +100,7 @@ const ProductCarousel: React.FC<ProductCarouselProps> = ({
       )}
     >
       {/* CAROUSEL */}
-      <div className="relative w-full md:w-[50%] h-[100%]">
+      <div className="relative w-full md:w-[50%] aspect-square">
         <Carousel
           innerRef={carouselRef}
           withoutControls={true}

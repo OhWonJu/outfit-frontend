@@ -20,9 +20,10 @@ interface Link {
 
 interface NavbarProps {
   links?: Link[];
+  logoVisible: boolean;
 }
 
-const Navbar: FC<NavbarProps> = ({ links }) => {
+const Navbar: FC<NavbarProps> = ({ links, logoVisible }) => {
   const theme = useTheme();
 
   const {
@@ -65,7 +66,7 @@ const Navbar: FC<NavbarProps> = ({ links }) => {
         {/* Logo */}
         <div
           className={`desktop--logo ${
-            hasScrolled ? "block" : "hidden"
+            hasScrolled || logoVisible ? "block" : "hidden"
           } relative z-20 order-2 min-w-[74px] flex-1 xmd:order-none w-[74px] h-[20px] xmd:col-start-1 xmd:col-span-2`}
         >
           <button className="logo--link w-full h-full">
@@ -99,9 +100,10 @@ const Navbar: FC<NavbarProps> = ({ links }) => {
                 }}
               >
                 <ListSpan>Store</ListSpan>
-                {dropDownView === "TEST_VIEW" && displayDropDown && (
+                {/* Legacy */}
+                {/* {dropDownView === "TEST_VIEW" && displayDropDown && (
                   <TestDropDown onClose={closeDropDown} />
-                )}
+                )} */}
               </ListItem>
             </li>
             <li className="new h-full">
@@ -112,9 +114,6 @@ const Navbar: FC<NavbarProps> = ({ links }) => {
                 }}
               >
                 <ListSpan>New Arrivals</ListSpan>
-                {dropDownView === "TEST_VIEW2" && displayDropDown && (
-                  <TestDropDown2 onClose={closeDropDown} />
-                )}
               </ListItem>
             </li>
             <li className="fallowing h-full">
@@ -180,7 +179,7 @@ const Navbar: FC<NavbarProps> = ({ links }) => {
                     style={{
                       color: theme.text_secondary_color,
                     }}
-                    className="absolute text-[0.5px] font-light text-ellipsis"
+                    className="absolute text-[0.5px] text-ellipsis"
                   >
                     {cartData <= 99 ? cartData : "99+"}
                   </span>
