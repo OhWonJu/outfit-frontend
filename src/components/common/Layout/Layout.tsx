@@ -3,26 +3,20 @@ import dynamic from "next/dynamic";
 
 import { Sidebar, LoadingDots, useUI } from "@components/ui";
 import { useAcceptCookies } from "@lib/hooks/useAcceptCookies";
+import useTheme from "@lib/hooks/useTheme";
 import Navbar from "../Navbar";
-import LoginView from "@components/auth/LoginView";
+import { Review } from "@components/review";
+import { LoginView } from "@components/auth";
 import { CartSidebarView } from "@components/cart";
 import { MenuSidebarView } from "@components/menu";
 import SearchDropDown from "../Searchbar/SearchDropDown";
-import useTheme from "@lib/hooks/useTheme";
-import { Cross } from "@components/icons";
 import { TestDropDown, TestDropDown2 } from "../NavDroupDown";
+// import { Cross } from "@components/icons";
 
 const Loading = () => (
   <div className="w-80 h-80 flex items-center text-center justify-center p-3">
     <LoadingDots />
   </div>
-);
-
-const SignUpView = dynamic(
-  () => import("@components/auth/SignUpView/SignUpView"),
-  {
-    loading: Loading,
-  },
 );
 
 const ForgotPassword = dynamic(
@@ -46,32 +40,25 @@ const ModalView: React.FC<{ modalView: string; closeModal(): any }> = ({
   modalView,
   closeModal,
 }) => {
-  const mobileForm: boolean = [
-    "LOGIN_VIEW",
-    "SIGNUP_VIEW",
-    "FORGOT_VIEW",
-  ].includes(modalView);
+  // const mobileForm: boolean = ["LOGIN_VIEW", "FORGOT_VIEW"].includes(modalView);
 
-  let modalTitle: string = "";
-  switch (modalView) {
-    case "LOGIN_VIEW":
-      modalTitle = "LOG IN";
-      break;
-    case "SIGNUP_VIEW":
-      modalTitle = "SIGN UP";
-      break;
-    case "FORGOT_VIEW":
-      modalTitle = "FIND ACCOUNT";
-      break;
-    default:
-      modalTitle = "";
-  }
+  // let modalTitle: string = "";
+  // switch (modalView) {
+  //   case "LOGIN_VIEW":
+  //     modalTitle = "LOG IN";
+  //     break;
+  //   case "FORGOT_VIEW":
+  //     modalTitle = "FIND ACCOUNT";
+  //     break;
+  //   default:
+  //     modalTitle = "";
+  // }
 
   return (
-    <Modal onClose={closeModal} modalTitle={modalTitle} mobileForm={mobileForm}>
+    <Modal onClose={closeModal}>
       {modalView === "LOGIN_VIEW" && <LoginView />}
-      {modalView === "SIGNUP_VIEW" && <SignUpView />}
       {modalView === "FORGOT_VIEW" && <ForgotPassword />}
+      {modalView === "PRODUCT_REVIEW" && <Review />}
     </Modal>
   );
 };

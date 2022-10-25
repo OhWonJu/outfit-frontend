@@ -1,7 +1,8 @@
 export type MODAL_VIEWS =
-  | "SIGNUP_VIEW"
+  // | "SIGNUP_VIEW"
   | "LOGIN_VIEW"
   | "FORGOT_VIEW"
+  | "PRODUCT_REVIEW"
   | "NEW_SHIPPING_ADDRESS"
   | "NEW_PAYMENT_METHOD";
 

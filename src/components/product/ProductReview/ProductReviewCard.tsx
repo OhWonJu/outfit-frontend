@@ -1,13 +1,11 @@
 import React from "react";
+import styled from "styled-components";
+import tw from "twin.macro";
 
 import useTheme from "@lib/hooks/useTheme";
 import { Col, Row } from "src/styles/GlobalStyle";
 
-import { product_01_Data } from "../../../MockData/productData";
-import styled from "styled-components";
-import tw from "twin.macro";
-import { Star } from "@components/icons";
-import { BORDER_BASE_WIDTH, BORDER_TINE_WIDTH } from "src/constants";
+import { BORDER_TINE_WIDTH } from "src/constants";
 
 type ReviewType = {
   userName: string;
@@ -26,7 +24,7 @@ type ReviewType = {
   fitThickness: string; // "tine" | "normal" | "thick";
 };
 
-const ReviewCard: React.FC<ReviewType> = ({
+const ProductReviewCard: React.FC<ReviewType> = ({
   userName,
   userHeight,
   userWeight,
@@ -45,14 +43,14 @@ const ReviewCard: React.FC<ReviewType> = ({
   const theme = useTheme();
 
   return (
-    <div className="grid grid-cols-2 w-full aspect-2/1">
+    <div className="grid grid-cols-2 w-full aspect-2/1 shadow-md rounded-lg">
       {/* Review Infos */}
-      <Col className="pr-4 justify-between">
+      <Col className="pt-4 px-4 pb-2 justify-between">
         <div>
           {/* header */}
           <div className="mb-5 grid grid-cols-6 items-center">
             <Row className="col-start-1 col-span-4">
-              <div className="w-10 h-10 bg-gray-500 mr-3 rounded-full" />
+              <div className="w-10 h-10 bg-gray-300 mr-3 rounded-full" />
               <Col className="justify-center">
                 <div>
                   <span className="font-bold">{userName}</span>
@@ -88,9 +86,9 @@ const ReviewCard: React.FC<ReviewType> = ({
             </FitWrapper>
           </Row>
         </div>
-        <div className="flex flex-cols my-5">
+        <article className="flex flex-cols my-5">
           <span className="font-medium">{context}</span>
-        </div>
+        </article>
         <div className=" flex justify-end items-end">
           <span className="text-xs" style={{ color: theme.gray_dark }}>
             {date}
@@ -100,11 +98,13 @@ const ReviewCard: React.FC<ReviewType> = ({
 
       {/* Review contexts */}
       <Col className="flex flex-col">
-        <div className="w-full aspect-square bg-gray-500"></div>
+        <div className="w-full aspect-square bg-gray-300 rounded-tr-lg rounded-br-lg"></div>
       </Col>
     </div>
   );
 };
+
+export default ProductReviewCard;
 
 const UserInfoSpan = styled.span`
   color: ${props => props.theme.gray_dark};
@@ -118,62 +118,16 @@ const ProductInfoSpan = styled.span`
 `;
 
 const FitWrapper = styled.div`
+  position: relative;
   border-width: ${BORDER_TINE_WIDTH}px;
   border-color: ${props => props.theme.gray_light};
-  ${tw`space-x-1 px-3 py-1  rounded-full`};
+  ${tw`flex flex-col items-end space-x-1 px-3 pt-[1.1rem] rounded-xl min-w-[5rem]`};
 `;
 
 const FitTagSpan = styled.span`
   color: ${props => props.theme.gray_dark};
-  ${tw`font-medium text-sm`};
+  ${tw`absolute top-1 left-2 font-medium text-xs`};
 `;
 const FitGradeSpan = styled.span`
-  ${tw`font-medium text-sm`};
+  ${tw`font-semibold text-sm`};
 `;
-
-interface ProductReviewProps {
-  productId: string;
-  //   productReview: Object{userName, grade, context,};
-}
-
-export const ProductReview: React.FC<ProductReviewProps> = ({ productId }) => {
-  const theme = useTheme();
-  const preReviews: Array<ReviewType> = product_01_Data.review.slice(0, 4); // first 3 reviews
-
-  return (
-    <div className="max-w-[1200px] mx-auto">
-      <Row className="items-center">
-        <div className="pb-[8px] pr-[2px] mr-1">
-          <Star className="w-5 h-5" />
-        </div>
-        <h1 className="font-bold text-2xl pr-2">{product_01_Data.grade}</h1>
-        <span className="text-[5px] pr-2">●</span>
-        <h1 className="font-bold text-2xl pr-2">
-          {product_01_Data.review.length}개의 리뷰
-        </h1>
-      </Row>
-      <div className="grid grid-cols-2 grid-rows-2 gap-x-16 gap-y-10 ">
-        {preReviews.map((data, index) => (
-          <ReviewCard key={index} {...data} />
-        ))}
-      </div>
-      {product_01_Data.review.length > 4 && (
-        <div className="my-10 w-full flex justify-center">
-          <button className="">
-            <span
-              className="font-bold text-lg px-3 py-2"
-              style={{
-                textDecoration: "underline",
-                textUnderlineOffset: 8,
-                textDecorationThickness: BORDER_BASE_WIDTH,
-                textDecorationColor: theme.text_primary_color,
-              }}
-            >
-              리뷰 더 보기
-            </span>
-          </button>
-        </div>
-      )}
-    </div>
-  );
-};

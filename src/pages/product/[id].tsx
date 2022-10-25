@@ -2,10 +2,9 @@ import React, { useRef } from "react";
 
 import { NAV_HEIGHT, PRODUCT_PADDING } from "src/constants";
 import { Container } from "@components/ui";
-import { ProductCarousel, ProductInfo } from "@components/product";
+import { ProductCarousel, ProductInfo, ProductTabs } from "@components/product";
 
 import { product_01_Data } from "../../../MockData/productData";
-import ProductTabs from "@components/product/ProductTabs";
 import Footer from "@components/Footer/Footer";
 import AppHead from "@components/common/AppHead";
 
