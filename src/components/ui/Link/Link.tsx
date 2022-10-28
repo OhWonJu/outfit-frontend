@@ -9,7 +9,7 @@ interface LinkProps extends NextLinkProps {
 const Link: React.FC<LinkProps> = ({ href, children, ...props }) => {
   return (
     <NextLink href={href}>
-      <a {...props}>{children}</a>
+      <div {...props}>{children}</div>
     </NextLink>
   );
 };

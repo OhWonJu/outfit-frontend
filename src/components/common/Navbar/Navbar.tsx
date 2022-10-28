@@ -1,17 +1,15 @@
 import { FC, useEffect, useState } from "react";
-import Link from "next/link";
 import styled from "styled-components";
 import tw from "twin.macro";
 import { throttle } from "lodash";
 
 import useTheme from "@lib/hooks/useTheme";
 import { NAV_HEIGHT, SYMBOL_TEXT } from "src/constants";
-import { useUI } from "@components/ui";
+import { Link, useUI } from "@components/ui";
 import Searchbar from "../Searchbar";
 import { Menu, Search, ShoppingBag } from "@components/icons";
 
 import { cartData } from "MockData/cartData";
-import { TestDropDown, TestDropDown2 } from "../NavDroupDown";
 
 interface Link {
   href: string;
@@ -69,11 +67,11 @@ const Navbar: FC<NavbarProps> = ({ links, logoVisible }) => {
             hasScrolled || logoVisible ? "block" : "hidden"
           } relative z-20 order-2 min-w-[74px] flex-1 xmd:order-none w-[74px] h-[20px] xmd:col-start-1 xmd:col-span-2`}
         >
-          <button className="logo--link w-full h-full">
+          <Link href={"/"} className="logo--link w-full h-full">
             <span className="text-sm font-extrabold font-sansSrif">
               {SYMBOL_TEXT}
             </span>
-          </button>
+          </Link>
         </div>
 
         {/* Mobile  Menu Section */}
@@ -199,7 +197,7 @@ const Navbar: FC<NavbarProps> = ({ links, logoVisible }) => {
         </div>
 
         {/* Search bar and Search DropDown */}
-        <Searchbar show={displayDropDown && dropDownView === "SEARCH_VIEW"} />
+        {displayDropDown && dropDownView === "SEARCH_VIEW" && <Searchbar />}
       </NavContent>
     </NavbarRoot>
   );

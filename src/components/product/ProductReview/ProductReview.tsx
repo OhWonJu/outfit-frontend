@@ -9,7 +9,7 @@ import ProductReviewCard from "./ProductReviewCard";
 
 import { product_01_Data } from "../../../../MockData/productData";
 import { useUI } from "@components/ui";
-import IdStore from "@lib/store/simpleStore/idStore";
+import PresentProductStore from "@lib/store/simpleStore/presentProductStore";
 
 type ReviewType = {
   userName: string;
@@ -38,10 +38,10 @@ const ProductReview: React.FC<ProductReviewProps> = ({ productId }) => {
   const preReviews: Array<ReviewType> = product_01_Data.review.slice(0, 4); // first 3 reviews
 
   const { setModalView, openModal } = useUI();
-  const { setProductId } = IdStore();
+  const { setProduct } = PresentProductStore();
 
   const _handleClick = useCallback(() => {
-    setProductId(product_01_Data.id);
+    setProduct(product_01_Data.id, product_01_Data.name);
     setModalView("PRODUCT_REVIEW");
     openModal();
   }, []);

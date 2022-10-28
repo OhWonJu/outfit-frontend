@@ -107,15 +107,22 @@ const ProductCarousel: React.FC<ProductCarouselProps> = ({
           slideIndex={slideIdx}
         >
           {imageUrls.map((data, index) => (
-            <Image
-              key={index}
-              src={data.url}
-              alt="product image"
-              width={600}
-              height={600}
-              layout="responsive"
-              objectFit="cover"
-            />
+            <div className="relative w-full aspect-square overflow-hidden">
+              <Image
+                key={index}
+                src={data.url}
+                alt="product image"
+                fill={true}
+                style={{ objectFit: "cover" }}
+                // width={600}
+                // height={600}
+                // layout="responsive"
+                // objectFit="cover"
+                draggable={false}
+                placeholder="blur"
+                blurDataURL="data:image/png;base64,"
+              />
+            </div>
           ))}
         </Carousel>
         {/* CAROUSEL CONTROLLER */}
@@ -165,17 +172,23 @@ const ProductCarousel: React.FC<ProductCarouselProps> = ({
       >
         <div className="grid grid-cols-3">
           {imageUrls.map((data, index) => (
-            <Image
-              onClick={() => throttleClickHandler((): any => null, index)}
-              key={index}
-              src={data.url}
-              width={200}
-              height={200}
-              alt="product image"
-              layout="responsive"
-              objectFit="cover"
-              draggable={false}
-            />
+            <div className="relative w-full aspect-square overflow-hidden">
+              <Image
+                onClick={() => throttleClickHandler((): any => null, index)}
+                key={index}
+                src={data.url}
+                fill={true}
+                style={{ objectFit: "cover" }}
+                alt="product image"
+                // width={200}
+                // height={200}
+                // layout="responsive"
+                // objectFit="cover"
+                draggable={false}
+                placeholder="blur"
+                blurDataURL="data:image/png;base64,"
+              />
+            </div>
           ))}
         </div>
         {/* Notic for scroll */}

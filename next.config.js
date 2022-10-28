@@ -6,7 +6,7 @@ const nextConfig = {
     styledComponents: true,
   },
   images: {
-    // for test 
+    // for test
     domains: ["static.nike.com"],
   },
 };

@@ -12,6 +12,7 @@ import SidebarLayout from "@components/common/SidebarLayout";
 const CartSidebarView: FC = () => {
   const { closeSidebar, setSidebarView } = useUI();
   // const { data, isLoading, isEmpty } = useCart()
+  // @ts-ignore
   const { data, isLoading, isEmpty } = {
     data: null,
     isLoading: false,
@@ -21,8 +22,8 @@ const CartSidebarView: FC = () => {
   const handleClose = () => closeSidebar();
   const goToCheckout = () => setSidebarView("CHECKOUT_VIEW");
 
-  const error = null;
-  const success = null;
+  const error: any = null;
+  const success: any = null;
 
   return (
     <SidebarLayout
