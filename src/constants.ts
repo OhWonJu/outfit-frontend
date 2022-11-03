@@ -15,5 +15,3 @@ export const MOBILEABLE_CONTAINER_VERTICAL_SPACE: string =
   "h-[100%] sm:h-screen";
 
 export const ICON_BUTTON_BLACK_OPACTIY: number = 50;
-
-export const SCREEN_XMD_SIZE: number = 940; // tailwind.config....

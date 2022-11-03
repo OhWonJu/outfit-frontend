@@ -8,7 +8,7 @@ import useTheme from "@lib/hooks/useTheme";
 import { ReviewCard } from "@components/review";
 import { useUI } from "@components/ui";
 import { Star } from "@components/icons";
-import { BORDER_BASE_WIDTH, SCREEN_XMD_SIZE } from "src/constants";
+import { BORDER_BASE_WIDTH } from "src/constants";
 import { Row } from "src/styles/GlobalStyle";
 
 import { product_01_Data } from "../../../MockData/productData";
@@ -39,11 +39,6 @@ const ProductReview: React.FC<ProductReviewProps> = ({ productId }) => {
   const theme = useTheme();
   const preReviews: Array<ReviewType> = product_01_Data.review.slice(0, 4); // first 3 reviews
 
-  const { width: windowWidth } = useWindowSize();
-
-  const contentRef = useRef() as React.MutableRefObject<HTMLDivElement>;
-  const carouselRef = useRef() as MutableRefObject<HTMLDivElement>;
-
   // MODAL
   const { setModalView, openModal } = useUI();
   const { setProduct } = PresentProductStore();
@@ -54,17 +49,6 @@ const ProductReview: React.FC<ProductReviewProps> = ({ productId }) => {
     openModal();
   }, []);
   // -------------------------------------------------------- //
-
-  // SLIDE //
-  const [slideShowRatio, setSlideShowRatio] = useState<number>(1.1);
-
-  const observeCallback = (entries: any) => {
-    for (let entry of entries) {
-      setSlideShowRatio(entry.contentRect.width / 328 - 0.1);
-    }
-  };
-  useResizeObserver({ callback: observeCallback, element: contentRef });
-  // --------------------------------------------------------------------- //
 
   return (
     <div className="max-w-[1200px] mx-auto">
@@ -79,30 +63,10 @@ const ProductReview: React.FC<ProductReviewProps> = ({ productId }) => {
           {product_01_Data.review.length}개의 리뷰
         </h1> */}
       </Row>
-      {windowWidth < SCREEN_XMD_SIZE && (
-        <>
-          <div ref={contentRef} className="xmd:hidden" />
-          {/* <Carousel
-            innerRef={carouselRef}
-            withoutControls={true}
-            slidesToShow={slideShowRatio}
-            // @ts-ignore
-            scrollMode="remainder"
-          >
-            {preReviews.map((data, index) => (
-              <ReviewCard
-                key={index}
-                reviewCardType={"PRODUCT_PAGE"}
-                seeMoreHandler={_handleClick}
-                {...data}
-              />
-            ))}
-          </Carousel> */}
-        </>
-      )}
-      <div className="snap-mandatory snap-x">
+
+      <div className="flex snap-x snap-mandatory w-full mx:auto overflow-scroll scrollbar-hide">
         {preReviews.map((data, index) => (
-          <div className="snap-center">
+          <div className="snap-center ml-4">
             <ReviewCard
               key={index}
               reviewCardType={"PRODUCT_PAGE"}
@@ -112,22 +76,7 @@ const ProductReview: React.FC<ProductReviewProps> = ({ productId }) => {
           </div>
         ))}
       </div>
-      {/* <Carousel
-        innerRef={carouselRef}
-        withoutControls={true}
-        slidesToShow={slideShowRatio}
-        // @ts-ignore
-        scrollMode="remainder"
-      >
-        {preReviews.map((data, index) => (
-          <ReviewCard
-            key={index}
-            reviewCardType={"PRODUCT_PAGE"}
-            seeMoreHandler={_handleClick}
-            {...data}
-          />
-        ))}
-      </Carousel> */}
+
       {product_01_Data.review.length > 4 && (
         <div className="mt-5 mb-10 w-full flex justify-center">
           <button className="" onClick={_handleClick}>
