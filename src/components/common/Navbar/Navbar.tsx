@@ -67,7 +67,7 @@ const Navbar: FC<NavbarProps> = ({ links, logoVisible }) => {
             hasScrolled || logoVisible ? "block" : "hidden"
           } relative z-20 order-2 min-w-[74px] flex-1 xmd:order-none w-[74px] h-[20px] xmd:col-start-1 xmd:col-span-2`}
         >
-          <Link href={"/"} className="logo--link w-full h-full">
+          <Link href={"/"} className="logo--link w-full h-full flex justify-center">
             <span className="text-sm font-extrabold font-sansSrif">
               {SYMBOL_TEXT}
             </span>

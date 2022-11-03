@@ -6,6 +6,7 @@ module.exports = {
       fontFamily: { sansSrif: "sans-serif" },
       aspectRatio: {
         "2/1": "2 / 1",
+        "7/2": "7 / 2",
       },
     },
     screens: {

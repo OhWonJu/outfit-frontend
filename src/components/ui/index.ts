@@ -2,6 +2,7 @@
 // export { default as Collapse } from './Collapse'
 export { default as Container } from "./Container";
 export { default as DropDown } from "./DropDown";
+export { default as EllipsisSpan } from "./EllipsisSpan";
 // export { default as Grid } from './Grid'
 // export { default as Hero } from './Hero'
 export { default as Input } from "./Input";

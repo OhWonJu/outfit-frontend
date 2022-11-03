@@ -14,7 +14,7 @@ export const product_01_Data = {
   context:
     "다음 휴가에서 영감을 받은 새로운 디자인으로 스타일을 뽐내 보세요. 여름에 어울리는 통기성 좋은 메쉬 스우시 포인트가 양말을 돋보이게 해줍니다. 무게 기준 20% 이상 재생 소재로 제작되어 멋스러운 스타일을 연출하며 환경 보호에도 동참할 수 있습니다.",
   grade: 4.67,
-  reviewCount: 4,
+  reviewCount: 5,
   size: [
     { size: 240, width: 0, toecap: 0, heel: 0 },
     { size: 245, width: 0, toecap: 0, heel: 0 },
@@ -126,7 +126,7 @@ export const product_01_Data = {
       date: "2022-09-21",
       size: 280,
       color: "샌디드 골드",
-      context: "my foot too big, so size not matching too me...",
+      context: "my foot too big, so size not matching too me... but i like so 딴놈한테 줘버릴려고요 ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ",
       grade: 2.5,
       fitSize: "small", // small, fit, big
       fitColor: "fit", // bright, fit, dark

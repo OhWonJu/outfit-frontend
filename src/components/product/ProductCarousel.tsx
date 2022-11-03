@@ -106,10 +106,12 @@ const ProductCarousel: React.FC<ProductCarouselProps> = ({
           withoutControls={true}
           slideIndex={slideIdx}
         >
-          {imageUrls.map((data, index) => (
-            <div className="relative w-full aspect-square overflow-hidden">
+          {imageUrls.map(data => (
+            <div
+              key={data.url}
+              className="relative w-full aspect-square overflow-hidden"
+            >
               <Image
-                key={index}
                 src={data.url}
                 alt="product image"
                 fill={true}
@@ -119,8 +121,6 @@ const ProductCarousel: React.FC<ProductCarouselProps> = ({
                 // layout="responsive"
                 // objectFit="cover"
                 draggable={false}
-                placeholder="blur"
-                blurDataURL="data:image/png;base64,"
               />
             </div>
           ))}
@@ -172,10 +172,12 @@ const ProductCarousel: React.FC<ProductCarouselProps> = ({
       >
         <div className="grid grid-cols-3">
           {imageUrls.map((data, index) => (
-            <div className="relative w-full aspect-square overflow-hidden">
+            <div
+              key={data.url}
+              className="relative w-full aspect-square overflow-hidden"
+            >
               <Image
                 onClick={() => throttleClickHandler((): any => null, index)}
-                key={index}
                 src={data.url}
                 fill={true}
                 style={{ objectFit: "cover" }}
@@ -185,8 +187,6 @@ const ProductCarousel: React.FC<ProductCarouselProps> = ({
                 // layout="responsive"
                 // objectFit="cover"
                 draggable={false}
-                placeholder="blur"
-                blurDataURL="data:image/png;base64,"
               />
             </div>
           ))}

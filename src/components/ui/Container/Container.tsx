@@ -34,7 +34,7 @@ const Container: FC<ContainerProps> = ({
       {verticalSidebarVisible && (
         <VerticalSidebarUI>{verticalSidebarChildren}</VerticalSidebarUI>
       )}
-      <div className="w-full h-full px-8 md:px-14">{children}</div>
+      <div className="w-full h-full px-5 md:px-14">{children}</div>
     </Wrapper>
   );
 };
