@@ -49,7 +49,7 @@ const ReviewCard: React.FC<ReviewType> = ({
   return (
     <>
       {reviewCardType === "PRODUCT_PAGE" && (
-        <Wrappeer className="relative w-[328px] h-[360px] xmd:w-[350px] xmd:h-[380px] rounded-md p-3">
+        <Wrappeer className="relative w-[328px] h-[360px] xmd:w-[350px] xmd:h-[380px] shadow-lg rounded-md p-3">
           {/* INFOS */}
           <div className="grid grid-cols-5 gap-3 mb-3">
             {/* AVATOR */}
@@ -115,8 +115,8 @@ const ReviewCard: React.FC<ReviewType> = ({
 export default ReviewCard;
 
 const Wrappeer = styled.div`
-  border-width: ${BORDER_BASE_WIDTH}px;
-  border-color: ${props => props.theme.gray_light};
+  border-width: 1px;
+  border-color: ${props => props.theme.gray_light + 50};
 `;
 
 const UserInfoSpan = styled.span`

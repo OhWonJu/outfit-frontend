@@ -83,6 +83,12 @@ export const product_01_Data = {
       url: "https://static.nike.com/a/images/w_1920,c_limit,f_auto,q_auto/9efb4cd6-b7da-4ea0-b3ee-0a69df12280f/image.jpg",
     },
   ],
+  reviewGrade: {
+    satisfactionScore: 4.7,
+    sizeScore: 4.8,
+    colorScore: 5.0,
+    thicknessScore: 4.2,
+  },
   review: [
     {
       userName: "tester1",
@@ -126,7 +132,8 @@ export const product_01_Data = {
       date: "2022-09-21",
       size: 280,
       color: "샌디드 골드",
-      context: "my foot too big, so size not matching too me... but i like so 딴놈한테 줘버릴려고요 ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ",
+      context:
+        "my foot too big, so size not matching too me... but i like so 딴놈한테 줘버릴려고요 ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ",
       grade: 2.5,
       fitSize: "small", // small, fit, big
       fitColor: "fit", // bright, fit, dark

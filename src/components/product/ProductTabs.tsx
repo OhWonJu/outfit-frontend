@@ -7,7 +7,7 @@ import tw from "twin.macro";
 
 import useTheme from "@lib/hooks/useTheme";
 import { Container } from "@components/ui";
-import { ProductReview } from ".";
+import { ProductReview } from "./ProductTabScreens";
 
 import {
   BORDER_BASE_WIDTH,

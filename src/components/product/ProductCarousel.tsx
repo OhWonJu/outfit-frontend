@@ -115,6 +115,7 @@ const ProductCarousel: React.FC<ProductCarouselProps> = ({
                 src={data.url}
                 alt="product image"
                 fill={true}
+                sizes="100%"
                 style={{ objectFit: "cover" }}
                 // width={600}
                 // height={600}
@@ -180,6 +181,7 @@ const ProductCarousel: React.FC<ProductCarouselProps> = ({
                 onClick={() => throttleClickHandler((): any => null, index)}
                 src={data.url}
                 fill={true}
+                sizes="100%"
                 style={{ objectFit: "cover" }}
                 alt="product image"
                 // width={200}
