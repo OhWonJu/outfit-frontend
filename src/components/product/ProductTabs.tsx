@@ -93,7 +93,7 @@ const ProductTabs: React.FC<ProductTabsProps> = ({ id, reviewCount }) => {
       <div
         className="sticky z-50"
         style={{
-          top: NAV_HEIGHT,
+          top: NAV_HEIGHT - 1, // 약간 공간 뜨는거?????잡아주네?
           backgroundColor: theme.background_color,
         }}
       >

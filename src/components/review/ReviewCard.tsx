@@ -3,12 +3,12 @@ import styled from "styled-components";
 import tw from "twin.macro";
 
 import useTheme from "@lib/hooks/useTheme";
-import { Col, Row } from "src/styles/GlobalStyle";
-import { BORDER_BASE_WIDTH, BORDER_TINE_WIDTH } from "src/constants";
+import { Col } from "src/styles/GlobalStyle";
+import { BORDER_TINE_WIDTH } from "src/constants";
 import { EllipsisSpan } from "@components/ui";
 
 type ReviewType = {
-  reviewCardType: "PRODUCT_PAGE" | "REVIEW_PAGE";
+  reviewCardType: "MOBILE" | "DESKTOP";
   seeMoreHandler?: Function;
   userName: string;
   userHeight: number;
@@ -48,8 +48,8 @@ const ReviewCard: React.FC<ReviewType> = ({
 
   return (
     <>
-      {reviewCardType === "PRODUCT_PAGE" && (
-        <Wrappeer className="relative w-[328px] h-[360px] xmd:w-[350px] xmd:h-[380px] shadow-lg rounded-md p-3">
+      {reviewCardType === "MOBILE" && (
+        <CardWrappeer className="shadow-lg">
           {/* INFOS */}
           <div className="grid grid-cols-5 gap-3 mb-3">
             {/* AVATOR */}
@@ -105,18 +105,19 @@ const ReviewCard: React.FC<ReviewType> = ({
           <div className="absolute bottom-0 right-0 pb-2 pr-3">
             <UserInfoSpan>{date}</UserInfoSpan>
           </div>
-        </Wrappeer>
+        </CardWrappeer>
       )}
-      {reviewCardType === "REVIEW_PAGE" && null}
+      {reviewCardType === "DESKTOP" && null}
     </>
   );
 };
 
 export default ReviewCard;
 
-const Wrappeer = styled.div`
-  border-width: 1px;
+export const CardWrappeer = styled.div`
+  border-width: ${BORDER_TINE_WIDTH}px;
   border-color: ${props => props.theme.gray_light + 50};
+  ${tw`relative w-[328px] min-h-[360px] xmd:w-[350px] xmd:h-[380px] rounded-md p-3`}
 `;
 
 const UserInfoSpan = styled.span`

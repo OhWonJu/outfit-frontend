@@ -1,4 +1,4 @@
-import { FC, useEffect, useState, useCallback } from "react";
+import { FC, useEffect, useState, useCallback, useMemo } from "react";
 import { FieldErrors, useForm } from "react-hook-form";
 import { validate as emailVaildate } from "email-validator";
 import styled from "styled-components";
@@ -8,7 +8,10 @@ import { Row } from "src/styles/GlobalStyle";
 import { Info } from "@components/icons";
 import { useUI } from "@components/ui/context";
 import { Input, InputLabel } from "@components/ui";
-import { MOBILEABLE_CONTAINER_HORIZONTAL_SPACE } from "src/constants";
+import {
+  BORDER_TINE_WIDTH,
+  MOBILEABLE_CONTAINER_HORIZONTAL_SPACE,
+} from "src/constants";
 import PolicyListView from "./PolicyListView";
 import useTheme from "@lib/hooks/useTheme";
 import Header from "./Header";
@@ -52,6 +55,18 @@ const SignUpView: FC<Props> = () => {
     console.log(value, getValues("password"));
     return value === getValues("password");
   };
+  // ------------------------------------------------- //
+
+  const InputStyle = useMemo(
+    () => ({
+      borderColor: "transparent",
+      backgroundColor: "transparent",
+      borderWidth: BORDER_TINE_WIDTH,
+      // @ts-ignore
+      borderColor: theme.gray_light + 50,
+    }),
+    [],
+  );
 
   return (
     <>
@@ -85,8 +100,7 @@ const SignUpView: FC<Props> = () => {
                     className="shadow-md focus:shadow-inner bg-transparent"
                     style={{
                       width: "70%",
-                      borderColor: "transparent",
-                      backgroundColor: "transparent",
+                      ...InputStyle,
                     }}
                   />
                   <TempButton
@@ -119,8 +133,7 @@ const SignUpView: FC<Props> = () => {
                   isInvalid={Boolean(errors.password?.message)}
                   className="shadow-md focus:shadow-inner bg-transparent"
                   style={{
-                    borderColor: "transparent",
-                    backgroundColor: "transparent",
+                    ...InputStyle,
                   }}
                 />
               </InputWrapper>
@@ -145,8 +158,7 @@ const SignUpView: FC<Props> = () => {
                   isInvalid={Boolean(errors.passwordDoubleCheck?.message)}
                   className="shadow-md focus:shadow-inner bg-transparent"
                   style={{
-                    borderColor: "transparent",
-                    backgroundColor: "transparent",
+                    ...InputStyle,
                   }}
                 />
               </InputWrapper>
@@ -168,8 +180,7 @@ const SignUpView: FC<Props> = () => {
                   isInvalid={Boolean(errors.email?.message)}
                   className="shadow-md focus:shadow-inner bg-transparent"
                   style={{
-                    borderColor: "transparent",
-                    backgroundColor: "transparent",
+                    ...InputStyle,
                   }}
                 />
               </InputWrapper>

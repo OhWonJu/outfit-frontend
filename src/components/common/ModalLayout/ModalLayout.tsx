@@ -64,8 +64,8 @@ const ModalLayout: FC<ModalLayoutProps> = ({
       $mobileForm={mobileForm}
     >
       <div className="absolute left-0 top-0 w-full mt-6">
-        <div className="modal-title-text relative text-center text-lg font-semibold font-sansSrif">
-          <span>{modalTitle}</span>
+        <div className="modal-title-text relative text-center w-[70%] truncate m-auto text-lg font-semibold font-sansSrif">
+          {modalTitle}
         </div>
       </div>
       <button
@@ -114,7 +114,7 @@ const ModalWrapper = styled.div<any>`
     }
   }};
 
-  ${tw`py-12 px-10 border relative shadow-md`} /* ${props =>
+  ${tw`py-12 px-5 md:px-10 border relative shadow-md`} /* ${props =>
     props.$mobileForm ? `${tw`overflow-auto`}` : null} */
   ${props =>
     props.$mobileForm && tw`h-[100%] w-[100%] sm:h-screen sm:max-w-[420px]`}

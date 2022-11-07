@@ -12,30 +12,8 @@ import styled from "styled-components";
 import tw from "twin.macro";
 
 import { product_01_Data } from "../../../../MockData/productData";
-
-type ReviewType = {
-  userName: string;
-  userHeight: number;
-  userWeight: number;
-  userGender: string; //"male" | "female";
-  productId: string;
-  productName: string;
-  date: string;
-  size: number | string;
-  color: string;
-  context: string;
-  grade: number;
-  fitSize: string; //"small" | "fit" | "big";
-  fitColor: string; // "bright" | "fit" | "dark";
-  fitThickness: string; // "tine" | "normal" | "thick";
-};
-
-type ReviewGrade = {
-  satisfactionScore: number;
-  sizeScore: number;
-  colorScore: number;
-  thicknessScore: number;
-};
+import { ReviewGrade, ReviewType } from "types/review";
+import { CardWrappeer } from "@components/review/ReviewCard";
 
 interface ProductReviewProps {
   productId: string;
@@ -83,7 +61,7 @@ const ProductReview: React.FC<ProductReviewProps> = ({ productId }) => {
         </h1> */}
       </Row>
       {/* Review Grade */}
-      <div className="hidden sm:grid grid-cols-2 grid-rows-2 space-y-3 mb-6">
+      <div className="hidden sm:grid grid-cols-2 grid-rows-2 space-y-3 mb-10">
         <Row className="items-center mr-12">
           <GradeTitle>만족도</GradeTitle>
           <GradeWrapper>
@@ -130,16 +108,32 @@ const ProductReview: React.FC<ProductReviewProps> = ({ productId }) => {
         </Row>
       </div>
       {/* Review Card */}
-      <ReviewCardWrapper className="flex w-full snap-mandatory snap-x overflow-scroll scrollbar-hide p-2">
+      <ReviewCardWrapper className="flex w-full snap-mandatory snap-x overflow-scroll scrollbar-hide p-2 space-x-4">
         {preReviews.map((data, index) => (
-          <div key={index} className="snap-center ml-4">
+          <div key={index} className="snap-center">
             <ReviewCard
-              reviewCardType={"PRODUCT_PAGE"}
+              reviewCardType={"MOBILE"}
               seeMoreHandler={_handleClick}
               {...data}
             />
           </div>
         ))}
+        <div className="snap-center">
+          <CardWrappeer
+            className="flex justify-center items-center"
+            style={{
+              borderWidth: BORDER_BASE_WIDTH,
+              borderColor: theme.gray_light,
+              borderStyle: "dashed",
+            }}
+          >
+            <button className="w-full h-full">
+              <span className="font-bold" style={{ color: theme.gray_primary }}>
+                후기 쓰기
+              </span>
+            </button>
+          </CardWrappeer>
+        </div>
       </ReviewCardWrapper>
       {/* more reviews */}
       {product_01_Data.review.length > 4 && (
@@ -154,7 +148,7 @@ const ProductReview: React.FC<ProductReviewProps> = ({ productId }) => {
                 textDecorationColor: theme.text_primary_color,
               }}
             >
-              리뷰 더 보기
+              후기 더 보기
             </span>
           </button>
         </div>

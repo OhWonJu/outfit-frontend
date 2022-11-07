@@ -170,8 +170,9 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
           </Row>
         </Col>
         <SubmitButton className="mb-4">
-          <span>Add to Cart</span>
+          <span>Buy Now</span>
         </SubmitButton>
+        <SNSLogIn className="mb-4">Add to Cart</SNSLogIn>
         <SNSLogIn>Pin to wishlist</SNSLogIn>
       </Col>
     </div>
