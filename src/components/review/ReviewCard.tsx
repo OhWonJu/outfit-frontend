@@ -49,7 +49,7 @@ const ReviewCard: React.FC<ReviewType> = ({
   return (
     <>
       {reviewCardType === "MOBILE" && (
-        <CardWrappeer className="shadow-lg">
+        <CardWrappeer className="p-3 shadow-md">
           {/* INFOS */}
           <div className="grid grid-cols-5 gap-3 mb-3">
             {/* AVATOR */}
@@ -117,7 +117,8 @@ export default ReviewCard;
 export const CardWrappeer = styled.div`
   border-width: ${BORDER_TINE_WIDTH}px;
   border-color: ${props => props.theme.gray_light + 50};
-  ${tw`relative w-[328px] min-h-[360px] xmd:w-[350px] xmd:h-[380px] rounded-md p-3`}
+  background-color: ${props => props.theme.container_bg_color};
+  ${tw`relative w-[328px] min-h-[360px] xmd:w-[350px] xmd:h-[380px] rounded-md`}
 `;
 
 const UserInfoSpan = styled.span`

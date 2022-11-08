@@ -19,6 +19,7 @@ import type { SIDEBAR_VIEWS } from "@lib/store/types/sidebarType";
 import type { MODAL_VIEWS } from "@lib/store/types/modalType";
 import type { DROP_DOWN_VIEWS } from "@lib/store/types/dropDownType";
 import type { WINDOW_VIEWS } from "@lib/store/types/windowType";
+import { userAvatarActions } from "@lib/store/reducers/userAvatarReducer";
 
 export const useUI = () => {
   const dispatch = useDispatch();
@@ -36,6 +37,7 @@ export const useUI = () => {
   const { displayWindow, windowView } = useSelector(
     ({ window }: RootState) => window,
   );
+  const { userAvatar } = useSelector(({ userAvatar }: RootState) => userAvatar);
   // --------------------------------------------------- //
 
   const openSidebar = useCallback(
@@ -121,6 +123,14 @@ export const useUI = () => {
     [dispatch],
   );
 
+  const setUserAvatar = useCallback(
+    (value: string) =>
+      dispatch(
+        userAvatarActions.userAvatarReducer({ type: "SET_USER_AVATAR", value }),
+      ),
+    [dispatch],
+  );
+
   const context = {
     displaySidebar,
     sidebarView,
@@ -130,6 +140,7 @@ export const useUI = () => {
     dropDownView,
     displayWindow,
     windowView,
+    userAvatar,
     openSidebar: () => openSidebar(),
     closeSidebar: () => closeSidebar(),
     openModal: () => openModal(),
@@ -144,6 +155,7 @@ export const useUI = () => {
     setModalView: (view: MODAL_VIEWS) => setModalView(view),
     setDropDownView: (view: DROP_DOWN_VIEWS) => setDropDownView(view),
     setWindowView: (view: WINDOW_VIEWS) => setWindowView(view),
+    setUserAvatar: (value: string) => setUserAvatar(value),
   };
 
   return context;

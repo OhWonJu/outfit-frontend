@@ -53,7 +53,7 @@ const ProductTabs: React.FC<ProductTabsProps> = ({ id, reviewCount }) => {
 
   // TABS SCROLL ACTION ---------------------------------------------------------
   function scrollToTargetAdjusted(ref: React.MutableRefObject<HTMLDivElement>) {
-    const offsetPosition = getElementPosition(ref.current);
+    const offsetPosition = getElementPosition(ref.current) + 1; // sticky 보정 1px
 
     window.scrollTo({
       top: offsetPosition,
@@ -63,8 +63,8 @@ const ProductTabs: React.FC<ProductTabsProps> = ({ id, reviewCount }) => {
   // ------------------------------------------------------------------------- //
 
   const handleChange = (event: any, value: any) => {
-    setScreenValue(value);
     scrollToTargetAdjusted(refArray[value]);
+    setScreenValue(value);
   };
 
   // SCROLL EVENT //
@@ -76,7 +76,7 @@ const ProductTabs: React.FC<ProductTabsProps> = ({ id, reviewCount }) => {
             setScreenValue(index);
           }
         });
-      }, 300),
+      }, 100),
     [refArray],
   );
 
@@ -93,7 +93,7 @@ const ProductTabs: React.FC<ProductTabsProps> = ({ id, reviewCount }) => {
       <div
         className="sticky z-50"
         style={{
-          top: NAV_HEIGHT - 1, // 약간 공간 뜨는거?????잡아주네?
+          top: NAV_HEIGHT - 1, // 약간 공간 뜨는거?????잡아주네? sticky 보정 1px
           backgroundColor: theme.background_color,
         }}
       >

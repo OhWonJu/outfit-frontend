@@ -119,19 +119,12 @@ const ProductReview: React.FC<ProductReviewProps> = ({ productId }) => {
           </div>
         ))}
         <div className="snap-center">
-          <CardWrappeer
-            className="flex justify-center items-center"
-            style={{
-              borderWidth: BORDER_BASE_WIDTH,
-              borderColor: theme.gray_light,
-              borderStyle: "dashed",
-            }}
-          >
-            <button className="w-full h-full">
-              <span className="font-bold" style={{ color: theme.gray_primary }}>
+          <CardWrappeer className="w-full h-full">
+            <ReviewWriteButton className="group p-10">
+              <div className="group-hover:scale-105 transition-transform overflow-hidden font-bold">
                 후기 쓰기
-              </span>
-            </button>
+              </div>
+            </ReviewWriteButton>
           </CardWrappeer>
         </div>
       </ReviewCardWrapper>
@@ -188,4 +181,24 @@ const Grade = styled.span<any>`
   width: ${props => props.percent}%;
   background-color: ${props => props.theme.black_primary};
   ${tw`absolute top-0 left-0 bottom-0 rounded-full`}
+`;
+
+const ReviewWriteButton = styled.button`
+  background-color: ${props => props.theme.background_color};
+  border-width: ${BORDER_BASE_WIDTH}px;
+  border-color: ${props => props.theme.gray_light};
+
+  & > div {
+    color: ${props => props.theme.gray_primary};
+  }
+
+  :hover {
+    background-color: ${props => props.theme.container_bg_color};
+    border-width: 0px;
+    & > div {
+      color: ${props => props.theme.text_primary_color};
+    }
+  }
+
+  ${tw`w-full h-full rounded-md transition-all border-dashed hover:border-solid hover:shadow-md`}
 `;

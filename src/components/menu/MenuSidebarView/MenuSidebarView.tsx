@@ -1,11 +1,14 @@
+import { Avatar } from "@components/common";
 import SidebarLayout from "@components/common/SidebarLayout";
 import { useUI } from "@components/ui";
 import Collapse from "@components/ui/Collapse";
+import useTheme from "@lib/hooks/useTheme";
 import { FC } from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
 
 const MenuSidebarView: FC = () => {
+  const theme = useTheme();
   const { closeSidebar, setSidebarView, setModalView, openModal } = useUI();
 
   const _handleClose = () => closeSidebar();
@@ -21,8 +24,15 @@ const MenuSidebarView: FC = () => {
                 setModalView("LOGIN_VIEW");
                 openModal();
               }}
+              className="flex justify-center items-center"
             >
-              <div className="menu_avator h-12 w-12 mr-4 rounded-full bg-gray-400" />
+              {false && (
+                <div
+                  className="w-12 h-12 border-2 rounded-full mr-4"
+                  style={{ backgroundColor: theme.gray_primary }}
+                />
+              )}
+              {true && <Avatar className="w-12 h-12 mr-4" />}
             </button>
             <div className="">
               <p>Someone</p>

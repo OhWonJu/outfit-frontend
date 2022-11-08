@@ -3,12 +3,12 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { WINDOW_ACTION } from "@lib/store/types";
 
-export type windowStateType = {
+export type WindowStateType = {
   displayWindow: boolean;
   windowView: string;
 };
 
-const initialState: windowStateType = {
+const initialState: WindowStateType = {
   displayWindow: false,
   windowView: "POLICY_TEST1",
 };

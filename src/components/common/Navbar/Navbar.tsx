@@ -10,6 +10,7 @@ import Searchbar from "../Searchbar";
 import { Menu, Search, ShoppingBag } from "@components/icons";
 
 import { cartData } from "MockData/cartData";
+import Avatar from "../Avatar";
 
 interface Link {
   href: string;
@@ -67,7 +68,10 @@ const Navbar: FC<NavbarProps> = ({ links, logoVisible }) => {
             hasScrolled || logoVisible ? "block" : "hidden"
           } relative z-20 order-2 min-w-[74px] flex-1 xmd:order-none w-[74px] h-[20px] xmd:col-start-1 xmd:col-span-2`}
         >
-          <Link href={"/"} className="logo--link w-full h-full flex justify-center">
+          <Link
+            href={"/"}
+            className="logo--link w-full h-full flex justify-center"
+          >
             <span className="text-sm font-extrabold font-sansSrif">
               {SYMBOL_TEXT}
             </span>
@@ -191,8 +195,16 @@ const Navbar: FC<NavbarProps> = ({ links, logoVisible }) => {
                 setModalView("LOGIN_VIEW");
                 openModal();
               }}
-              className="bg-black opacity-50 rounded-full p-2.5 aspect-square"
-            />
+              className="flex justify-center items-center"
+            >
+              {false && (
+                <div
+                  className="w-7 h-7 border-2 rounded-full"
+                  style={{ backgroundColor: theme.gray_primary }}
+                />
+              )}
+              {true && <Avatar className="w-7 h-7" />}
+            </button>
           </div>
         </div>
 
