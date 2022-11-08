@@ -1,4 +1,4 @@
-import React, { MutableRefObject, useCallback, useRef, useState } from "react";
+import React, { useCallback } from "react";
 
 import PresentProductStore from "@lib/store/simpleStore/presentProductStore";
 import useTheme from "@lib/hooks/useTheme";

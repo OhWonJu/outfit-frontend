@@ -83,7 +83,7 @@ const Navbar: FC<NavbarProps> = ({ links, logoVisible }) => {
           <button
             className="text-[14px] font-bold font-sansSrif"
             onClick={() => {
-              setSidebarView("MOBILE_MENU_VIEW");
+              setSidebarView("MOBILE_NAV_VIEW");
               openSidebar();
             }}
           >

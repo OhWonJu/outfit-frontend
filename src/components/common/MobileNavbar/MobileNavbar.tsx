@@ -1,13 +1,13 @@
-import { Avatar } from "@components/common";
-import SidebarLayout from "@components/common/SidebarLayout";
-import { useUI } from "@components/ui";
-import Collapse from "@components/ui/Collapse";
-import useTheme from "@lib/hooks/useTheme";
 import { FC } from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
 
-const MenuSidebarView: FC = () => {
+import useTheme from "@lib/hooks/useTheme";
+import SidebarLayout from "@components/common/SidebarLayout";
+import { useUI, Collapse } from "@components/ui";
+import Avatar from "../Avatar";
+
+const MobileNavbar: FC = () => {
   const theme = useTheme();
   const { closeSidebar, setSidebarView, setModalView, openModal } = useUI();
 
@@ -215,7 +215,7 @@ const MenuSidebarView: FC = () => {
     </SidebarLayout>
   );
 };
-export default MenuSidebarView;
+export default MobileNavbar;
 
 const Row = styled.div`
   display: flex;

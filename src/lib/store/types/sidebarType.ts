@@ -2,7 +2,7 @@ export type SIDEBAR_VIEWS =
   | "CART_VIEW"
   | "CHECKOUT_VIEW"
   | "PAYMENT_METHOD_VIEW"
-  | "MOBILE_MENU_VIEW";
+  | "MOBILE_NAV_VIEW";
 
 export type SIDEBAR_ACTION =
   | {

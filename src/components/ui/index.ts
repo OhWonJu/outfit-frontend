@@ -1,5 +1,5 @@
 // export { default as Button } from './Button'
-// export { default as Collapse } from './Collapse'
+export { default as Collapse } from "./Collapse";
 export { default as Container } from "./Container";
 export { default as DropDown } from "./DropDown";
 export { default as EllipsisSpan } from "./EllipsisSpan";
