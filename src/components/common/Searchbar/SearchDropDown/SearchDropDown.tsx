@@ -51,7 +51,7 @@ const curr = [
 // --------------------------------- //
 
 interface SearchDropDownProps {
-  onClose: () => void;
+  onClose?: () => void;
 }
 
 const SearchDropDown: React.FC<SearchDropDownProps> = ({ onClose }) => {

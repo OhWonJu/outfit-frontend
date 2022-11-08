@@ -40,7 +40,7 @@ const DropDown: React.FC<DropDownProps> = ({
     const contentElement = contentRef.current;
 
     if (contentElement) {
-      disableBodyScroll(contentElement, { reserveScrollBarGap: true });
+      disableBodyScroll(contentElement, { reserveScrollBarGap: false });
     }
 
     return () => {
@@ -50,7 +50,7 @@ const DropDown: React.FC<DropDownProps> = ({
 
   return (
     <div
-      className="fixed inset-0 h-full z-[100] box-border outline-none"
+      className="fixed inset-0 h-full w-full z-[100] box-border outline-none"
       ref={dropDownRef}
       style={{ marginTop: NAV_HEIGHT }}
       tabIndex={1}

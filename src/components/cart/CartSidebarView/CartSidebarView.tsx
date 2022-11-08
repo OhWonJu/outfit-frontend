@@ -27,10 +27,6 @@ const CartSidebarView: FC = () => {
 
   return (
     <SidebarLayout
-      className={cn({
-        ["bg-secondary text-secondary"]:
-          error || success || isLoading || isEmpty,
-      })}
       handleClose={handleClose}
     >
       {isLoading || isEmpty ? (

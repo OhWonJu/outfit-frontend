@@ -23,7 +23,7 @@ const Modal: FC<ModalProps> = ({ children, onClose }) => {
     const modal = ref.current;
 
     if (modal) {
-      disableBodyScroll(modal, { reserveScrollBarGap: true });
+      disableBodyScroll(modal, { reserveScrollBarGap: false });
       window.addEventListener("keydown", handleKey);
     }
     return () => {

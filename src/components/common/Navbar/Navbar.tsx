@@ -8,9 +8,9 @@ import { NAV_HEIGHT, SYMBOL_TEXT } from "src/constants";
 import { Link, useUI } from "@components/ui";
 import Searchbar from "../Searchbar";
 import { Menu, Search, ShoppingBag } from "@components/icons";
+import Avatar from "../Avatar";
 
 import { cartData } from "MockData/cartData";
-import Avatar from "../Avatar";
 
 interface Link {
   href: string;
@@ -93,7 +93,10 @@ const Navbar: FC<NavbarProps> = ({ links, logoVisible }) => {
 
         {/* Web Menu Section */}
         <div className="desktop--main--nav hidden xmd:flex align-start xmd:ml-14 xmd:col-start-3 xmd:col-span-7">
-          <ul className="flex" onMouseLeave={closeDropDown}>
+          <ul
+            className="flex bg-red-300"
+            onMouseLeave={closeDropDown}
+          >
             <li className="store h-full">
               <ListItem
                 onMouseOver={() => {
@@ -231,13 +234,14 @@ const NavbarRoot = styled.header<any>`
 `;
 
 const NavContent = styled.div<any>`
-  ${tw`flex h-full w-full justify-between items-center xmd:grid grid-cols-12 gap-1 xmd:gap-2`}
+  ${tw`flex w-full h-full justify-between items-center xmd:grid grid-cols-12 gap-1 xmd:gap-2`}
 `;
 
 const ListItem = styled.a`
   display: inline-flex;
   align-items: center;
   position: relative;
+  height: ${NAV_HEIGHT}px;
   :hover:before {
     content: "";
     position: absolute;
@@ -247,7 +251,7 @@ const ListItem = styled.a`
     height: 1.8px;
     background-color: ${props => props.theme.text_primary_color};
   }
-  ${tw`px-4 py-2 h-[60px] cursor-pointer`}
+  ${tw`px-4 py-2 cursor-pointer`}
 `;
 
 const ListSpan = styled.span`

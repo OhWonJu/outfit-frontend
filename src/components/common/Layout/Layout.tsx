@@ -103,9 +103,7 @@ const DropDownView: React.FC<{
 }> = ({ dropDownView, closeDropDown }) => {
   return (
     <>
-      {dropDownView === "SEARCH_VIEW" && (
-        <SearchDropDown onClose={closeDropDown} />
-      )}
+      {dropDownView === "SEARCH_VIEW" && <SearchDropDown />}
       {dropDownView === "TEST_VIEW" && <TestDropDown onClose={closeDropDown} />}
       {dropDownView === "TEST_VIEW2" && (
         <TestDropDown2 onClose={closeDropDown} />
@@ -150,7 +148,7 @@ const Layout: React.FC<Props> = ({ children, pageProps, path }) => {
 
   return (
     <div
-      className="h-full mx-auto transition-colors duration-150"
+      className="h-full w-full mx-auto transition-colors duration-150"
       style={{
         backgroundColor: theme.background_color,
         maxWidth: 2460,

@@ -32,7 +32,7 @@ const Sidebar: React.FC<SidebarProps> = ({
     const contentElement = contentRef.current;
 
     if (contentElement) {
-      disableBodyScroll(contentElement, { reserveScrollBarGap: true });
+      disableBodyScroll(contentElement, { reserveScrollBarGap: false }); // padding issue
     }
 
     return () => {
