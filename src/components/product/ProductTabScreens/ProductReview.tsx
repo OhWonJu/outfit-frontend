@@ -1,19 +1,19 @@
 import React, { useCallback } from "react";
-
-import PresentProductStore from "@lib/store/simpleStore/presentProductStore";
-import useTheme from "@lib/hooks/useTheme";
-import { ReviewCard } from "@components/review";
-import { useUI } from "@components/ui";
-import { Star } from "@components/icons";
-import { BORDER_BASE_WIDTH } from "src/constants";
-import { Row } from "src/styles/GlobalStyle";
-
 import styled from "styled-components";
 import tw from "twin.macro";
 
-import { product_01_Data } from "../../../../MockData/productData";
-import { ReviewGrade, ReviewType } from "types/review";
+import PresentProductStore from "@lib/store/simpleStore/presentProductStore";
+import useTheme from "@lib/hooks/useTheme";
+import useWindowSize from "@lib/hooks/useWindowSize";
+import { ReviewCard } from "@components/review";
+import { useUI } from "@components/ui";
+import { Star } from "@components/icons";
 import { CardWrappeer } from "@components/review/ReviewCard";
+import { BORDER_BASE_WIDTH } from "src/constants";
+import { Row } from "src/styles/GlobalStyle";
+import { ReviewGrade, ReviewType } from "types/review";
+
+import { product_01_Data } from "../../../../MockData/productData";
 
 interface ProductReviewProps {
   productId: string;
@@ -22,6 +22,7 @@ interface ProductReviewProps {
 
 const ProductReview: React.FC<ProductReviewProps> = ({ productId }) => {
   const theme = useTheme();
+  const { width: windowWith } = useWindowSize();
 
   // mock data
   const preReviews: Array<ReviewType> = product_01_Data.review.slice(0, 4); // first 3 reviews
@@ -108,25 +109,27 @@ const ProductReview: React.FC<ProductReviewProps> = ({ productId }) => {
         </Row>
       </div>
       {/* Review Card */}
-      <ReviewCardWrapper className="flex w-full snap-mandatory snap-x overflow-scroll scrollbar-hide p-2 space-x-4">
+      <ReviewCardWrapper className="flex md:grid md:grid-cols-2 md:gap-4 w-full snap-mandatory snap-x md:snap-none overflow-scroll scrollbar-hide p-2 space-x-4 md:space-x-0">
         {preReviews.map((data, index) => (
           <div key={index} className="snap-center">
             <ReviewCard
-              reviewCardType={"MOBILE"}
+              reviewCardType={windowWith < 768 ? "MOBILE" : "DESKTOP"}
               seeMoreHandler={_handleClick}
               {...data}
             />
           </div>
         ))}
-        <div className="snap-center">
-          <CardWrappeer className="w-full h-full">
-            <ReviewWriteButton className="group p-10">
-              <div className="group-hover:scale-105 transition-transform overflow-hidden font-bold">
-                후기 쓰기
-              </div>
-            </ReviewWriteButton>
-          </CardWrappeer>
-        </div>
+        {windowWith < 768 && (
+          <div className="snap-center">
+            <CardWrappeer className="w-full h-full">
+              <ReviewWriteButton className="group p-10">
+                <div className="group-hover:scale-105 transition-transform overflow-hidden font-bold">
+                  후기 쓰기
+                </div>
+              </ReviewWriteButton>
+            </CardWrappeer>
+          </div>
+        )}
       </ReviewCardWrapper>
       {/* more reviews */}
       {product_01_Data.review.length > 4 && (

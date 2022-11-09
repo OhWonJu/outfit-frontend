@@ -11,6 +11,7 @@ import { Menu, Search, ShoppingBag } from "@components/icons";
 import Avatar from "../Avatar";
 
 import { cartData } from "MockData/cartData";
+import { TestDropDown, TestDropDown2 } from "../NavDroupDown";
 
 interface Link {
   href: string;
@@ -93,10 +94,7 @@ const Navbar: FC<NavbarProps> = ({ links, logoVisible }) => {
 
         {/* Web Menu Section */}
         <div className="desktop--main--nav hidden xmd:flex align-start xmd:ml-14 xmd:col-start-3 xmd:col-span-7">
-          <ul
-            className="flex bg-red-300"
-            onMouseLeave={closeDropDown}
-          >
+          <ul className="flex" onMouseLeave={closeDropDown}>
             <li className="store h-full">
               <ListItem
                 onMouseOver={() => {
@@ -106,9 +104,9 @@ const Navbar: FC<NavbarProps> = ({ links, logoVisible }) => {
               >
                 <ListSpan>Store</ListSpan>
                 {/* Legacy */}
-                {/* {dropDownView === "TEST_VIEW" && displayDropDown && (
+                {dropDownView === "TEST_VIEW" && displayDropDown && (
                   <TestDropDown onClose={closeDropDown} />
-                )} */}
+                )}
               </ListItem>
             </li>
             <li className="new h-full">
@@ -119,6 +117,10 @@ const Navbar: FC<NavbarProps> = ({ links, logoVisible }) => {
                 }}
               >
                 <ListSpan>New Arrivals</ListSpan>
+                {/* Legacy */}
+                {dropDownView === "TEST_VIEW2" && displayDropDown && (
+                  <TestDropDown2 onClose={closeDropDown} />
+                )}
               </ListItem>
             </li>
             <li className="fallowing h-full">

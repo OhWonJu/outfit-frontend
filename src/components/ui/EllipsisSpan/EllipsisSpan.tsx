@@ -92,7 +92,7 @@ const Button = styled.button`
   max-height: 2rem;
   line-height: 2rem;
   color: ${props => props.theme.gray_dark};
-  ${tw`text-sm font-semibold`}
+  ${tw`text-xs font-semibold`}
 
   &.hide {
     display: none;

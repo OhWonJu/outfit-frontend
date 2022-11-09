@@ -8,7 +8,7 @@ module.exports = {
         "2/1": "2 / 1",
         "7/2": "7 / 2",
       },
-    },
+    }, 
     screens: {
       sm: "640px",
       // => @media (min-width: 640px) { ... }

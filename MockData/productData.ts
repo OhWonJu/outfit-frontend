@@ -133,7 +133,7 @@ export const product_01_Data = {
       size: 280,
       color: "샌디드 골드",
       context:
-        "my foot too big, so size not matching too me... but i like so 딴놈한테 줘버릴려고요 ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ",
+        "my foot too big, so size not matching too me... but i like so 딴놈한테 줘버릴려고요 ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ",
       grade: 2.5,
       fitSize: "small", // small, fit, big
       fitColor: "fit", // bright, fit, dark

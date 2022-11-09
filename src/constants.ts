@@ -7,6 +7,8 @@ export const PRODUCT_PADDING: number = 80;
 export const BORDER_TINE_WIDTH: number = 1;
 export const BORDER_BASE_WIDTH: number = 1.5;
 
+export const MAX_CONTENT_WIDTH: number = 1200;
+
 export const CONTAINER_PADDING_VERTICAL: string = "3rem"; // 3rem
 export const CONTAINER_PADDING_HORIZONTAIL: string = "2.5rem";
 export const MOBILEABLE_CONTAINER_HORIZONTAL_SPACE: string =

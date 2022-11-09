@@ -104,11 +104,10 @@ const DropDownView: React.FC<{
   return (
     <>
       {dropDownView === "SEARCH_VIEW" && <SearchDropDown />}
-      {dropDownView === "TEST_VIEW" && <TestDropDown onClose={closeDropDown} />}
+      {/* {dropDownView === "TEST_VIEW" && <TestDropDown onClose={closeDropDown} />}
       {dropDownView === "TEST_VIEW2" && (
         <TestDropDown2 onClose={closeDropDown} />
-      )}
-      {/* {dropDownView === "TEST_VIEW" && <TestDropDown onClose={closeDropDown} />} */}
+      )} */} 
     </>
   );
 };

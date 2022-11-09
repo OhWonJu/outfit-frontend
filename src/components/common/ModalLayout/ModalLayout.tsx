@@ -46,7 +46,7 @@ const ModalLayout: FC<ModalLayoutProps> = ({
     const modal = ref.current;
 
     if (modal) {
-      disableBodyScroll(modal, { reserveScrollBarGap: true });
+      disableBodyScroll(modal, { reserveScrollBarGap: false });
       window.addEventListener("keydown", handleKey);
     }
     return () => {

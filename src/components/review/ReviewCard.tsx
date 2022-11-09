@@ -107,7 +107,71 @@ const ReviewCard: React.FC<ReviewType> = ({
           </div>
         </CardWrappeer>
       )}
-      {reviewCardType === "DESKTOP" && null}
+      {reviewCardType === "DESKTOP" && (
+        <CardWrappeer className="p-3 shadow-md">
+          {/* INFOS */}
+          <div className="flex h-[25%]">
+            {/* AVATOR */}
+            <div className="mr-3">
+              <div className="rounded-full w-[50px] aspect-square bg-slate-200" />
+            </div>
+            {/* USER INFO */}
+            <div className="flex flex-col flex-1">
+              <div className="flex font-semibold text-lg items-center justify-between">
+                {userName}
+                <span className="text-xs" style={{ color: theme.gray_dark }}>
+                  {size} {color}
+                </span>
+              </div>
+              <div className="space-x-2">
+                <UserInfoSpan>
+                  {userGender === "male" ? "남성" : "여성"}
+                </UserInfoSpan>
+                <UserInfoSpan>{userHeight}cm</UserInfoSpan>
+                <UserInfoSpan>{userWeight}kg</UserInfoSpan>
+              </div>
+            </div>
+          </div>
+          {/* REVIEW INFO */}
+          <div className="flex flex-col h-[75%]">
+            {/* RATE */}
+            <div className="flex flex-row flex-wrap h-[25%] pb-3 justify-between space-x-2">
+              <FitWrapper>
+                <FitTagSpan>사이즈</FitTagSpan>
+                <FitGradeSpan>{fitSize}</FitGradeSpan>
+              </FitWrapper>
+              <FitWrapper>
+                <FitTagSpan>색상</FitTagSpan>
+                <FitGradeSpan>{fitColor}</FitGradeSpan>
+              </FitWrapper>
+              <FitWrapper>
+                <FitTagSpan>두께</FitTagSpan>
+                <FitGradeSpan>{fitThickness}</FitGradeSpan>
+              </FitWrapper>
+            </div>
+            <div className="flex flex-row h-[75%] w-full">
+              {/* PHOTO  */}
+              <div className="flex h-full aspect-square mr-3">
+                <div className="h-full aspect-square bg-slate-200" />
+              </div>
+              {/* Context */}
+              <div className="flex w-full">
+                <article>
+                  <EllipsisSpan
+                    className="font-medium"
+                    context={context}
+                    onClick={seeMoreHandler}
+                    lineClamp={5}
+                  />
+                </article>
+              </div>
+              <div className="absolute bottom-0 right-0 pb-3 pr-3">
+                <UserInfoSpan>{date}</UserInfoSpan>
+              </div>
+            </div>
+          </div>
+        </CardWrappeer>
+      )}
     </>
   );
 };
@@ -118,7 +182,7 @@ export const CardWrappeer = styled.div`
   border-width: ${BORDER_TINE_WIDTH}px;
   border-color: ${props => props.theme.gray_light + 50};
   background-color: ${props => props.theme.container_bg_color};
-  ${tw`relative w-[328px] min-h-[360px] xmd:w-[350px] xmd:h-[380px] rounded-md`}
+  ${tw`relative w-[328px] min-h-[360px] md:w-full md:min-h-[300px] rounded-md`}
 `;
 
 const UserInfoSpan = styled.span`
@@ -130,7 +194,7 @@ const FitWrapper = styled.div`
   position: relative;
   border-width: ${BORDER_TINE_WIDTH}px;
   border-color: ${props => props.theme.gray_light};
-  ${tw`flex flex-col items-end px-3 pt-[1rem] rounded-xl `};
+  ${tw`flex flex-col items-end px-3 py-1 pt-[1rem] rounded-xl md:flex-1`};
 `;
 
 const FitTagSpan = styled.span`
