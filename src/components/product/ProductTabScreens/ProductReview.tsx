@@ -9,7 +9,7 @@ import { ReviewCard } from "@components/review";
 import { useUI } from "@components/ui";
 import { Star } from "@components/icons";
 import { CardWrappeer } from "@components/review/ReviewCard";
-import { BORDER_BASE_WIDTH } from "src/constants";
+import { BORDER_BASE_WIDTH, SCREEN_SIZE_MD } from "src/constants";
 import { Row } from "src/styles/GlobalStyle";
 import { ReviewGrade, ReviewType } from "types/review";
 
@@ -113,7 +113,9 @@ const ProductReview: React.FC<ProductReviewProps> = ({ productId }) => {
         {preReviews.map((data, index) => (
           <div key={index} className="snap-center">
             <ReviewCard
-              reviewCardType={windowWith < 768 ? "MOBILE" : "DESKTOP"}
+              reviewCardType={
+                windowWith < SCREEN_SIZE_MD ? "MOBILE" : "DESKTOP"
+              }
               seeMoreHandler={_handleClick}
               {...data}
             />

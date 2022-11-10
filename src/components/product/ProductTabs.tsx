@@ -64,7 +64,7 @@ const ProductTabs: React.FC<ProductTabsProps> = ({ id, reviewCount }) => {
 
   const handleChange = (event: any, value: any) => {
     scrollToTargetAdjusted(refArray[value]);
-    setScreenValue(value);
+    // setScreenValue(value);
   };
 
   // SCROLL EVENT //

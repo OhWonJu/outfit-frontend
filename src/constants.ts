@@ -1,5 +1,9 @@
 export const SYMBOL_TEXT: string = "OURFIT";
 
+export const SCREEN_SIZE_MB = 450;
+export const SCREEN_SIZE_SM = 640;
+export const SCREEN_SIZE_MD = 768;
+
 export const NAV_HEIGHT: number = 60;
 
 export const PRODUCT_PADDING: number = 80;

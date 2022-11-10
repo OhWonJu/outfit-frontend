@@ -3,13 +3,12 @@ import styled from "styled-components";
 import tw from "twin.macro";
 
 import useTheme from "@lib/hooks/useTheme";
-import { Col, Row } from "src/styles/GlobalStyle";
-
+import { Col } from "src/styles/GlobalStyle";
 import { BORDER_TINE_WIDTH } from "src/constants";
 import { EllipsisSpan } from "@components/ui";
 
 type ReviewType = {
-  reviewCardType: "PRODUCT_PAGE" | "REVIEW_PAGE";
+  reviewCardType: "MOBILE" | "DESKTOP" | "MODAL";
   seeMoreHandler?: Function;
   userName: string;
   userHeight: number;
@@ -49,99 +48,231 @@ const ReviewCard: React.FC<ReviewType> = ({
 
   return (
     <>
-      {reviewCardType === "PRODUCT_PAGE" && (
-        <div className="grid grid-cols-2 w-full aspect-2/1 shadow-md rounded-lg">
-          {/* Review Infos */}
-          <Col className="pt-4 px-4 pb-2 justify-between">
-            <div>
-              {/* header */}
-              <div className="mb-5 grid grid-cols-6 items-center">
-                <Row className="col-start-1 col-span-4">
-                  <div className="w-10 h-10 bg-gray-300 mr-3 rounded-full" />
-                  <Col className="justify-center">
-                    <div>
-                      <span className="font-bold">{userName}</span>
-                    </div>
-                    <div className="space-x-2">
-                      <UserInfoSpan>
-                        {userGender === "male" ? "남성" : "여성"}
-                      </UserInfoSpan>
-                      <UserInfoSpan>{userHeight}cm</UserInfoSpan>
-                      <UserInfoSpan>{userWeight}kg</UserInfoSpan>
-                    </div>
-                  </Col>
-                </Row>
-                <div className="col-start-5 col-span-2 flex justify-end">
-                  <ProductInfoSpan>
-                    {size}, {color}
-                  </ProductInfoSpan>
-                </div>
+      {reviewCardType === "MOBILE" && (
+        <CardWrappeer className="p-3 shadow-md">
+          {/* INFOS */}
+          <div className="grid grid-cols-5 gap-3 mb-3">
+            {/* AVATOR */}
+            <div className="col-start-1 col-span-1">
+              <div className="rounded-full w-[50px] aspect-square bg-slate-200" />
+            </div>
+            {/* USER INFO */}
+            <div className="col-start-2 col-span-4 flex flex-col">
+              <div className="flex font-semibold text-lg items-center justify-between">
+                {userName}
+                <span className="text-xs" style={{ color: theme.gray_dark }}>
+                  {size} {color}
+                </span>
               </div>
-              {/* fit info */}
-              <Row className="flex-wraps space-x-1">
-                <FitWrapper className="space-x-1 px-1 py-1">
-                  <FitTagSpan>사이즈</FitTagSpan>
-                  <FitGradeSpan>{fitSize}</FitGradeSpan>
-                </FitWrapper>
-                <FitWrapper className="space-x-1 px-1 py-1">
-                  <FitTagSpan>색상</FitTagSpan>
-                  <FitGradeSpan>{fitColor}</FitGradeSpan>
-                </FitWrapper>
-                <FitWrapper className="space-x-1 px-1 py-1">
-                  <FitTagSpan>두께</FitTagSpan>
-                  <FitGradeSpan>{fitThickness}</FitGradeSpan>
-                </FitWrapper>
-              </Row>
+              <div className="space-x-2">
+                <UserInfoSpan>
+                  {userGender === "male" ? "남성" : "여성"}
+                </UserInfoSpan>
+                <UserInfoSpan>{userHeight}cm</UserInfoSpan>
+                <UserInfoSpan>{userWeight}kg</UserInfoSpan>
+              </div>
             </div>
-            <article className="my-5">
-              <EllipsisSpan
-                className="font-medium"
-                context={context}
-                onClick={seeMoreHandler}
-              />
-            </article>
-            <div className=" flex justify-end items-end">
-              <span className="text-xs" style={{ color: theme.gray_dark }}>
-                {date}
-              </span>
+          </div>
+          {/* PHOTO & Rate */}
+          <div className="flex flex-row mb-3">
+            <div className="flex-1">
+              <div className="w-[142px] aspect-square bg-slate-200" />
             </div>
-          </Col>
-
-          {/* Review contexts */}
-          <Col className="flex flex-col">
-            <div className="w-full aspect-square bg-gray-300 rounded-tr-lg rounded-br-lg"></div>
-          </Col>
-        </div>
+            <Col className="flex-1 flex-wraps justify-between">
+              <FitWrapper className="space-x-1 px-1 py-1 mb-1">
+                <FitTagSpan>사이즈</FitTagSpan>
+                <FitGradeSpan>{fitSize}</FitGradeSpan>
+              </FitWrapper>
+              <FitWrapper className="space-x-1 px-1 py-1 mb-1">
+                <FitTagSpan>색상</FitTagSpan>
+                <FitGradeSpan>{fitColor}</FitGradeSpan>
+              </FitWrapper>
+              <FitWrapper className="space-x-1 px-1 py-1">
+                <FitTagSpan>두께</FitTagSpan>
+                <FitGradeSpan>{fitThickness}</FitGradeSpan>
+              </FitWrapper>
+            </Col>
+          </div>
+          {/* Context */}
+          <article className="my-5">
+            <EllipsisSpan
+              className="font-medium"
+              context={context}
+              onClick={seeMoreHandler}
+            />
+          </article>
+          <div className="absolute bottom-0 right-0 pb-2 pr-3">
+            <UserInfoSpan>{date}</UserInfoSpan>
+          </div>
+        </CardWrappeer>
       )}
-      {reviewCardType === "REVIEW_PAGE" && null}
+      {reviewCardType === "DESKTOP" && (
+        <CardWrappeer className="p-3 shadow-md">
+          {/* INFOS */}
+          <div className="flex h-[22%]">
+            {/* AVATOR */}
+            <div className="mr-3">
+              <div className="rounded-full w-[50px] aspect-square bg-slate-200" />
+            </div>
+            {/* USER INFO */}
+            <div className="flex flex-col flex-1">
+              <div className="flex font-semibold text-lg items-center justify-between">
+                {userName}
+                <span className="text-xs" style={{ color: theme.gray_dark }}>
+                  {size} {color}
+                </span>
+              </div>
+              <div className="space-x-2">
+                <UserInfoSpan>
+                  {userGender === "male" ? "남성" : "여성"}
+                </UserInfoSpan>
+                <UserInfoSpan>{userHeight}cm</UserInfoSpan>
+                <UserInfoSpan>{userWeight}kg</UserInfoSpan>
+              </div>
+            </div>
+          </div>
+          {/* REVIEW INFO */}
+          <div className="flex flex-col h-[78%]">
+            {/* RATE */}
+            <div className="flex flex-row flex-wrap h-[25%] pb-3 justify-between space-x-2">
+              <FitWrapper>
+                <FitTagSpan>사이즈</FitTagSpan>
+                <FitGradeSpan>{fitSize}</FitGradeSpan>
+              </FitWrapper>
+              <FitWrapper>
+                <FitTagSpan>색상</FitTagSpan>
+                <FitGradeSpan>{fitColor}</FitGradeSpan>
+              </FitWrapper>
+              <FitWrapper>
+                <FitTagSpan>두께</FitTagSpan>
+                <FitGradeSpan>{fitThickness}</FitGradeSpan>
+              </FitWrapper>
+            </div>
+            <div className="flex flex-row h-[75%] w-full">
+              {/* PHOTO  */}
+              <div className="flex h-full aspect-square mr-3">
+                <div className="h-full aspect-square bg-slate-200" />
+              </div>
+              {/* Context */}
+              <div className="flex w-full">
+                <article>
+                  <EllipsisSpan
+                    className="font-medium"
+                    context={context}
+                    onClick={seeMoreHandler}
+                    lineClamp={5}
+                  />
+                </article>
+              </div>
+              <div className="absolute bottom-0 right-0 pb-3 pr-3">
+                <UserInfoSpan>{date}</UserInfoSpan>
+              </div>
+            </div>
+          </div>
+        </CardWrappeer>
+      )}
+      {reviewCardType === "MODAL" && (
+        <ModalCardWrapper>
+          {/* INFOS */}
+          <div className="flex h-[50px] mb-3">
+            {/* AVATOR */}
+            <div className="mr-3">
+              <div className="rounded-full w-[50px] aspect-square bg-slate-200" />
+            </div>
+            {/* USER INFO */}
+            <div className="flex flex-col flex-1">
+              <div className="flex font-semibold text-lg items-center justify-between">
+                {userName}
+                <span className="text-xs" style={{ color: theme.gray_dark }}>
+                  {size} {color}
+                </span>
+              </div>
+              <div className="space-x-2">
+                <UserInfoSpan>
+                  {userGender === "male" ? "남성" : "여성"}
+                </UserInfoSpan>
+                <UserInfoSpan>{userHeight}cm</UserInfoSpan>
+                <UserInfoSpan>{userWeight}kg</UserInfoSpan>
+              </div>
+            </div>
+          </div>
+          {/* REVIEW INFO */}
+          <div className="flex flex-col h-full">
+            {/* RATE */}
+            <div className="flex flex-row flex-wrap h-[40px] mb-3 justify-between space-x-2">
+              <FitWrapper>
+                <FitTagSpan>사이즈</FitTagSpan>
+                <FitGradeSpan>{fitSize}</FitGradeSpan>
+              </FitWrapper>
+              <FitWrapper>
+                <FitTagSpan>색상</FitTagSpan>
+                <FitGradeSpan>{fitColor}</FitGradeSpan>
+              </FitWrapper>
+              <FitWrapper>
+                <FitTagSpan>두께</FitTagSpan>
+                <FitGradeSpan>{fitThickness}</FitGradeSpan>
+              </FitWrapper>
+            </div>
+            <div className="flex flex-row w-full">
+              {/* PHOTO  */}
+              <div className="flex  aspect-square mr-3">
+                <div className=" aspect-square bg-slate-200" />
+              </div>
+              {/* Context */}
+              <div className="flex w-full">
+                <article>
+                  <EllipsisSpan
+                    className="font-medium"
+                    context={context}
+                    onClick={seeMoreHandler}
+                    lineClamp={5}
+                  />
+                </article>
+              </div>
+              <div className="absolute bottom-0 right-0 pb-3 pr-3">
+                <UserInfoSpan>{date}</UserInfoSpan>
+              </div>
+            </div>
+          </div>
+        </ModalCardWrapper>
+      )}
     </>
   );
 };
 
 export default ReviewCard;
 
-const UserInfoSpan = styled.span`
-  color: ${props => props.theme.gray_dark};
-  ${tw`font-semibold text-sm`};
+export const CardWrappeer = styled.div`
+  border-width: ${BORDER_TINE_WIDTH}px;
+  border-color: ${props => props.theme.gray_light + 50};
+  background-color: ${props => props.theme.container_bg_color};
+  ${tw`relative w-[328px] min-h-[360px] md:w-full md:min-h-0 md:h-[300px] rounded-md`}
 `;
 
-const ProductInfoSpan = styled.span`
+const UserInfoSpan = styled.span`
   color: ${props => props.theme.gray_dark};
-  text-overflow: ellipsis;
-  ${tw`font-semibold text-sm`};
+  ${tw`font-semibold text-xs`};
 `;
 
 const FitWrapper = styled.div`
   position: relative;
   border-width: ${BORDER_TINE_WIDTH}px;
   border-color: ${props => props.theme.gray_light};
-  ${tw`flex flex-col items-end space-x-1 px-3 pt-[1.1rem] rounded-xl `};
+  ${tw`flex flex-col items-end px-3 py-1 pt-[1rem] rounded-xl flex-1`};
 `;
 
 const FitTagSpan = styled.span`
   color: ${props => props.theme.gray_dark};
-  ${tw`absolute top-1 left-2 font-medium text-xs`};
+  ${tw`absolute top-1 left-3 font-medium text-xs`};
 `;
 const FitGradeSpan = styled.span`
   ${tw`font-semibold text-sm`};
+`;
+
+// MODAL STYLE //
+const ModalCardWrapper = styled.div`
+  border-width: ${BORDER_TINE_WIDTH}px;
+  border-color: ${props => props.theme.gray_light + 50};
+  background-color: ${props => props.theme.container_bg_color};
+  ${tw`relative w-full min-h-[360px] p-3 shadow-md rounded-md`}
 `;
