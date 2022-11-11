@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import cn from "clsx";
 import styled, { css } from "styled-components";
 import tw from "twin.macro";
@@ -7,6 +7,7 @@ interface TagProps {
   context: string;
   className?: string;
   onClick?: Function;
+  selected?: boolean;
   [key: string]: any;
 }
 
@@ -14,9 +15,14 @@ const Tag: React.FC<TagProps> = ({
   context,
   className,
   onClick = (): any => null,
+  selected = false,
   ...rest
 }) => {
-  const [pressed, setPressed] = useState<boolean>(false);
+  const [pressed, setPressed] = useState<boolean>(selected);
+
+  useEffect(() => {
+    setPressed(selected);
+  }, [selected]);
 
   const rootClassName = cn(
     "p-3 mr-2 mb-2 flex rounded-full items-center",
