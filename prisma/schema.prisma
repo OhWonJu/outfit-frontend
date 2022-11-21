@@ -19,7 +19,7 @@ model User {
   phoneNumber String?     @unique
   password    String
   snsKey      String? // 인증되면 해시 값으로 ..? 
-  address     String?
+  userAdress  UserAdress?
   bio         String?
   avatar      String?
   gender      String
@@ -35,6 +35,13 @@ model User {
   Comment     Comment[]
   Recomment   Recomment[]
   QnA         QnA[]
+}
+
+model UserAdress {
+  id      Int    @id @default(autoincrement())
+  user    User   @relation(fields: [userId], references: [id])
+  userId  String @unique
+  content String
 }
 
 model Brand {
