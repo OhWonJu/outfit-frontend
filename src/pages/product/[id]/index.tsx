@@ -4,7 +4,7 @@ import { NAV_HEIGHT, PRODUCT_PADDING } from "src/constants";
 import { Container } from "@components/ui";
 import { ProductCarousel, ProductInfo, ProductTabs } from "@components/product";
 
-import Footer from "@components/Footer/Footer";
+import Footer from "@components/footer/Footer";
 import AppHead from "@components/common/AppHead";
 
 import { product_01_Data } from "MockData/productData";

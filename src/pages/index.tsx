@@ -3,28 +3,15 @@ import Image from "next/image";
 import styled from "styled-components";
 import tw from "twin.macro";
 
-import Footer from "@components/Footer/Footer";
+import Footer from "@components/footer/Footer";
+import { LaunchingBanner } from "@components/launching";
 
 const Home: NextPage = () => {
   return (
     <Container>
-      {/* <div className="relative w-full h-[80vh]">
-        <div className="absolute left-[15%] top-8 h-full">
-          <SingleLine className="w-full h-full" />
-        </div>
-        <h2 className="absolute right-[40%] bottom-[21%] m-0 font-sansSrif font-semibold text-4xl sm:text-5xl">
-          Our fit
-        </h2>
-        <h1 className="absolute right-[20%] bottom-[5%] m-0 font-sansSrif font-semibold text-8xl sm:text-9xl">
-          Out Fit
-        </h1>
-        <span className="absolute right-[20%] bottom-[4%] m-0 font-sansSrif sm:text-xl">
-          Choose your fit
-        </span>
-      </div>
-      <div className="w-full h-[80vh] mt-10 bg-[#262626]"></div> */}
-      <Wrapper></Wrapper>
-
+      <Wrapper className="overflow-hidden">
+        <LaunchingBanner />
+      </Wrapper>
       <Footer />
     </Container>
   );
@@ -34,34 +21,12 @@ export default Home;
 
 const Container = styled.div`
   width: 100%;
-  height: 800vh;
-  display: flex;
-  flex-direction: column;
+  /* height: 100vh; */
   background-color: ${({ theme }) => theme.background_color};
-`;
-
-const BannerWrapper = styled.div`
-  ${tw`
-    flex
-    flex-col-reverse
-    xmd:flex-row
-    w-screen
-    h-screen
-    mb-12
-  `}
+  ${tw`absolute inset-0`}
 `;
 
 const Wrapper = styled.div`
-  display: flex;
-  width: 100%;
-  flex: 5;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-`;
-
-const Base_Context = styled.div`
-  color: ${props => props.theme.text_primary_color};
-  /* font-size: 1.5rem; */
-  font-weight: 300;
+  background-color: ${({ theme }) => theme.background_color};
+  ${tw`w-full h-screen`}
 `;

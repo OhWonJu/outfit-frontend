@@ -237,18 +237,6 @@ export const Input = styled.input<any>`
   ${tw`appearance-none px-4 py-3 rounded-md shadow-sm box-border focus:outline-none focus:ring-black focus:ring-0`};
 `;
 
-export const SubmitButton = styled.button<any>`
-  width: 100%;
-  background-color: ${props => props.theme.gray_primary};
-  & > span {
-    color: ${props => props.theme.text_secondary_color};
-  }
-  &:hover {
-    background-color: ${props => props.theme.black_primary};
-  }
-  ${tw`px-4 py-4 rounded-md transition duration-100`}
-`;
-
 const AccountHelpButton = styled.button<any>`
   color: ${props => props.theme.gray_primary};
   &:hover {

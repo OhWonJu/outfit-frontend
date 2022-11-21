@@ -7,7 +7,7 @@ import useTheme from "@lib/hooks/useTheme";
 import { Col, Row } from "src/styles/GlobalStyle";
 import { SNSLogIn, SubmitButton } from "@components/auth/LoginView/LoginView";
 import { Check, ChevronRight, Star } from "@components/icons";
-import { Tag } from "@components/ui";
+import { Button, Tag } from "@components/ui";
 
 interface ProductInfoProps {
   id: string;
@@ -169,11 +169,15 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
             ))}
           </Row>
         </Col>
-        <SubmitButton className="mb-4">
+        <Button className="mb-4" variant="flat" type="button">
           <span>Buy Now</span>
-        </SubmitButton>
-        <SNSLogIn className="mb-4">Add to Cart</SNSLogIn>
-        <SNSLogIn>Pin to wishlist</SNSLogIn>
+        </Button>
+        <Button className="mb-4" variant="naked" type="button">
+          Add to Cart
+        </Button>
+        <Button variant="naked" type="button">
+          Pin to wishlist
+        </Button>
       </Col>
     </div>
   );

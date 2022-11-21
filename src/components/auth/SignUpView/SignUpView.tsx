@@ -7,7 +7,7 @@ import tw from "twin.macro";
 import { Row } from "src/styles/GlobalStyle";
 import { Info } from "@components/icons";
 import { useUI } from "@components/ui/context";
-import { Input, InputLabel } from "@components/ui";
+import { Button, Input, InputLabel } from "@components/ui";
 import {
   BORDER_TINE_WIDTH,
   MOBILEABLE_CONTAINER_HORIZONTAL_SPACE,
@@ -189,12 +189,13 @@ const SignUpView: FC<Props> = () => {
             <PolicyListView setPoliciesAccept={setPoliciesAccept} />
             {/* 인증 및 SUBMIT */}
             <div className="flex justify-center items-center mt-5">
-              <LogInButton
+              <Button
+                variant="flat"
                 type="submit"
                 onClick={handleSubmit(onValid, onInvaild)}
               >
                 <span className="font-semibold">본인인증하고 가입하기</span>
-              </LogInButton>
+              </Button>
             </div>
             {/* REDIRECT TO LOG IN */}
             <div className="sign-wrapper flex flex-col w-full mt-14 mb-5 space-y-4 relative">
@@ -214,14 +215,16 @@ const SignUpView: FC<Props> = () => {
                 </span>
               </div>
               <div className="flex justify-center items-center">
-                <LogInButton
+                <Button
+                  variant="flat"
+                  type="button"
                   onClick={() => {
                     setModalView("LOGIN_VIEW");
                     openModal();
                   }}
                 >
                   <span className="font-semibold">Log In</span>
-                </LogInButton>
+                </Button>
               </div>
             </div>
           </InnerWrapper>
@@ -258,16 +261,4 @@ const TempButton = styled.button`
     }
   }
   ${tw`ml-3 rounded-md transition duration-100`}
-`;
-
-const LogInButton = styled.button`
-  width: 100%;
-  background-color: ${props => props.theme.gray_primary};
-  & > span {
-    color: ${props => props.theme.text_secondary_color};
-  }
-  &:hover {
-    background-color: ${props => props.theme.black_primary};
-  }
-  ${tw`px-4 py-4 rounded-md transition duration-100`}
 `;

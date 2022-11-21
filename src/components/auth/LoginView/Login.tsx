@@ -3,7 +3,7 @@ import { FieldErrors, useForm } from "react-hook-form";
 import { validate as emailVaildate } from "email-validator";
 
 import useTheme from "@lib/hooks/useTheme";
-import { Input, InputLabel } from "@components/ui";
+import { Button, Input, InputLabel } from "@components/ui";
 
 import { SubmitButton } from "./LoginView";
 
@@ -75,9 +75,9 @@ export default function Login() {
         />
       </div>
       {/* Submit Btn */}
-      <SubmitButton>
+      <Button variant="flat" type="submit">
         <span className="font-semibold">Log In</span>
-      </SubmitButton>
+      </Button>
     </form>
   );
 }

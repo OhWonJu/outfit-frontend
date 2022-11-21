@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 
 import Input from "@components/ui/Input";
 import { SubmitButton } from "./LoginView";
+import { Button } from "@components/ui";
 
 export default function OrderCode() {
   const { register, handleSubmit, getValues } = useForm();
@@ -23,9 +24,9 @@ export default function OrderCode() {
           required
         />
       </div>
-      <SubmitButton className="group">
+      <Button className="group" variant="flat">
         <span className="font-semibold">Join</span>
-      </SubmitButton>
+      </Button>
     </form>
   );
 }

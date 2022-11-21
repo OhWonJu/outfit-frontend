@@ -1,9 +1,13 @@
 // export type Mode = "light" | "dark";
 
+import { theme } from "twin.macro";
+
 export const lightTheme: object = {
   // background_color: "#F8F9FA",
   background_color: "#F5F8F7",
   container_bg_color: "#F9FBFB",
+  theme_color: "#F5F8F7",
+  theme_comparsion_color: "#202020",
   text_symbol_color: "#0066A0",
   text_primary_color: "#0F1118",
   text_secondary_color: "#F0F0F0",

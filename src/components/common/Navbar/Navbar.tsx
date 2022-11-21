@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import tw from "twin.macro";
 import { throttle } from "lodash";
 
@@ -12,6 +12,7 @@ import Avatar from "../Avatar";
 
 import { cartData } from "MockData/cartData";
 import { TestDropDown, TestDropDown2 } from "../NavDroupDown";
+import { useRouter } from "next/router";
 
 interface Link {
   href: string;
@@ -25,6 +26,8 @@ interface NavbarProps {
 
 const Navbar: FC<NavbarProps> = ({ links, logoVisible }) => {
   const theme = useTheme();
+
+  const router = useRouter();
 
   const {
     // toggleSidebar,
@@ -97,6 +100,7 @@ const Navbar: FC<NavbarProps> = ({ links, logoVisible }) => {
           <ul className="flex" onMouseLeave={closeDropDown}>
             <li className="store h-full">
               <ListItem
+                currentPage={router.pathname.split("/")[1] === "store"}
                 onMouseOver={() => {
                   setDropDownView("TEST_VIEW");
                   openDropDown();
@@ -111,6 +115,7 @@ const Navbar: FC<NavbarProps> = ({ links, logoVisible }) => {
             </li>
             <li className="new h-full">
               <ListItem
+                currentPage={router.pathname.split("/")[1] === "new"}
                 onMouseOver={() => {
                   setDropDownView("TEST_VIEW2");
                   openDropDown();
@@ -125,15 +130,19 @@ const Navbar: FC<NavbarProps> = ({ links, logoVisible }) => {
             </li>
             <li className="fallowing h-full">
               <ListItem
+                currentPage={router.pathname.split("/")[1] === "fallowing"}
                 onMouseOver={() => {
                   closeDropDown();
                 }}
               >
-                <ListSpan>Fallowing</ListSpan>
+                <Link href={"/fallowing"}>
+                  <ListSpan>Fallowing</ListSpan>
+                </Link>
               </ListItem>
             </li>
             <li className="brand h-full">
               <ListItem
+                currentPage={router.pathname.split("/")[1] === "brand"}
                 onMouseOver={() => {
                   closeDropDown();
                 }}
@@ -228,8 +237,11 @@ const NavbarRoot = styled.header<any>`
   background-color: ${props =>
     props.$scrolled ? props.theme.background_color : "transparent"};
 
+  :hover {
+    background-color: ${props => props.theme.background_color};
+  }
+
   ${props => props.$scrolled && tw`shadow-md`}
-  /* ${tw`shadow-md`} */
   ${tw`
      sticky top-0 px-5 w-full z-50 border-transparent transition-shadow duration-300
   `}
@@ -239,11 +251,12 @@ const NavContent = styled.div<any>`
   ${tw`flex w-full h-full justify-between items-center xmd:grid grid-cols-12 gap-1 xmd:gap-2`}
 `;
 
-const ListItem = styled.a`
+const ListItem = styled.div<any>`
   display: inline-flex;
   align-items: center;
   position: relative;
   height: ${NAV_HEIGHT}px;
+
   :hover:before {
     content: "";
     position: absolute;
@@ -253,7 +266,23 @@ const ListItem = styled.a`
     height: 1.8px;
     background-color: ${props => props.theme.text_primary_color};
   }
-  ${tw`px-4 py-2 cursor-pointer`}
+
+  ${props => {
+    if (props.currentPage) {
+      return css`
+        :before {
+          content: "";
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          width: 100%;
+          height: 1.8px;
+          background-color: ${props => props.theme.text_primary_color};
+        }
+      `;
+    }
+  }}
+  ${tw`cursor-pointer`}
 `;
 
 const ListSpan = styled.span`
@@ -261,6 +290,6 @@ const ListSpan = styled.span`
   font-weight: bold;
   font-family: sans-serif;
   color: ${props => props.theme.text_primary_color};
-  /* ${tw`hover:border-b-[1.5px]`}
+  ${tw`flex justify-center items-center w-full h-full px-4 py-2 `}/* ${tw`hover:border-b-[1.5px]`}
   border-bottom-color: ${props => props.theme.text_primary_color}; */
 `;

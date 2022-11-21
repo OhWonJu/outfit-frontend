@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Container } from "@components/ui";
-import { TestSidebar } from "@components/VerticalSidebar";
+import { TestSidebar } from "@components/verticalSidebar";
 
 const Product = () => {
   return (
