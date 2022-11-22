@@ -2,12 +2,14 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["referentialIntegrity"]
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+  provider             = "mysql"
+  url                  = env("DATABASE_URL")
+  referentialIntegrity = "prisma"
 }
 
 model User {
@@ -31,6 +33,7 @@ model User {
   shoeSize    Int?
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
+  orders      Order[]
   Review      Review[]
   Comment     Comment[]
   Recomment   Recomment[]
@@ -48,69 +51,100 @@ model Brand {
   id        String    @id @default(uuid())
   name      String
   bid       String
+  Seller    Seller    @relation(fields: [sellerId], references: [id])
+  sellerId  String
   products  Product[]
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
 }
 
 model Product {
-  id         String      @id @default(uuid())
-  Brand      Brand       @relation(fields: [brandId], references: [id])
-  brandId    String
-  title      String      @unique @default("")
-  caption    String?
-  thumbNails Json
-  kategories Kategorie[] // outer, top, bottom, shoes, acc ....
-  type       Type        @relation(fields: [typeId], references: [id]) // top -> shirts T-shirts knit, mantoman... 
-  typeId     String
-  stoke      Int
+  id          String      @id @default(uuid())
+  seller      Seller      @relation(fields: [sellerId], references: [id])
+  sellerId    String
+  brand       Brand       @relation(fields: [brandId], references: [id])
+  brandId     String
+  title       String
+  caption     String?
+  price       Int
+  discount    Discount?
+  thumbNails  Json
+  kategories  Kategorie[] // outer, top, bottom, shoes, acc ....
+  type        Type        @relation(fields: [typeId], references: [id]) // top -> shirts T-shirts knit, mantoman... 
+  typeId      String
   // 1 to 1 으로 별도 모델을 팔지??   String[]으로 처리하고 싶은데 디비에서 안받아즈나봄?
-  sizes      Json // xs s m l xl, 220 230 240 250 ... 타입에 따라..
-  specs      Json // 협의 필요... top-xs (총장 품 가슴 둘레 어꺠 등등,,) bottom-xs(총장, 허벅지, 밑위 등등..) 조사 요망      
-  colors     Json // {name: String, code: HEXcode} 
+  sizes       Size[]
+  colors      Color[]
   // -------------------------------------------------------------------------------------------------------
-  hashtags   HashTag[]
-  reviews    Review[]
-  starCount  Int         @default(0)
-  totalStar  Float       @default(0)
-  qnas       QnA[]
-  createdAt  DateTime    @default(now())
-  updatedAt  DateTime    @updatedAt
-  Comment    Comment[]
+  tags        Tag[]
+  reviews     Review[]
+  ratingCount Int         @default(0)
+  totalRating Float       @default(0)
+  comments    Comment[]
+  qnAs        QnA[]
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
 }
 
 model Kategorie {
-  id        String    @id @default(cuid())
+  id        String    @id @default(uuid())
   kategorie String    @unique
   products  Product[]
   types     Type[]
 }
 
 model Type {
-  id          String     @id @default(cuid())
+  id          String     @id @default(uuid())
   ingredient  String     @unique
   products    Product[]
   Kategorie   Kategorie? @relation(fields: [kategorieId], references: [id])
   kategorieId String?
 }
 
-model HashTag {
-  id        String    @id @default(uuid())
-  hashtag   String    @unique
-  products  Product[]
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+model Tag {
+  id         String    @id @default(uuid())
+  tagContext String    @unique
+  products   Product[]
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+}
+
+model Discount {
+  id        Int     @id @default(autoincrement())
+  product   Product @relation(fields: [productId], references: [id])
+  productId String  @unique
+  able      Boolean
+  percent   Float
+}
+
+model Size {
+  id        Int     @id @default(autoincrement())
+  Product   Product @relation(fields: [productId], references: [id])
+  productId String  @unique
+  size      String
+  quantity  Int
+  spec      Json?
+}
+
+model Color {
+  id        Int     @id @default(autoincrement())
+  Product   Product @relation(fields: [productId], references: [id])
+  productId String  @unique
+  name      String
+  colorCode String
 }
 
 model Review {
-  id        Int       @id @default(autoincrement())
+  id        String    @id @default(uuid())
   user      User      @relation(fields: [userId], references: [id])
   userId    String
   product   Product   @relation(fields: [productId], references: [id])
   productId String
-  star      Float     @default(0)
-  files     Json
-  content   String
+  order     Order     @relation(fields: [orderId], references: [id])
+  orderId   String    @unique
+  rating    Float     @default(0)
+  files     Json?
+  content   String    @unique
   comments  Comment[]
   // Int 1 2 3 값 형식 및 서식 협의 필요
   fit       Int // 1.작아요 2.커요 3.딱 맞아요 
@@ -124,38 +158,38 @@ model Review {
 }
 
 model Comment {
-  id         Int         @id @default(autoincrement())
+  id         String      @id @default(uuid())
   user       User        @relation(fields: [userId], references: [id])
   userId     String
   product    Product     @relation(fields: [productId], references: [id])
   productId  String
+  review     Review      @relation(fields: [reviewId], references: [id])
+  reviewId   String
   content    String
   recomments Recomment[]
   createdAt  DateTime    @default(now())
   updatedAt  DateTime    @updatedAt
-  Review     Review?     @relation(fields: [reviewId], references: [id])
-  reviewId   Int?
 }
 
 model Recomment {
-  id        Int      @id @default(autoincrement())
-  comment   Comment  @relation(fields: [commentId], references: [id])
-  commentId Int
+  id        String   @id @default(uuid())
   user      User     @relation(fields: [userId], references: [id])
   userId    String
+  comment   Comment  @relation(fields: [commentId], references: [id])
+  commentId String
   content   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
 model QnA {
-  id        Int        @id @default(autoincrement())
+  id        String     @id @default(uuid())
   user      User       @relation(fields: [userId], references: [id])
   userId    String
   product   Product    @relation(fields: [productId], references: [id])
   productId String
   qnAaType  QnAType    @relation(fields: [qnATypeId], references: [id])
-  qnATypeId Int
+  qnATypeId String
   content   String
   qnaAnswer QnAAnswer?
   createdAt DateTime   @default(now())
@@ -163,22 +197,45 @@ model QnA {
 }
 
 model QnAType {
-  id   Int    @id @default(autoincrement())
+  id   String @id @default(uuid())
   QnA  QnA[]
   type String
 }
 
 model QnAAnswer {
-  id      Int    @id @default(autoincrement())
-  QnA     QnA    @relation(fields: [qnAId], references: [id])
-  qnAId   Int    @unique
-  content String
+  id        String   @id @default(uuid())
+  QnA       QnA      @relation(fields: [qnAId], references: [id])
+  qnAId     String   @unique
+  Seller    Seller   @relation(fields: [sellerId], references: [id])
+  sellerId  String
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
-// model Seller {
+model Order {
+  id        String   @id @default(uuid())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  seller    Seller   @relation(fields: [sellerId], references: [id])
+  sellerId  String
+  productId String
+  orderCode String
+  size      String
+  color     String
+  quantity  Int
+  progress  String // "order-check" | "oder-done" | "order-fail" | "delivery" | "delivery-complete" | "delivery-fail" | "cancel" | "cancel-fail" | "return" | "return-check" |  "return-done" | "return-fail" | "exchange" | "exchange-check" |  "exchange-done" | "exchange-fail"
+  review    Review?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
 
-// }
-
-// model Order {
-
-// }
+model Seller {
+  id         String      @id @default(uuid())
+  products   Product[]
+  brands     Brand[]
+  orders     Order[]
+  qnAAnswers QnAAnswer[]
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+}
