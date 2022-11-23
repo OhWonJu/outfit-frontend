@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 
-import useTheme from "@lib/hooks/useTheme";
-import useWindowSize from "@lib/hooks/useWindowSize";
+import useTheme from "@lib/client/hooks/useTheme";
+import useWindowSize from "@lib/client/hooks/useWindowSize";
 
 import {
   Banner,
@@ -20,7 +20,6 @@ const LaunchingBanner = () => {
   let canvas = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    console.log(windowWidth, windowHeight);
     let renderingElement = canvas.current;
     let drawingElement = renderingElement.cloneNode() as HTMLCanvasElement;
 

@@ -5,7 +5,7 @@ import { Box } from "@mui/system";
 import styled from "styled-components";
 import tw from "twin.macro";
 
-import useTheme from "@lib/hooks/useTheme";
+import useTheme from "@lib/client/hooks/useTheme";
 import { Container } from "@components/ui";
 import { ProductReview } from "./ProductTabScreens";
 

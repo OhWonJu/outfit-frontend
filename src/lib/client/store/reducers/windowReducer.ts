@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import type { PayloadAction } from "@reduxjs/toolkit";
-import type { WINDOW_ACTION } from "@lib/store/types";
+import type { WINDOW_ACTION } from "@lib/client/store/types";
 
 export type WindowStateType = {
   displayWindow: boolean;

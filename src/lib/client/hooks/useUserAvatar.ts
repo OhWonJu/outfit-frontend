@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useUI } from "src/components/ui/context";
-import { getRandomPairOfColors } from "src/lib/colors";
+import { getRandomPairOfColors } from "@lib/client/colors";
 
 export const useUserAvatar = (name = "userAvatar") => {
   const { userAvatar, setUserAvatar } = useUI();

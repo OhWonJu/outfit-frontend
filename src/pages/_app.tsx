@@ -5,7 +5,7 @@ import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
 import { Provider } from "react-redux";
 
-import wrapper from "@lib/store/store";
+import wrapper from "@lib/client/store/store";
 import AppHead from "@components/common/AppHead";
 import Layout from "@components/common/Layout";
 import { ManagedUIContext } from "@components/ui/context";

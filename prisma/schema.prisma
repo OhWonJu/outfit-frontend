@@ -73,7 +73,7 @@ model Product {
   type        Type        @relation(fields: [typeId], references: [id]) // top -> shirts T-shirts knit, mantoman... 
   typeId      String
   // 1 to 1 으로 별도 모델을 팔지??   String[]으로 처리하고 싶은데 디비에서 안받아즈나봄?
-  sizes       Size[]
+  options     Option[]
   colors      Color[]
   // -------------------------------------------------------------------------------------------------------
   tags        Tag[]
@@ -117,11 +117,11 @@ model Discount {
   percent   Float
 }
 
-model Size {
+model Option {
   id        Int     @id @default(autoincrement())
   Product   Product @relation(fields: [productId], references: [id])
-  productId String  @unique
-  size      String
+  productId String
+  option    String
   quantity  Int
   spec      Json?
 }
@@ -129,7 +129,7 @@ model Size {
 model Color {
   id        Int     @id @default(autoincrement())
   Product   Product @relation(fields: [productId], references: [id])
-  productId String  @unique
+  productId String
   name      String
   colorCode String
 }
@@ -220,11 +220,11 @@ model Order {
   seller    Seller   @relation(fields: [sellerId], references: [id])
   sellerId  String
   productId String
-  orderCode String
+  orderCode String   @unique
   size      String
   color     String
   quantity  Int
-  progress  String // "order-check" | "oder-done" | "order-fail" | "delivery" | "delivery-complete" | "delivery-fail" | "cancel" | "cancel-fail" | "return" | "return-check" |  "return-done" | "return-fail" | "exchange" | "exchange-check" |  "exchange-done" | "exchange-fail"
+  progress  String // "order-check" | "oder-done" | "order-fail" | "delivery" | "delivery-complete" | "delivery-fail" | "receipt-confirmed" | "cancel" | "cancel-fail" | "return" | "return-check" |  "return-done" | "return-fail" | "exchange" | "exchange-check" |  "exchange-done" | "exchange-fail"
   review    Review?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -232,6 +232,7 @@ model Order {
 
 model Seller {
   id         String      @id @default(uuid())
+  sellerName String
   products   Product[]
   brands     Brand[]
   orders     Order[]

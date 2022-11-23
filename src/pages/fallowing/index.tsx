@@ -5,7 +5,7 @@ import tw from "twin.macro";
 import { BORDER_TINE_WIDTH, NAV_HEIGHT } from "src/constants";
 import { BrandList, BrandMarquee } from "@components/fallowing";
 import { Cross, Menu } from "@components/icons";
-import useTheme from "@lib/hooks/useTheme";
+import useTheme from "@lib/client/hooks/useTheme";
 
 const Fallowing = () => {
   const theme = useTheme();

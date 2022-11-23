@@ -1,6 +1,6 @@
 import React from "react";
 
-import useTheme from "@lib/hooks/useTheme";
+import useTheme from "@lib/client/hooks/useTheme";
 
 const BrandList = () => {
   const theme = useTheme();

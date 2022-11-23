@@ -1,4 +1,4 @@
-import useTheme from "@lib/hooks/useTheme";
+import useTheme from "@lib/client/hooks/useTheme";
 import { BORDER_BASE_WIDTH, NAV_HEIGHT } from "src/constants";
 
 interface SidebarProps {

@@ -10,16 +10,16 @@ import {
   modalActions,
   sidebarActions,
   windowActions,
-} from "@lib/store/reducers";
+} from "@lib/client/store/reducers";
 
 // type
 // import type { GetServerSideProps, GetServerSidePropsContext, NextPage } from "next";
-import type { RootState } from "@lib/store/store";
-import type { SIDEBAR_VIEWS } from "@lib/store/types/sidebarType";
-import type { MODAL_VIEWS } from "@lib/store/types/modalType";
-import type { DROP_DOWN_VIEWS } from "@lib/store/types/dropDownType";
-import type { WINDOW_VIEWS } from "@lib/store/types/windowType";
-import { userAvatarActions } from "@lib/store/reducers/userAvatarReducer";
+import type { RootState } from "@lib/client/store/store";
+import type { SIDEBAR_VIEWS } from "@lib/client/store/types/sidebarType";
+import type { MODAL_VIEWS } from "@lib/client/store/types/modalType";
+import type { DROP_DOWN_VIEWS } from "@lib/client/store/types/dropDownType";
+import type { WINDOW_VIEWS } from "@lib/client/store/types/windowType";
+import { userAvatarActions } from "@lib/client/store/reducers/userAvatarReducer";
 
 export const useUI = () => {
   const dispatch = useDispatch();

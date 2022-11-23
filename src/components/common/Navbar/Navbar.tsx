@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 import tw from "twin.macro";
 import { throttle } from "lodash";
 
-import useTheme from "@lib/hooks/useTheme";
+import useTheme from "@lib/client/hooks/useTheme";
 import { NAV_HEIGHT, SYMBOL_TEXT } from "src/constants";
 import { Link, useUI } from "@components/ui";
 import Searchbar from "../Searchbar";

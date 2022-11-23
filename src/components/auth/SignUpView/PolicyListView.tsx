@@ -1,11 +1,11 @@
 import React, { forwardRef, useEffect, useState } from "react";
 
-import useTheme from "@lib/hooks/useTheme";
+import useTheme from "@lib/client/hooks/useTheme";
 import { useUI, Window } from "@components/ui";
 import { Col, Row } from "src/styles/GlobalStyle";
 import { Check } from "@components/icons";
 import Policy from "@components/policy";
-import { WINDOW_VIEWS } from "@lib/store/types/windowType";
+import { WINDOW_VIEWS } from "@lib/client/store/types/windowType";
 
 // Policy Window View //
 const WindowView: React.FC<{

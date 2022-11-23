@@ -2,9 +2,9 @@ import React, { useCallback } from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
 
-import PresentProductStore from "@lib/store/simpleStore/presentProductStore";
-import useTheme from "@lib/hooks/useTheme";
-import useWindowSize from "@lib/hooks/useWindowSize";
+import PresentProductStore from "@lib/client/store/simpleStore/presentProductStore";
+import useTheme from "@lib/client/hooks/useTheme";
+import useWindowSize from "@lib/client/hooks/useWindowSize";
 import { ReviewCard } from "@components/review";
 import { useUI } from "@components/ui";
 import { Star } from "@components/icons";

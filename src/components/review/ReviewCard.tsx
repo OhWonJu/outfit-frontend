@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
 
-import useTheme from "@lib/hooks/useTheme";
+import useTheme from "@lib/client/hooks/useTheme";
 import { Col, Row } from "src/styles/GlobalStyle";
 import { BORDER_TINE_WIDTH } from "src/constants";
 import { EllipsisSpan } from "@components/ui";

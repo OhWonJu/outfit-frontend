@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { disableBodyScroll, clearAllBodyScrollLocks } from "body-scroll-lock";
-import useTheme from "@lib/hooks/useTheme";
+import useTheme from "@lib/client/hooks/useTheme";
 
 interface SidebarProps {
   children: any;

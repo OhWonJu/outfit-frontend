@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import type { PayloadAction } from "@reduxjs/toolkit";
-import type { SIDEBAR_ACTION } from "@lib/store/types";
+import type { SIDEBAR_ACTION } from "@lib/client/store/types";
 
 export type SidebarStateType = {
   displaySidebar: boolean;

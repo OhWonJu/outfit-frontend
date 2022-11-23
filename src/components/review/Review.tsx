@@ -1,10 +1,10 @@
 import React from "react";
 
-import PresentProductStore from "@lib/store/simpleStore/presentProductStore";
+import PresentProductStore from "@lib/client/store/simpleStore/presentProductStore";
 import ModalLayout from "@components/common/ModalLayout";
 import { ReviewType } from "types/review";
 import ReviewCard from "./ReviewCard";
-import useWindowSize from "@lib/hooks/useWindowSize";
+import useWindowSize from "@lib/client/hooks/useWindowSize";
 import { SCREEN_SIZE_MB, SCREEN_SIZE_MD } from "src/constants";
 
 import { product_01_Data } from "MockData/productData";

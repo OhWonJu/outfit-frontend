@@ -2,7 +2,7 @@ import { FC } from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
 
-import useTheme from "@lib/hooks/useTheme";
+import useTheme from "@lib/client/hooks/useTheme";
 import SidebarLayout from "@components/common/SidebarLayout";
 import { useUI, Collapse } from "@components/ui";
 import Avatar from "../Avatar";

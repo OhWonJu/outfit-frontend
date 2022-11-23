@@ -13,7 +13,7 @@ import {
   MOBILEABLE_CONTAINER_HORIZONTAL_SPACE,
 } from "src/constants";
 import PolicyListView from "./PolicyListView";
-import useTheme from "@lib/hooks/useTheme";
+import useTheme from "@lib/client/hooks/useTheme";
 import Header from "./Header";
 
 interface Props {}

@@ -1,5 +1,6 @@
 import styled, { createGlobalStyle } from "styled-components";
 import { normalize } from "styled-normalize";
+import tw from "twin.macro";
 
 export const GlobalStyle = createGlobalStyle<any>`
     ${normalize};
@@ -42,3 +43,17 @@ export const Row = styled.div`
   display: flex;
   flex-direction: row;
 `;
+
+// FOR Index.ts
+export const IndexContainer = styled.div`
+  width: 100%;
+  /* height: 100vh; */
+  background-color: ${({ theme }) => theme.background_color};
+  ${tw`absolute inset-0`}
+`;
+
+export const IndexWrapper = styled.div`
+  background-color: ${({ theme }) => theme.background_color};
+  ${tw`w-full h-screen`}
+`;
+// -----------------------------------------------------------

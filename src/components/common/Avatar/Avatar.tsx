@@ -1,7 +1,7 @@
 import { FC, useRef, useEffect } from "react";
 import cn from "clsx";
 
-import { useUserAvatar } from "@lib/hooks/useUserAvatar";
+import { useUserAvatar } from "@lib/client/hooks/useUserAvatar";
 
 interface Props {
   className?: string;

@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import type { PayloadAction } from "@reduxjs/toolkit";
-import type { MODAL_ACTION } from "@lib/store/types";
+import type { MODAL_ACTION } from "@lib/client/store/types";
 
 export type ModalStateType = {
   displayModal: boolean;

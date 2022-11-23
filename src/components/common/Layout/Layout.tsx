@@ -2,8 +2,8 @@ import { ReactNode, useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 
 import { Sidebar, LoadingDots, useUI } from "@components/ui";
-import { useAcceptCookies } from "@lib/hooks/useAcceptCookies";
-import useTheme from "@lib/hooks/useTheme";
+import { useAcceptCookies } from "@lib/client/hooks/useAcceptCookies";
+import useTheme from "@lib/client/hooks/useTheme";
 import Navbar from "../Navbar";
 import SideNavbar from "../MobileNavbar";
 import { Review } from "@components/review";
@@ -76,7 +76,7 @@ const SidebarView: React.FC<{
   closeSidebar(): any;
   // links: LinkProps[];
 }> = ({ sidebarView, closeSidebar }) => {
-  const left = sidebarView === "MOBILE_MENU_VIEW";
+  const left = sidebarView === "MOBILE_NAV_VIEW";
   return (
     <Sidebar left={left} onClose={closeSidebar}>
       {sidebarView === "CART_VIEW" && <CartSidebarView />}
@@ -107,7 +107,7 @@ const DropDownView: React.FC<{
       {/* {dropDownView === "TEST_VIEW" && <TestDropDown onClose={closeDropDown} />}
       {dropDownView === "TEST_VIEW2" && (
         <TestDropDown2 onClose={closeDropDown} />
-      )} */} 
+      )} */}
     </>
   );
 };

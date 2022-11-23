@@ -10,7 +10,7 @@ import cn from "clsx";
 import throttle from "lodash.throttle";
 import { IconButton } from "@mui/material";
 
-import useTheme from "@lib/hooks/useTheme";
+import useTheme from "@lib/client/hooks/useTheme";
 import { ChevronDown, ChevronLeft, ChevronRight } from "@components/icons";
 import { ICON_BUTTON_BLACK_OPACTIY } from "src/constants";
 // import useHover from "@lib/hooks/useHover";

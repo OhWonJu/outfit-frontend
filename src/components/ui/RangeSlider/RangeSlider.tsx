@@ -7,7 +7,7 @@ import React, {
 } from "react";
 import Slider from "@mui/material/Slider";
 
-import useTheme from "@lib/hooks/useTheme";
+import useTheme from "@lib/client/hooks/useTheme";
 import styled from "styled-components";
 import tw from "twin.macro";
 

@@ -1,11 +1,11 @@
 import React from "react";
 import { FieldErrors, useForm } from "react-hook-form";
 import { validate as emailVaildate } from "email-validator";
+import { AxiosError } from "axios";
 
-import useTheme from "@lib/hooks/useTheme";
 import { Button, Input, InputLabel } from "@components/ui";
-
-import { SubmitButton } from "./LoginView";
+import { useMutation } from "react-query";
+import { _POST } from "@lib/server/Api";
 
 interface LoginFormProps {
   email: string;
@@ -13,7 +13,27 @@ interface LoginFormProps {
 }
 
 export default function Login() {
-  const theme = useTheme();
+  // React Query //
+  function _LOGIN(data: LoginFormProps) {
+    // fetch("/api/users/logIn", {
+    //   method: "POST",
+    //   body: JSON.stringify(data),
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // });
+    _POST("/api/users/logIn", data);
+  }
+
+  const { mutate, data, isLoading } = useMutation<
+    any,
+    AxiosError,
+    LoginFormProps
+    // @ts-ignore
+  >(_LOGIN, {
+    onSuccess: () => {},
+  });
+  // -------------------------------------------------------------- //
 
   // React Form Hook //
   const {
@@ -25,7 +45,10 @@ export default function Login() {
   });
 
   const onValid = (data: LoginFormProps) => {
-    console.log("valid Action", data);
+    mutate({
+      email: data.email,
+      password: data.password,
+    });
   };
   const onInvaild = (errors: FieldErrors) => {
     console.log(errors);

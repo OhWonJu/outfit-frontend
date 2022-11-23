@@ -3,7 +3,7 @@ import styled, { css, keyframes } from "styled-components";
 import tw from "twin.macro";
 
 import { BORDER_BASE_WIDTH } from "src/constants";
-import useTheme from "@lib/hooks/useTheme";
+import useTheme from "@lib/client/hooks/useTheme";
 import { Col, Row } from "src/styles/GlobalStyle";
 import { SNSLogIn, SubmitButton } from "@components/auth/LoginView/LoginView";
 import { Check, ChevronRight, Star } from "@components/icons";

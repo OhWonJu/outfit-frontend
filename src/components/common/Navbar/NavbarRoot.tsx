@@ -1,7 +1,7 @@
 import { FC, useState, useEffect, ReactNode } from "react";
 import throttle from "lodash.throttle";
 import styled, { css } from "styled-components";
-import useTheme from "@lib/hooks/useTheme";
+import useTheme from "@lib/client/hooks/useTheme";
 
 /**
  * @deprecated
