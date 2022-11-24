@@ -54,7 +54,9 @@ export async function _POST(endPoint: string, params: any) {
         "Content-Type": "application/json",
       },
     });
-    return response;
+    // fetch의 res 결과를 받기 위해서는 이렇게.
+    const data = await response.json();
+    return data;
   } catch (e) {
     console.error(e);
   }

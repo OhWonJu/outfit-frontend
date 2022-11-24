@@ -1,11 +1,10 @@
 import React from "react";
 import { FieldErrors, useForm } from "react-hook-form";
 import { validate as emailVaildate } from "email-validator";
-import { AxiosError } from "axios";
 
 import { Button, Input, InputLabel } from "@components/ui";
-import { useMutation } from "react-query";
 import { _POST } from "@lib/server/Api";
+import { useMutation } from "@tanstack/react-query";
 
 interface LoginFormProps {
   email: string;
@@ -14,25 +13,18 @@ interface LoginFormProps {
 
 export default function Login() {
   // React Query //
-  function _LOGIN(data: LoginFormProps) {
-    // fetch("/api/users/logIn", {
-    //   method: "POST",
-    //   body: JSON.stringify(data),
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    // });
-    _POST("/api/users/logIn", data);
+  async function _LOGIN(data: LoginFormProps) {
+    return await _POST("/api/users/logIn", data);
   }
-
-  const { mutate, data, isLoading } = useMutation<
-    any,
-    AxiosError,
-    LoginFormProps
-    // @ts-ignore
-  >(_LOGIN, {
-    onSuccess: () => {},
+  const mutation = useMutation({
+    mutationFn: async (formData: LoginFormProps) => {
+      return await _LOGIN(formData);
+    },
+    onSuccess: data => {
+      console.log("SUCCESS: ", data);
+    },
   });
+
   // -------------------------------------------------------------- //
 
   // React Form Hook //
@@ -45,10 +37,7 @@ export default function Login() {
   });
 
   const onValid = (data: LoginFormProps) => {
-    mutate({
-      email: data.email,
-      password: data.password,
-    });
+    mutation.mutate(data);
   };
   const onInvaild = (errors: FieldErrors) => {
     console.log(errors);

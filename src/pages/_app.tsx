@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import { QueryClient, QueryClientProvider } from "react-query";
-import { ReactQueryDevtools } from "react-query-devtools";
 import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
 import { Provider } from "react-redux";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import wrapper from "@lib/client/store/store";
 import AppHead from "@components/common/AppHead";
