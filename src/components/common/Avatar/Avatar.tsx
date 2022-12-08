@@ -21,7 +21,7 @@ const Avatar: FC<Props> = ({ className }) => {
   return (
     <div
       ref={ref}
-      style={{ backgroundImage: userAvatar }}
+      style={{ backgroundImage: userAvatar ?? "" }}
       className={rootClassName}
     >
       {/* Add an image - We're generating a gradient as placeholder  <img></img> */}

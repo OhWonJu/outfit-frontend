@@ -42,9 +42,9 @@ const Fallowing = () => {
 export default Fallowing;
 
 const Wrapper = styled.div`
-  height: calc(100vh);
+  /* height: calc(100vh); */
   padding-top: ${NAV_HEIGHT}px;
-  ${tw`absolute inset-0 w-screen m-0 overflow-hidden`}
+  ${tw`absolute inset-0 h-screen w-full m-0 overflow-hidden`}
 `;
 
 const Main = styled.div<any>`

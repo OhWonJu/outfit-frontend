@@ -2,7 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 
 import Input from "@components/ui/Input";
-import { SubmitButton } from "./LoginView";
+import { SubmitButton } from ".";
 import { Button } from "@components/ui";
 
 export default function OrderCode() {

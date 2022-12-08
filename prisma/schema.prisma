@@ -7,83 +7,132 @@ generator client {
 }
 
 datasource db {
-  provider             = "mysql"
-  url                  = env("DATABASE_URL")
-  referentialIntegrity = "prisma"
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
 }
 
 model User {
-  id          String      @id @default(uuid())
-  firstName   String?
-  lastName    String?
-  userName    String      @unique
-  email       String      @unique
-  phoneNumber String?     @unique
-  password    String
-  snsKey      String? // 인증되면 해시 값으로 ..? 
-  userAdress  UserAdress?
-  bio         String?
-  avatar      String?
-  gender      String
-  weigth      Int?
-  height      Int?
-  topSize     String?
-  bottomSize  String?
-  outerSize   String?
-  shoeSize    Int?
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
-  orders      Order[]
-  Review      Review[]
-  Comment     Comment[]
-  Recomment   Recomment[]
-  QnA         QnA[]
+  id              String           @id @default(uuid())
+  firstName       String?
+  lastName        String?
+  userName        String           @unique
+  email           String           @unique
+  phoneNumber     String?          @unique
+  password        String
+  snsKey          String? // 인증되면 해시 값으로 ..? 
+  userAdress      UserAdress?
+  bio             String?
+  avatar          String?
+  gender          String
+  weight          Int?
+  height          Int?
+  topSize         String?
+  bottomSize      String?
+  outerSize       String?
+  shoeSize        Int?
+  orders          Order[]
+  cartItems       CartItem[]
+  pins            Pin[]
+  reviews         Review[]
+  comments        Comment[]
+  recomments      Recomment[]
+  questions       Question[]
+  brandFallowings BrandFallowing[]
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  cartItemId      String?
 }
 
 model UserAdress {
-  id      Int    @id @default(autoincrement())
+  id     Int    @id @default(autoincrement())
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @unique
+  adress String
+
+  @@index([userId])
+}
+
+model CartItem {
+  id               String   @id @default(uuid())
+  user             User     @relation(fields: [userId], references: [id])
+  userId           String
+  productId        String
+  productName      String
+  proudctPrice     Float
+  productThumbNail String
+  size             String
+  color            String
+  quantity         Int      @default(1)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@index([userId])
+}
+
+model Pin {
+  id        String @id @default(uuid())
+  user      User   @relation(fields: [userId], references: [id])
+  userId    String
+  productId String
+
+  @@index([userId])
+}
+
+model BrandFallowing {
+  id      String @id @default(uuid())
   user    User   @relation(fields: [userId], references: [id])
-  userId  String @unique
-  content String
+  userId  String
+  brandId String
+
+  @@index([userId])
 }
 
 model Brand {
-  id        String    @id @default(uuid())
-  name      String
-  bid       String
-  Seller    Seller    @relation(fields: [sellerId], references: [id])
-  sellerId  String
-  products  Product[]
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  id            String    @id @default(uuid())
+  name          String
+  bid           String
+  seller        Seller    @relation(fields: [sellerId], references: [id])
+  sellerId      String
+  products      Product[]
+  fallowerCount Int       @default(0)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@index([sellerId])
 }
 
 model Product {
-  id          String      @id @default(uuid())
-  seller      Seller      @relation(fields: [sellerId], references: [id])
+  id          String     @id @default(uuid())
+  seller      Seller     @relation(fields: [sellerId], references: [id])
   sellerId    String
-  brand       Brand       @relation(fields: [brandId], references: [id])
+  brand       Brand      @relation(fields: [brandId], references: [id])
   brandId     String
   title       String
   caption     String?
-  price       Int
-  discount    Discount?
   thumbNails  Json
-  kategories  Kategorie[] // outer, top, bottom, shoes, acc ....
-  type        Type        @relation(fields: [typeId], references: [id]) // top -> shirts T-shirts knit, mantoman... 
+  kategorie   Kategorie  @relation(fields: [kategorieId], references: [id]) // outer, top, bottom, shoes, acc .... 
+  kategorieId String
+  type        Type       @relation(fields: [typeId], references: [id]) // top -> shirts T-shirts knit, mantoman... 
   typeId      String
   // 1 to 1 으로 별도 모델을 팔지??   String[]으로 처리하고 싶은데 디비에서 안받아즈나봄?
   options     Option[]
   colors      Color[]
   // -------------------------------------------------------------------------------------------------------
+  price       Int
+  discount    Discount?
   tags        Tag[]
   reviews     Review[]
-  ratingCount Int         @default(0)
-  totalRating Float       @default(0)
-  comments    Comment[]
-  qnAs        QnA[]
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
+  ratingCount Int        @default(0)
+  totalRating Float      @default(0)
+  questions   Question[]
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  @@index([sellerId])
+  @@index([brandId])
+  @@index([kategorieId])
+  @@index([typeId])
 }
 
 model Kategorie {
@@ -95,10 +144,43 @@ model Kategorie {
 
 model Type {
   id          String     @id @default(uuid())
-  ingredient  String     @unique
+  type        String     @unique
   products    Product[]
   Kategorie   Kategorie? @relation(fields: [kategorieId], references: [id])
   kategorieId String?
+
+  @@index([kategorieId])
+}
+
+model Option {
+  id        Int     @id @default(autoincrement())
+  product   Product @relation(fields: [productId], references: [id])
+  productId String
+  option    String
+  quantity  Int
+  spec      Json?
+
+  @@index([productId])
+}
+
+model Color {
+  id        Int     @id @default(autoincrement())
+  product   Product @relation(fields: [productId], references: [id])
+  productId String
+  name      String
+  colorCode String
+
+  @@index([productId])
+}
+
+model Discount {
+  id        Int     @id @default(autoincrement())
+  product   Product @relation(fields: [productId], references: [id])
+  productId String  @unique
+  able      Boolean
+  percent   Int
+
+  @@index([productId])
 }
 
 model Tag {
@@ -109,66 +191,44 @@ model Tag {
   updatedAt  DateTime  @updatedAt
 }
 
-model Discount {
-  id        Int     @id @default(autoincrement())
-  product   Product @relation(fields: [productId], references: [id])
-  productId String  @unique
-  able      Boolean
-  percent   Float
-}
-
-model Option {
-  id        Int     @id @default(autoincrement())
-  Product   Product @relation(fields: [productId], references: [id])
-  productId String
-  option    String
-  quantity  Int
-  spec      Json?
-}
-
-model Color {
-  id        Int     @id @default(autoincrement())
-  Product   Product @relation(fields: [productId], references: [id])
-  productId String
-  name      String
-  colorCode String
-}
-
 model Review {
-  id        String    @id @default(uuid())
-  user      User      @relation(fields: [userId], references: [id])
-  userId    String
-  product   Product   @relation(fields: [productId], references: [id])
-  productId String
-  order     Order     @relation(fields: [orderId], references: [id])
-  orderId   String    @unique
-  rating    Float     @default(0)
-  files     Json?
-  content   String    @unique
-  comments  Comment[]
+  id              String    @id @default(uuid())
+  user            User      @relation(fields: [userId], references: [id])
+  userId          String
+  product         Product   @relation(fields: [productId], references: [id])
+  productId       String
+  order           Order     @relation(fields: [orderId], references: [id])
+  orderId         String    @unique
+  rating          Float     @default(0)
+  files           Json?
+  content         String
+  comments        Comment[]
   // Int 1 2 3 값 형식 및 서식 협의 필요
-  fit       Int // 1.작아요 2.커요 3.딱 맞아요 
-  color     Int // 1. 어두워요 2.밝아요 3.딱 맞아요
-  thickness Int // 1.얇아요 2.두꺼워요 3.딱 맞아요
+  fitRating       Int // 1.작아요 2.커요 3.딱 맞아요 
+  colorRating     Int // 1. 어두워요 2.밝아요 3.딱 맞아요
+  thicknessRating Int // 1.얇아요 2.두꺼워요 3.딱 맞아요
   // ---------------------------------------------
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
 
   @@unique([productId, userId])
+  @@index([userId])
+  @@index([productId])
 }
 
 model Comment {
   id         String      @id @default(uuid())
   user       User        @relation(fields: [userId], references: [id])
   userId     String
-  product    Product     @relation(fields: [productId], references: [id])
-  productId  String
   review     Review      @relation(fields: [reviewId], references: [id])
   reviewId   String
   content    String
   recomments Recomment[]
   createdAt  DateTime    @default(now())
   updatedAt  DateTime    @updatedAt
+
+  @@index([userId])
+  @@index([reviewId])
 }
 
 model Recomment {
@@ -180,37 +240,39 @@ model Recomment {
   content   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([commentId])
 }
 
-model QnA {
-  id        String     @id @default(uuid())
-  user      User       @relation(fields: [userId], references: [id])
-  userId    String
-  product   Product    @relation(fields: [productId], references: [id])
-  productId String
-  qnAaType  QnAType    @relation(fields: [qnATypeId], references: [id])
-  qnATypeId String
-  content   String
-  qnaAnswer QnAAnswer?
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
-}
-
-model QnAType {
-  id   String @id @default(uuid())
-  QnA  QnA[]
-  type String
-}
-
-model QnAAnswer {
+model Question {
   id        String   @id @default(uuid())
-  QnA       QnA      @relation(fields: [qnAId], references: [id])
-  qnAId     String   @unique
-  Seller    Seller   @relation(fields: [sellerId], references: [id])
-  sellerId  String
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  product   Product  @relation(fields: [productId], references: [id])
+  productId String
+  qnAType   String
   content   String
+  answer    Answer?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([productId])
+}
+
+model Answer {
+  id         String   @id @default(uuid())
+  question   Question @relation(fields: [questionId], references: [id])
+  questionId String   @unique
+  Seller     Seller   @relation(fields: [sellerId], references: [id])
+  sellerId   String
+  content    String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([questionId])
+  @@index([sellerId])
 }
 
 model Order {
@@ -223,20 +285,41 @@ model Order {
   orderCode String   @unique
   size      String
   color     String
-  quantity  Int
+  quantity  Int      @default(1)
+  adress    String?
   progress  String // "order-check" | "oder-done" | "order-fail" | "delivery" | "delivery-complete" | "delivery-fail" | "receipt-confirmed" | "cancel" | "cancel-fail" | "return" | "return-check" |  "return-done" | "return-fail" | "exchange" | "exchange-check" |  "exchange-done" | "exchange-fail"
   review    Review?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([sellerId])
 }
 
 model Seller {
-  id         String      @id @default(uuid())
+  id         String    @id @default(uuid())
   sellerName String
   products   Product[]
   brands     Brand[]
   orders     Order[]
-  qnAAnswers QnAAnswer[]
-  createdAt  DateTime    @default(now())
-  updatedAt  DateTime    @updatedAt
+  qnAAnswers Answer[]
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+}
+
+// ------------------------------------------------------------ //
+// for test
+
+model TProduct {
+  id          String   @id @default(uuid())
+  name        String
+  thumbNails  Json
+  kategorieId String
+  content     String
+  createdAt   DateTime @default(now())
+  typeId      String
+  price       Int
+
+  @@index([kategorieId])
+  @@index([typeId])
 }

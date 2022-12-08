@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useState } from "react";
 import dynamic from "next/dynamic";
 
 import { Sidebar, LoadingDots, useUI } from "@components/ui";
@@ -10,7 +10,7 @@ import { Review } from "@components/review";
 import { LoginView } from "@components/auth";
 import { CartSidebarView } from "@components/cart";
 import SearchDropDown from "../Searchbar/SearchDropDown";
-import { TestDropDown, TestDropDown2 } from "../NavDroupDown";
+// import { TestDropDown, TestDropDown2 } from "../NavDroupDown";
 // import { Cross } from "@components/icons";
 
 const Loading = () => (

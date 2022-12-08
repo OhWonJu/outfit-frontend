@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FieldErrors, useForm } from "react-hook-form";
+import { useMutation } from "@tanstack/react-query";
 import { validate as emailVaildate } from "email-validator";
 
+import { LogInProps } from "types/users";
+import { _POST } from "@lib/server/rootApi";
+import { _LOGIN } from "@lib/server/api/user/login";
 import { Button, Input, InputLabel } from "@components/ui";
-import { _POST } from "@lib/server/Api";
-import { useMutation } from "@tanstack/react-query";
 
 interface LoginFormProps {
   email: string;
@@ -13,18 +15,12 @@ interface LoginFormProps {
 
 export default function Login() {
   // React Query //
-  async function _LOGIN(data: LoginFormProps) {
-    return await _POST("/api/users/logIn", data);
-  }
   const mutation = useMutation({
-    mutationFn: async (formData: LoginFormProps) => {
-      return await _LOGIN(formData);
-    },
+    mutationFn: async (formData: LogInProps) => await _LOGIN(formData),
     onSuccess: data => {
       console.log("SUCCESS: ", data);
     },
   });
-
   // -------------------------------------------------------------- //
 
   // React Form Hook //
