@@ -6,6 +6,9 @@ import { TestSidebar } from "@components/verticalSidebar";
 import { TProduct } from "@prisma/client";
 
 type TProductProps = TProduct & {
+  thumbNails: {
+    urls: Array<string>;
+  };
   kategorie: { id: string; kategorie: string };
   type: { id: string; type: string; kategorieId: string };
 };
@@ -21,8 +24,6 @@ const Product = () => {
       .then(res => res.json())
       .then(data => setProducts(data.items));
   }, []);
-
-  console.log(products[0]);
 
   return (
     <>
