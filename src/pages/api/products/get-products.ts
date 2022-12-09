@@ -5,7 +5,14 @@ const client = new PrismaClient();
 
 async function getProducts(skip: number, take: number) {
   try {
-    const response = await client.tProduct.findMany({ skip, take });
+    const response = await client.tProduct.findMany({
+      skip,
+      take,
+      include: {
+        kategorie: true,
+        type: true,
+      },
+    });
     return response;
   } catch (e) {
     console.error(JSON.stringify(e));

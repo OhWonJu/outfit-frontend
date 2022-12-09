@@ -136,10 +136,12 @@ model Product {
 }
 
 model Kategorie {
-  id        String    @id @default(uuid())
-  kategorie String    @unique
+  id        String     @id @default(uuid())
+  kategorie String     @unique
   products  Product[]
   types     Type[]
+  // for test
+  TProduct  TProduct[]
 }
 
 model Type {
@@ -148,6 +150,8 @@ model Type {
   products    Product[]
   Kategorie   Kategorie? @relation(fields: [kategorieId], references: [id])
   kategorieId String?
+  // for test
+  TProduct    TProduct[]
 
   @@index([kategorieId])
 }
@@ -311,14 +315,16 @@ model Seller {
 // for test
 
 model TProduct {
-  id          String   @id @default(uuid())
+  id          String     @id @default(uuid())
   name        String
   thumbNails  Json
-  kategorieId String
+  kategorie   Kategorie? @relation(fields: [kategorieId], references: [id])
+  kategorieId String?
+  type        Type?      @relation(fields: [typeId], references: [id])
+  typeId      String?
   content     String
-  createdAt   DateTime @default(now())
-  typeId      String
   price       Int
+  createdAt   DateTime   @default(now())
 
   @@index([kategorieId])
   @@index([typeId])
