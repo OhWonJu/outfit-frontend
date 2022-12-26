@@ -243,7 +243,7 @@ const NavbarRoot = styled.header<any>`
 
   ${props => props.$scrolled && tw`shadow-md`}
   ${tw`
-     sticky top-0 px-5 w-full z-50 border-transparent transition-shadow duration-300
+     fixed top-0 px-5 w-full z-50 border-transparent transition-shadow duration-300
   `}
 `;
 

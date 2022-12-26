@@ -77,7 +77,7 @@ const ModalLayout: FC<ModalLayoutProps> = ({
       </button>
       <div
         className={`outline-none h-full ${
-          mobileForm && "overflow-y-scroll scrollbar-hide "
+          mobileForm && "overflow-y-scroll scrollbar-hide"
         }`}
       >
         {children}

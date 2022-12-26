@@ -5,7 +5,7 @@ import { RangeSlider } from "@components/ui";
 
 export default function TestSidebar() {
   return (
-    <VerticalSidebarLayout>
+    <VerticalSidebarLayout className="">
       <div>
         <h1 className="mb-3 text-lg font-semibold">Price Range</h1>
         <RangeSlider

@@ -7,6 +7,8 @@ export const SCREEN_SIZE_LG = 1024;
 
 export const NAV_HEIGHT: number = 60;
 
+export const VERTICAL_SIDEBAR_WIDTH = 280;
+
 export const PRODUCT_PADDING: number = 80;
 
 export const BORDER_TINE_WIDTH: number = 1;

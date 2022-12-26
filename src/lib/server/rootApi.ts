@@ -10,22 +10,22 @@ export const API = axios.create({
   },
 });
 
-export async function _GET(
-  endPoint: string,
-  setData: Function,
-  setLoading: Function,
-) {
-  try {
-    const response = await API.get(endPoint);
-    setData(response.data);
-    return { ok: true };
-  } catch (e) {
-    console.error(e);
-    return { ok: false };
-  } finally {
-    setLoading(false);
-  }
-}
+// export async function _GET(
+//   endPoint: string,
+//   setData: Function,
+//   setLoading: Function,
+// ) {
+//   try {
+//     const response = await API.get(endPoint);
+//     setData(response.data);
+//     return { ok: true };
+//   } catch (e) {
+//     console.error(e);
+//     return { ok: false };
+//   } finally {
+//     setLoading(false);
+//   }
+// }
 
 export async function _REFETCH(endPoint: string, setData: Function) {
   try {
@@ -44,6 +44,23 @@ export async function _REFETCH(endPoint: string, setData: Function) {
 //     console.error(e);
 //   }
 // }
+
+export async function _GET(endPoint: string, setData: Function) {
+  try {
+    const response = await fetch(endPoint, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await response.json();
+    setData(data.items);
+    return { ok: true };
+  } catch (e) {
+    console.error(e);
+    return { ok: false };
+  }
+}
 
 export async function _POST(endPoint: string, params: any) {
   try {

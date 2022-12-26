@@ -3,7 +3,11 @@ import styled from "styled-components";
 import tw from "twin.macro";
 
 import { VerticalSidebar } from "@components/ui";
-import { BORDER_BASE_WIDTH } from "src/constants";
+import {
+  BORDER_BASE_WIDTH,
+  NAV_HEIGHT,
+  VERTICAL_SIDEBAR_WIDTH,
+} from "src/constants";
 
 // Vertical Side bar //
 const VerticalSidebarUI: React.FC<{
@@ -30,11 +34,18 @@ const Container: FC<ContainerProps> = ({
 }) => {
   return (
     <Wrapper className={className} {...rest}>
-      {/* 왼편 사이드 바 */}
-      {verticalSidebarVisible && (
-        <VerticalSidebarUI>{verticalSidebarChildren}</VerticalSidebarUI>
-      )}
-      <div className="w-full h-full px-5 md:px-14">{children}</div>
+      <div className="sm:w-full flex flex-row">
+        {/* 왼편 사이드 바 */}
+        {verticalSidebarVisible && (
+          <VerticalSidebarUI>{verticalSidebarChildren}</VerticalSidebarUI>
+        )}
+        <div
+          className="w-full h-full px-5 md:px-14"
+          style={{ marginLeft: VERTICAL_SIDEBAR_WIDTH ? 280 : 0 }}
+        >
+          {children}
+        </div>
+      </div>
     </Wrapper>
   );
 };
@@ -45,5 +56,6 @@ const Wrapper = styled.div`
   background-color: ${props => props.theme.background_color};
   border-top-width: ${BORDER_BASE_WIDTH}px;
   border-color: ${props => props.theme.gray_light};
-  ${tw`sm:w-full flex flex-row`}
+  margin-top: ${NAV_HEIGHT}px;
+  ${tw``}
 `;
