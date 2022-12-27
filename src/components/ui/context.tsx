@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useEffect, useState } from "react";
+import React, { FC, useCallback, useEffect, useMemo, useState } from "react";
 import { ThemeProvider } from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -163,6 +163,21 @@ export const useUI = () => {
 
 export const ManagedUIContext: FC<any> = ({ children }) => {
   const [mounted, setMounted] = useState(false);
+  // const mode = useMemo(() => {
+  //   if (mounted) {
+  //     const theme = localStorage.getItem("theme");
+  //     if (theme) return theme;
+  //     else
+  //       return window.matchMedia("(prefers-color-scheme: dark)").matches
+  //         ? "dark"
+  //         : "light";
+  //   }
+  // }, [mounted]);
+
+  // useEffect(() => {
+  //   setMounted(true);
+  // }, []);
+
   const [mode, setMode] = useState("light");
 
   useEffect(() => {
@@ -183,9 +198,10 @@ export const ManagedUIContext: FC<any> = ({ children }) => {
     setMode(m => (m === "light" ? "dark" : "light"));
   }, [mode]);
 
+  // 임시 ligth로 고정
   useEffect(() => {
     setMode("light");
-  });
+  }, []);
 
   return (
     <ThemeProvider theme={mode === "light" ? lightTheme : darkTheme}>

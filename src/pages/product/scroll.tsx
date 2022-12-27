@@ -59,11 +59,11 @@ const Product = () => {
       verticalSidebarVisible={true}
       verticalSidebarChildren={<TestSidebar />}
     >
-      <div className="px-36 mt-36 mb-36">
+      <div className="mt-36 mb-36">
         {products && (
           <div className="grid grid-cols-3 gap-5">
-            {products.map(item => (
-              <div key={item.id}>
+            {products.map((item, index) => (
+              <div key={index} className="w-[300px]">
                 <Image
                   alt={item.name}
                   src={

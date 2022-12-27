@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
 import { Provider } from "react-redux";
@@ -49,13 +49,10 @@ function App({ Component, ...rest }: AppProps) {
 
   const router = useRouter();
 
-  const [title, setTitle] = useState<string>(SYMBOL_TEXT);
-
-  useEffect(() => {
+  const title = useMemo(() => {
     const path = router.pathname.split("/")[1];
-    if (path) setTitle(path + " | " + SYMBOL_TEXT);
-    return;
-  }, [router]);
+    if (path) return path + " | " + SYMBOL_TEXT;
+  }, [router])
 
   return (
     <>

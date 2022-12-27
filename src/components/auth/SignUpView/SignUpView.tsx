@@ -1,4 +1,4 @@
-import { FC, useEffect, useState, useCallback, useMemo } from "react";
+import { FC, useState, useMemo } from "react";
 import { FieldErrors, useForm } from "react-hook-form";
 import { validate as emailVaildate } from "email-validator";
 import styled from "styled-components";

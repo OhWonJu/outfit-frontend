@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { FieldErrors, useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import { validate as emailVaildate } from "email-validator";
@@ -14,7 +14,7 @@ interface LoginFormProps {
 }
 
 export default function Login() {
-  // React Query //
+  // React Query //ㄴㄴ
   const mutation = useMutation({
     mutationFn: async (formData: LogInProps) => await _LOGIN(formData),
     onSuccess: data => {

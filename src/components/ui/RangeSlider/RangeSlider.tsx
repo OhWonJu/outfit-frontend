@@ -1,8 +1,4 @@
 import React, {
-  HTMLInputTypeAttribute,
-  useCallback,
-  useEffect,
-  useRef,
   useState,
 } from "react";
 import Slider from "@mui/material/Slider";

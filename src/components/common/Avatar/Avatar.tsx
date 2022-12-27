@@ -1,4 +1,4 @@
-import { FC, useRef, useEffect } from "react";
+import { FC, useRef } from "react";
 import cn from "clsx";
 
 import { useUserAvatar } from "@lib/client/hooks/useUserAvatar";

@@ -1,5 +1,9 @@
 import useTheme from "@lib/client/hooks/useTheme";
-import { BORDER_BASE_WIDTH, NAV_HEIGHT, VERTICAL_SIDEBAR_WIDTH } from "src/constants";
+import {
+  BORDER_BASE_WIDTH,
+  NAV_HEIGHT,
+  VERTICAL_SIDEBAR_WIDTH,
+} from "src/constants";
 
 interface SidebarProps {
   children: any;
@@ -10,9 +14,10 @@ const VerticalSidebar: React.FC<SidebarProps> = ({ children }) => {
 
   return (
     <aside
-      className={`min-h-screen hidden z-40 md:block md:w-[${VERTICAL_SIDEBAR_WIDTH}px] fixed scrollbar-hide`}
+      className={`min-h-screen hidden z-40 md:block fixed scrollbar-hide`}
       style={{
         // borderRightWidth: BORDER_BASE_WIDTH,
+        width: VERTICAL_SIDEBAR_WIDTH,
         borderColor: theme.gray_light,
       }}
       tabIndex={1}

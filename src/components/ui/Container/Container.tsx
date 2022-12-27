@@ -41,7 +41,7 @@ const Container: FC<ContainerProps> = ({
         )}
         <div
           className="w-full h-full px-5 md:px-14"
-          style={{ marginLeft: VERTICAL_SIDEBAR_WIDTH ? 280 : 0 }}
+          style={{ marginLeft: verticalSidebarVisible ? VERTICAL_SIDEBAR_WIDTH : 0 }}
         >
           {children}
         </div>
