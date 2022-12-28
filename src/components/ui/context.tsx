@@ -1,4 +1,11 @@
-import React, { FC, useCallback, useEffect, useMemo, useState } from "react";
+import React, {
+  FC,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+  useSyncExternalStore,
+} from "react";
 import { ThemeProvider } from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -20,6 +27,8 @@ import type { MODAL_VIEWS } from "@lib/client/store/types/modalType";
 import type { DROP_DOWN_VIEWS } from "@lib/client/store/types/dropDownType";
 import type { WINDOW_VIEWS } from "@lib/client/store/types/windowType";
 import { userAvatarActions } from "@lib/client/store/reducers/userAvatarReducer";
+import useToggle from "@lib/client/hooks/useToggle";
+import { useLocalStorage } from "@lib/client/hooks/useLocalStorage";
 
 export const useUI = () => {
   const dispatch = useDispatch();
@@ -162,49 +171,19 @@ export const useUI = () => {
 };
 
 export const ManagedUIContext: FC<any> = ({ children }) => {
-  const [mounted, setMounted] = useState(false);
-  // const mode = useMemo(() => {
-  //   if (mounted) {
-  //     const theme = localStorage.getItem("theme");
-  //     if (theme) return theme;
-  //     else
-  //       return window.matchMedia("(prefers-color-scheme: dark)").matches
-  //         ? "dark"
-  //         : "light";
-  //   }
-  // }, [mounted]);
+  // const theme = useLocalStorage("theme");
+  const [localTheme, _] = useLocalStorage("theme");
 
-  // useEffect(() => {
-  //   setMounted(true);
-  // }, []);
-
-  const [mode, setMode] = useState("light");
-
-  useEffect(() => {
-    setMounted(true);
-    const theme = localStorage.getItem("theme");
-    if (theme) {
-      setMode(theme);
-    } else {
-      setMode(
-        window.matchMedia("(prefers-color-scheme: dark)").matches
-          ? "dark"
-          : "light",
-      );
-    }
-  }, []);
-
-  const toggleTheme = useCallback(() => {
-    setMode(m => (m === "light" ? "dark" : "light"));
-  }, [mode]);
-
-  // 임시 ligth로 고정
-  useEffect(() => {
-    setMode("light");
-  }, []);
+  let themeMode = useMemo((): string => {
+    if (localTheme) return localTheme;
+    else
+      return window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light";
+  }, [localTheme]);
 
   return (
-    <ThemeProvider theme={mode === "light" ? lightTheme : darkTheme}>
+    <ThemeProvider theme={themeMode === "light" ? lightTheme : darkTheme}>
       {children}
     </ThemeProvider>
   );
