@@ -5,7 +5,7 @@ import ModalLayout from "@components/common/ModalLayout";
 import { ReviewType } from "types/review";
 import ReviewCard from "./ReviewCard";
 import useWindowSize from "@lib/client/hooks/useWindowSize";
-import { SCREEN_SIZE_MB, SCREEN_SIZE_MD } from "src/constants";
+import { SCREEN_SIZE_MB } from "src/constants";
 
 import { product_01_Data } from "MockData/productData";
 import ReviewFilter from "./ReviewFilter";

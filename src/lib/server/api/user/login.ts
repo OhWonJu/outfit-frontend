@@ -1,4 +1,4 @@
-import { _POST } from "@lib/server/rootApi";
+import { _POST } from "@lib/server/rootAPI";
 import { LogInProps } from "types/users";
 
 export async function _LOGIN(data: LogInProps) {

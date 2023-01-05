@@ -5,15 +5,15 @@ import tw from "twin.macro";
 import PresentProductStore from "@lib/client/store/simpleStore/presentProductStore";
 import useTheme from "@lib/client/hooks/useTheme";
 import useWindowSize from "@lib/client/hooks/useWindowSize";
-import { ReviewCard } from "@components/review";
+import { ReviewCard } from "@components/pages/review";
 import { useUI } from "@components/ui";
 import { Star } from "@components/icons";
-import { CardWrappeer } from "@components/review/ReviewCard";
+import { CardWrappeer } from "@components/pages/review/ReviewCard";
 import { BORDER_BASE_WIDTH, SCREEN_SIZE_MD } from "src/constants";
 import { Row } from "src/styles/GlobalStyle";
 import { ReviewGrade, ReviewType } from "types/review";
 
-import { product_01_Data } from "../../../../MockData/productData";
+import { product_01_Data } from "../../../../../MockData/productData";
 
 interface ProductReviewProps {
   productId: string;

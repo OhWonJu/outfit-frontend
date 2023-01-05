@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 
 import Footer from "@components/footer/Footer";
-import { LaunchingBanner } from "@components/launching";
+import { LaunchingBanner } from "@components/pages/launching";
 import { IndexContainer, IndexWrapper } from "src/styles/GlobalStyle";
 import { useLocalStorage } from "@lib/client/hooks/useLocalStorage";
 

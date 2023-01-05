@@ -4,7 +4,7 @@ import { useMutation } from "@tanstack/react-query";
 import { validate as emailVaildate } from "email-validator";
 
 import { LogInProps } from "types/users";
-import { _POST } from "@lib/server/rootApi";
+import { _POST } from "@lib/server/rootAPI";
 import { _LOGIN } from "@lib/server/api/user/login";
 import { Button, Input, InputLabel } from "@components/ui";
 
@@ -14,7 +14,7 @@ interface LoginFormProps {
 }
 
 export default function Login() {
-  // React Query //ㄴㄴ
+  // React Query //
   const mutation = useMutation({
     mutationFn: async (formData: LogInProps) => await _LOGIN(formData),
     onSuccess: data => {

@@ -6,9 +6,9 @@ import { useAcceptCookies } from "@lib/client/hooks/useAcceptCookies";
 import useTheme from "@lib/client/hooks/useTheme";
 import Navbar from "../Navbar";
 import SideNavbar from "../MobileNavbar";
-import { Review } from "@components/review";
-import { LoginView } from "@components/auth";
-import { CartSidebarView } from "@components/cart";
+import { Review } from "@components/pages/review";
+import { LoginView } from "@components/pages/auth";
+import { CartSidebarView } from "@components/pages/cart";
 import SearchDropDown from "../Searchbar/SearchDropDown";
 // import { TestDropDown, TestDropDown2 } from "../NavDroupDown";
 // import { Cross } from "@components/icons";
@@ -20,7 +20,7 @@ const Loading = () => (
 );
 
 const ForgotPassword = dynamic(
-  () => import("@components/auth/ForgotPassword"),
+  () => import("@components/pages/auth/ForgotPassword"),
   {
     loading: Loading,
   },

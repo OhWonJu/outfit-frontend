@@ -27,15 +27,6 @@ export const API = axios.create({
 //   }
 // }
 
-export async function _REFETCH(endPoint: string, setData: Function) {
-  try {
-    const response = await API.get(endPoint);
-    setData(response.data);
-  } catch (e) {
-    console.error(e);
-  }
-}
-
 // export async function _POST(endPoint: string, params: any) {
 //   try {
 //     const response = await API.post(endPoint, params);
@@ -45,7 +36,16 @@ export async function _REFETCH(endPoint: string, setData: Function) {
 //   }
 // }
 
-export async function _GET(endPoint: string, setData: Function) {
+// export async function _REFETCH(endPoint: string, setData: Function) {
+//   try {
+//     const response = await API.get(endPoint);
+//     setData(response.data);
+//   } catch (e) {
+//     console.error(e);
+//   }
+// }
+
+export async function _GET(endPoint: string, setData?: Function) {
   try {
     const response = await fetch(endPoint, {
       method: "GET",
@@ -54,11 +54,15 @@ export async function _GET(endPoint: string, setData: Function) {
       },
     });
     const data = await response.json();
-    setData(data.items);
-    return { ok: true };
+    if (typeof setData === "function") {
+      setData(data.items);
+      return { ok: true };
+    } else return data;
   } catch (e) {
     console.error(e);
-    return { ok: false };
+    if (typeof setData === "function") {
+      return { ok: false };
+    } else return null;
   }
 }
 
