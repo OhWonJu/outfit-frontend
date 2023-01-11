@@ -6,6 +6,7 @@ import styled from "styled-components";
 import tw from "twin.macro";
 import { Cross, Search } from "@components/icons";
 import { Input, useUI } from "@components/ui";
+import { NAV_HEIGHT } from "src/constants";
 
 interface SearchProps {
   keyword: string;
@@ -121,8 +122,9 @@ const Searchbar: FC<Props> = ({ className, id = "search" }) => {
 export default memo(Searchbar);
 
 const Container = styled.div<any>`
-  ${tw`absolute z-30 top-0 left-0 flex px-5 w-full h-full justify-center`};
-  background-color: ${props => props.theme.background_color};
+  ${tw`relative z-30 top-0 left-0 flex px-5 w-full justify-center`};
+  height: ${NAV_HEIGHT}px;
+  /* background-color: ${props => props.theme.background_color}; */
 `;
 
 // const Input = styled.input<any>`

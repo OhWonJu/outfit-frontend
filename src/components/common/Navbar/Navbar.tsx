@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { FC, useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 import tw from "twin.macro";
@@ -6,13 +7,11 @@ import { throttle } from "lodash";
 import useTheme from "@lib/client/hooks/useTheme";
 import { NAV_HEIGHT, SYMBOL_TEXT } from "src/constants";
 import { Link, useUI } from "@components/ui";
-import Searchbar from "../Searchbar";
 import { Menu, Search, ShoppingBag } from "@components/icons";
+import Searchbar from "../Searchbar";
 import Avatar from "../Avatar";
 
 import { cartData } from "MockData/cartData";
-import { TestDropDown, TestDropDown2 } from "../NavDroupDown";
-import { useRouter } from "next/router";
 
 interface Link {
   href: string;
@@ -70,11 +69,12 @@ const Navbar: FC<NavbarProps> = ({ links, logoVisible }) => {
         <div
           className={`desktop--logo ${
             hasScrolled || logoVisible ? "block" : "hidden"
-          } relative z-20 order-2 min-w-[74px] flex-1 xmd:order-none w-[74px] h-[20px] xmd:col-start-1 xmd:col-span-2`}
+          } relative z-20 order-2 min-w-[74px] flex-1 w-[74px] h-full xmd:order-none xmd:pl-5 xmd:max-w-[25%] xmd:justify-start`}
+          onMouseOver={closeDropDown}
         >
           <Link
             href={"/"}
-            className="logo--link w-full h-full flex justify-center"
+            className="logo--link xmd:w-fit h-full px-6 flex justify-center items-center"
           >
             <span className="text-sm font-extrabold font-sansSrif">
               {SYMBOL_TEXT}
@@ -96,8 +96,8 @@ const Navbar: FC<NavbarProps> = ({ links, logoVisible }) => {
         </div>
 
         {/* Web Menu Section */}
-        <div className="desktop--main--nav hidden xmd:flex align-start xmd:ml-14 xmd:col-start-3 xmd:col-span-7">
-          <ul className="flex" onMouseLeave={closeDropDown}>
+        <div className="desktop--main--nav hidden xmd:flex align-start xmd:w-fit">
+          <ul className="flex">
             <li className="store h-full">
               <ListItem
                 currentPage={router.pathname.split("/")[1] === "store"}
@@ -108,9 +108,9 @@ const Navbar: FC<NavbarProps> = ({ links, logoVisible }) => {
               >
                 <ListSpan>Store</ListSpan>
                 {/* Legacy */}
-                {dropDownView === "TEST_VIEW" && displayDropDown && (
+                {/* {dropDownView === "TEST_VIEW" && displayDropDown && (
                   <TestDropDown onClose={closeDropDown} />
-                )}
+                )} */}
               </ListItem>
             </li>
             <li className="new h-full">
@@ -123,9 +123,9 @@ const Navbar: FC<NavbarProps> = ({ links, logoVisible }) => {
               >
                 <ListSpan>New Arrivals</ListSpan>
                 {/* Legacy */}
-                {dropDownView === "TEST_VIEW2" && displayDropDown && (
+                {/* {dropDownView === "TEST_VIEW2" && displayDropDown && (
                   <TestDropDown2 onClose={closeDropDown} />
-                )}
+                )} */}
               </ListItem>
             </li>
             <li className="fallowing h-full">
@@ -163,7 +163,10 @@ const Navbar: FC<NavbarProps> = ({ links, logoVisible }) => {
         </div>
 
         {/* Util Section - cart, Avator, Search */}
-        <div className="desktop--cart-navigation order-3 flex-1 flex justify-end items-center xmd:col-start-10 xmd:col-span-3 space-x-4">
+        <div
+          className="desktop--cart-navigation order-3 flex-1 h-full flex justify-end items-center xmd:w-fit xmd:pr-5 space-x-4"
+          onMouseOver={closeDropDown}
+        >
           <button
             onClick={() => {
               setDropDownView("SEARCH_VIEW");
@@ -221,9 +224,6 @@ const Navbar: FC<NavbarProps> = ({ links, logoVisible }) => {
             </button>
           </div>
         </div>
-
-        {/* Search bar and Search DropDown */}
-        {displayDropDown && dropDownView === "SEARCH_VIEW" && <Searchbar />}
       </NavContent>
     </NavbarRoot>
   );
@@ -242,13 +242,11 @@ const NavbarRoot = styled.header<any>`
   }
 
   ${props => props.$scrolled && tw`shadow-md`}
-  ${tw`
-     fixed top-0 px-5 w-full z-50 border-transparent transition-shadow duration-300
-  `}
+  ${tw`fixed top-0 px-5 xmd:px-0 w-full z-50 border-transparent transition-shadow duration-300`}
 `;
 
 const NavContent = styled.div<any>`
-  ${tw`flex w-full h-full justify-between items-center xmd:grid grid-cols-12 gap-1 xmd:gap-2`}
+  ${tw`flex w-full h-full justify-between items-center gap-1 xmd:gap-0`}
 `;
 
 const ListItem = styled.div<any>`

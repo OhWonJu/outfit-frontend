@@ -5,6 +5,7 @@ import tw from "twin.macro";
 import useTheme from "@lib/client/hooks/useTheme";
 import DropDown from "@components/ui/DropDown";
 import { Tag } from "@components/ui";
+import Searchbar from "../Searchbar";
 
 // MOCK DATA //
 const cardData = [
@@ -56,8 +57,9 @@ interface SearchDropDownProps {
 
 const SearchDropDown: React.FC<SearchDropDownProps> = ({ onClose }) => {
   return (
-    <DropDown onClose={onClose}>
-      <div className="py-7 flex flex-col w-full h-full overflow-y-scroll px-10 xmd:px-0 xmd:justify-between xmd:flex-row \">
+    <DropDown onClose={onClose} navCover={true} activateCloseKeyAction={true}>
+      <Searchbar />
+      <div className="py-7 flex flex-col w-full h-full overflow-y-scroll px-10 xmd:px-0 xmd:justify-between xmd:flex-row">
         {/*  */}
         <div className="search_current flex flex-1 flex-col px-2 xmd:items-end xmd:flex-[1] xmd:pr-16">
           <div className="xmd:w-[45%]">

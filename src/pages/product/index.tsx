@@ -45,7 +45,7 @@ const Product = () => {
     queryKey: ["product"],
     queryFn: _fetchPage,
     getNextPageParam: (lastPage, pages) => {
-      if (lastPage.res.items.length < TAKE) return undefined;
+      if (lastPage.res.items?.length < TAKE) return undefined;
       return lastPage.pageParam + TAKE;
     },
   });

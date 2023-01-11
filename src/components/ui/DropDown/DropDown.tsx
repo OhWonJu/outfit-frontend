@@ -7,30 +7,28 @@ import { BORDER_BASE_WIDTH, NAV_HEIGHT } from "src/constants";
 
 interface DropDownProps {
   children?: any;
+  navCover?: boolean;
   hasBlur?: boolean;
   onClose?: () => void;
+  activateCloseKeyAction?: boolean;
 }
 
 const DropDown: React.FC<DropDownProps> = ({
   children,
+  navCover = false,
   hasBlur = true,
   onClose,
+  activateCloseKeyAction = false,
 }) => {
   // const ref = useRef() as React.MutableRefObject<HTMLDivElement>;
   const dropDownRef = useRef() as React.MutableRefObject<HTMLDivElement>;
   const contentRef = useRef() as React.MutableRefObject<HTMLDivElement>;
 
-  // useEffect(() => {
-  //   const dropDown = ref.current;
-
-  //   if (dropDown) {
-  //     disableBodyScroll(dropDown);
-  //   }
-
-  //   return () => {
-  //     clearAllBodyScrollLocks();
-  //   };
-  // }, []);
+  const onKeyDownDropdown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.code === "Escape") {
+      onClose();
+    }
+  };
 
   useEffect(() => {
     if (dropDownRef.current) {
@@ -52,7 +50,8 @@ const DropDown: React.FC<DropDownProps> = ({
     <div
       className="fixed inset-0 h-full w-full z-[100] box-border outline-none"
       ref={dropDownRef}
-      style={{ marginTop: NAV_HEIGHT }}
+      onKeyDown={activateCloseKeyAction ? onKeyDownDropdown : null}
+      style={{ marginTop: navCover ? 0 : NAV_HEIGHT }}
       tabIndex={1}
     >
       <div className="absolute inset-0 overflow-hidden">

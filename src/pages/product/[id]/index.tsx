@@ -2,8 +2,7 @@ import React, { useRef } from "react";
 
 import { NAV_HEIGHT, PRODUCT_PADDING } from "src/constants";
 import { Container } from "@components/ui";
-import { ProductCarousel, ProductInfo, ProductTabs } from "@components/pages/product";
-
+import { ProductCarousel, ProductInfo, ProductTabs } from "@components/pages/detail";
 import Footer from "@components/footer/Footer";
 import AppHead from "@components/common/AppHead";
 

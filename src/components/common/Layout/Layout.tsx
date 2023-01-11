@@ -10,6 +10,7 @@ import { Review } from "@components/pages/review";
 import { LoginView } from "@components/pages/auth";
 import { CartSidebarView } from "@components/pages/cart";
 import SearchDropDown from "../Searchbar/SearchDropDown";
+import { TestDropDown, TestDropDown2 } from "../NavDroupDown";
 // import { TestDropDown, TestDropDown2 } from "../NavDroupDown";
 // import { Cross } from "@components/icons";
 
@@ -103,11 +104,13 @@ const DropDownView: React.FC<{
 }> = ({ dropDownView, closeDropDown }) => {
   return (
     <>
-      {dropDownView === "SEARCH_VIEW" && <SearchDropDown />}
-      {/* {dropDownView === "TEST_VIEW" && <TestDropDown onClose={closeDropDown} />}
+      {dropDownView === "SEARCH_VIEW" && (
+        <SearchDropDown onClose={closeDropDown} />
+      )}
+      {dropDownView === "TEST_VIEW" && <TestDropDown onClose={closeDropDown} />}
       {dropDownView === "TEST_VIEW2" && (
         <TestDropDown2 onClose={closeDropDown} />
-      )} */}
+      )}
     </>
   );
 };
