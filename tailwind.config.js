@@ -7,6 +7,7 @@ module.exports = {
       aspectRatio: {
         "2/1": "2 / 1",
         "7/2": "7 / 2",
+        "10/16": "10 / 16",
       },
     },
     screens: {

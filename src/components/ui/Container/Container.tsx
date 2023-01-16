@@ -40,8 +40,9 @@ const Container: FC<ContainerProps> = ({
           <VerticalSidebarUI>{verticalSidebarChildren}</VerticalSidebarUI>
         )}
         <div
-          className="w-full h-full px-5 md:px-14"
-          style={{ marginLeft: verticalSidebarVisible ? VERTICAL_SIDEBAR_WIDTH : 0 }}
+          className={`w-full h-full px-5 md:px-14 ${
+            verticalSidebarVisible ? `md:ml-[280px]` : "md:mr-0"
+          }`}
         >
           {children}
         </div>

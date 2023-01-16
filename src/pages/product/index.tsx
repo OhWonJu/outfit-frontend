@@ -13,6 +13,7 @@ import { TestSidebar } from "@components/verticalSidebar";
 import { TProduct } from "@prisma/client";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { _GET } from "@lib/server/rootAPI";
+import { ProductCard } from "@components/pages/product";
 
 const TAKE = 9;
 
@@ -72,32 +73,10 @@ const Product = () => {
       verticalSidebarChildren={<TestSidebar />}
     >
       <div className="mt-36 mb-36">
-        <div className="grid grid-cols-3 gap-5">
+        <div className="grid grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
           {data &&
             products.map((item, index) => (
-              <div key={index} className="w-[300px]">
-                <Image
-                  alt={item.name}
-                  src={
-                    item.thumbNails.urls[0] ?? ""
-                    // JSON.parse(JSON.stringify(item.thumbNails)).urls[0] ?? ""
-                  }
-                  width={300}
-                  height={200}
-                />
-                <div className="flex">
-                  <span>{item.name}</span>
-                  <span className="ml-auto">
-                    {item.price.toLocaleString("ko-KR")}원
-                  </span>
-                </div>
-                <div className="text-zinc-400">
-                  <span className="text-zinc-400">
-                    {item.kategorie.kategorie} {" > "}
-                  </span>
-                  <span className="text-zinc-400">{item.type.type}</span>
-                </div>
-              </div>
+              <ProductCard key={index} data={item} />
             ))}
         </div>
       </div>

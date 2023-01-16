@@ -4,11 +4,12 @@ import styled, { css } from "styled-components";
 import tw from "twin.macro";
 import { throttle } from "lodash";
 
+import { LogoSection, NavbarRoot, NavContent, ListItem, ListSpan } from "./Navbar.styles";
+
 import useTheme from "@lib/client/hooks/useTheme";
 import { NAV_HEIGHT, SYMBOL_TEXT } from "src/constants";
 import { Link, useUI } from "@components/ui";
 import { Menu, Search, ShoppingBag } from "@components/icons";
-import Searchbar from "../Searchbar";
 import Avatar from "../Avatar";
 
 import { cartData } from "MockData/cartData";
@@ -66,21 +67,18 @@ const Navbar: FC<NavbarProps> = ({ links, logoVisible }) => {
     <NavbarRoot $scrolled={hasScrolled}>
       <NavContent>
         {/* Logo */}
-        <div
-          className={`desktop--logo ${
-            hasScrolled || logoVisible ? "block" : "hidden"
-          } relative z-20 order-2 min-w-[74px] flex-1 w-[74px] h-full xmd:order-none xmd:pl-5 xmd:max-w-[25%] xmd:justify-start`}
-          onMouseOver={closeDropDown}
-        >
+        <LogoSection onMouseOver={closeDropDown}>
           <Link
             href={"/"}
-            className="logo--link xmd:w-fit h-full px-6 flex justify-center items-center"
+            className={`logo--link ${
+              hasScrolled || logoVisible ? "block" : "hidden"
+            } xmd:w-fit h-full px-6 flex justify-center items-center`}
           >
             <span className="text-sm font-extrabold font-sansSrif">
               {SYMBOL_TEXT}
             </span>
           </Link>
-        </div>
+        </LogoSection>
 
         {/* Mobile  Menu Section */}
         <div className="mobile--nav--menu order-1 flex flex-1 justify-start items-center xmd:hidden">
@@ -231,63 +229,3 @@ const Navbar: FC<NavbarProps> = ({ links, logoVisible }) => {
 
 export default Navbar;
 
-// Styles //
-const NavbarRoot = styled.header<any>`
-  height: ${NAV_HEIGHT}px;
-  background-color: ${props =>
-    props.$scrolled ? props.theme.background_color : "transparent"};
-
-  :hover {
-    background-color: ${props => props.theme.background_color};
-  }
-
-  ${props => props.$scrolled && tw`shadow-md`}
-  ${tw`fixed top-0 px-5 xmd:px-0 w-full z-50 border-transparent transition-shadow duration-300`}
-`;
-
-const NavContent = styled.div<any>`
-  ${tw`flex w-full h-full justify-between items-center gap-1 xmd:gap-0`}
-`;
-
-const ListItem = styled.div<any>`
-  display: inline-flex;
-  align-items: center;
-  position: relative;
-  height: ${NAV_HEIGHT}px;
-
-  :hover:before {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 1.8px;
-    background-color: ${props => props.theme.text_primary_color};
-  }
-
-  ${props => {
-    if (props.currentPage) {
-      return css`
-        :before {
-          content: "";
-          position: absolute;
-          left: 0;
-          bottom: 0;
-          width: 100%;
-          height: 1.8px;
-          background-color: ${props => props.theme.text_primary_color};
-        }
-      `;
-    }
-  }}
-  ${tw`cursor-pointer`}
-`;
-
-const ListSpan = styled.span`
-  font-size: 14px;
-  font-weight: bold;
-  font-family: sans-serif;
-  color: ${props => props.theme.text_primary_color};
-  ${tw`flex justify-center items-center w-full h-full px-4 py-2 `}/* ${tw`hover:border-b-[1.5px]`}
-  border-bottom-color: ${props => props.theme.text_primary_color}; */
-`;

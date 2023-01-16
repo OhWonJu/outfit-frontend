@@ -7,7 +7,7 @@ export const SCREEN_SIZE_LG = 1024;
 
 export const NAV_HEIGHT: number = 60;
 
-export const VERTICAL_SIDEBAR_WIDTH = 280;
+export const VERTICAL_SIDEBAR_WIDTH = 260;
 
 export const PRODUCT_PADDING: number = 80;
 
@@ -24,3 +24,7 @@ export const MOBILEABLE_CONTAINER_VERTICAL_SPACE: string =
   "h-[100%] sm:h-screen";
 
 export const ICON_BUTTON_BLACK_OPACTIY: number = 50;
+
+// Product ---------------------------------------------- //
+export const PRODUCT_CARD_WIDTH = 280;
+// ---------------------------------------------- Product //
