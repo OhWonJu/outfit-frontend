@@ -7,56 +7,42 @@ import useTheme from "@lib/client/hooks/useTheme";
 import { Col, Row } from "src/styles/GlobalStyle";
 import { Check, ChevronRight, Star } from "@components/icons";
 import { Button, Tag } from "@components/ui";
+import { TProductDetailData } from "src/commonTypes/product/productType";
 
-interface ProductInfoProps {
-  id: string;
-  name: string;
-  brand: string;
-  type: string;
-  price: number;
-  discount: {
-    able: boolean;
-    percent?: number;
-  };
-  kategorie: Array<string>;
-  context: string;
-  grade: number;
-  reviewCount: number;
-  size: Array<{}>;
-  stock: Array<{ option: number; quantity: number }>;
-  colorCode: Array<{ name: string; code: string }>;
+interface IProductInfoProps {
+  data: TProductDetailData;
+  selectSize: number;
+  setSelectSize: React.Dispatch<React.SetStateAction<number>>;
+  selectColor: string;
+  setSelectColor: React.Dispatch<React.SetStateAction<string>>;
+  tagSelected: Array<string>;
+  _tagClickHandler: Function;
 }
 
-const ProductInfo: React.FC<ProductInfoProps> = ({
-  id,
-  name,
-  brand,
-  type,
-  price,
-  discount,
-  kategorie,
-  context,
-  grade,
-  reviewCount,
-  size,
-  stock,
-  colorCode,
+const ProductInfo: React.FC<IProductInfoProps> = ({
+  data,
+  selectSize,
+  setSelectSize,
+  selectColor,
+  setSelectColor,
+  tagSelected,
+  _tagClickHandler,
 }) => {
+  const {
+    brand,
+    colorCode,
+    context,
+    discount,
+    grade,
+    kategorie,
+    name,
+    price,
+    reviewCount,
+    size,
+    stock,
+  } = data;
+
   const theme = useTheme();
-
-  const [selectSize, setSelectSize] = useState<number>(null);
-  const [selectColor, setSelectColor] = useState<number>(null);
-
-  // tag //
-  const [tagSelected, setTagSelected] = useState<Array<string>>([]);
-  const _tagClickHandler = (tag: string) => {
-    if (tagSelected.includes(tag)) {
-      setTagSelected(tagSelected.filter(t => t !== tag));
-    } else {
-      setTagSelected(prev => [...prev, tag]);
-    }
-  };
-  // ----------------------------------------------------------------- //
 
   return (
     <div className="flex flex-col xmd:flex-row w-full">
@@ -143,14 +129,14 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
               <ColorButton
                 key={index}
                 $bgColor={data.code}
-                selected={index === selectColor}
-                onClick={() => setSelectColor(index)}
+                selected={data.name === selectColor}
+                onClick={() => setSelectColor(data.name)}
               >
                 <div
                   className="w-full h-full rounded-full flex items-center justify-center"
                   style={{
                     backgroundColor:
-                      index === selectColor
+                      data.name === selectColor
                         ? theme.black_primary + 20
                         : "transparent",
                   }}
@@ -158,7 +144,7 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
                   <Check
                     className={`w-5 h-5 mx-auto my-auto transition-colors`}
                     stroke={
-                      index === selectColor
+                      data.name === selectColor
                         ? theme.white_primary
                         : "transparent"
                     }

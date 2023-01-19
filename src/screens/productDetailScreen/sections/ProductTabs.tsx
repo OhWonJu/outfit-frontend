@@ -7,13 +7,15 @@ import tw from "twin.macro";
 
 import useTheme from "@lib/client/hooks/useTheme";
 import { Container } from "@components/ui";
-import { ProductReview } from "./ProductTabScreens";
 
 import {
   BORDER_BASE_WIDTH,
   CONTAINER_PADDING_HORIZONTAIL,
   NAV_HEIGHT,
 } from "src/constants";
+import { ReviewGrade, ReviewType } from "src/commonTypes/review";
+
+import { ProductReview } from "./productDetailTabSections";
 
 const TAB_HEIGHT: number = 50;
 
@@ -29,9 +31,16 @@ interface ProductTabsProps {
   id: string;
   //   detailFileUrl: string;
   reviewCount: number;
+  preReviews: Array<ReviewType>;
+  reviewGrade: ReviewGrade;
 }
 
-const ProductTabs: React.FC<ProductTabsProps> = ({ id, reviewCount }) => {
+const ProductTabs: React.FC<ProductTabsProps> = ({
+  id,
+  reviewCount,
+  preReviews,
+  reviewGrade,
+}) => {
   const theme = useTheme();
 
   const [screenValue, setScreenValue] = useState<number>(0);
@@ -67,7 +76,7 @@ const ProductTabs: React.FC<ProductTabsProps> = ({ id, reviewCount }) => {
     // setScreenValue(value);
   };
 
-  // SCROLL EVENT //
+  // SCROLL EVENT -------------------------------------------- //
   const throttledScroll = useMemo(
     () =>
       throttle(() => {
@@ -86,7 +95,7 @@ const ProductTabs: React.FC<ProductTabsProps> = ({ id, reviewCount }) => {
       window.removeEventListener("scroll", throttledScroll);
     };
   }, [throttledScroll]);
-  // -------------------------------------------------------- //
+  // -------------------------------------------- SCROLL EVENT //
 
   return (
     <div>
@@ -144,7 +153,11 @@ const ProductTabs: React.FC<ProductTabsProps> = ({ id, reviewCount }) => {
           Detail screen
         </section>
         <section ref={reviewRef} className="pt-16">
-          <ProductReview productId={id} />
+          <ProductReview
+            productId={id}
+            preReviews={preReviews}
+            reviewGrade={reviewGrade}
+          />
         </section>
         <section ref={qnaRef} className="h-[500px] bg-blue-400 pt-16">
           Q & A screen

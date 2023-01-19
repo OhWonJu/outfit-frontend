@@ -38,11 +38,11 @@ const ProductCard: React.FC<Props> = ({ data }) => {
           style={{ objectFit: "cover" }}
         />
       </ImageWrapper>
-      <InfoSection className="bg-blue-50">
-        <InfoBox className="bg-green-50">
+      <InfoSection className="">
+        <InfoBox className="">
           <span className="font-bold">{data.name}</span>
         </InfoBox>
-        <PriceBox className="bg-yellow-50">
+        <PriceBox className="">
           <Price disable={true}>{data.price.toLocaleString("ko-KR")}원</Price>
           {true && (
             <Row className="sm:pl-2">

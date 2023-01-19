@@ -11,27 +11,27 @@ import { Star } from "@components/icons";
 import { CardWrappeer } from "@components/pages/review/ReviewCard";
 import { BORDER_BASE_WIDTH, SCREEN_SIZE_MD } from "src/constants";
 import { Row } from "src/styles/GlobalStyle";
-import { ReviewGrade, ReviewType } from "types/review";
 
 import { product_01_Data } from "../../../../../MockData/productData";
+import { ReviewGrade, ReviewType } from "src/commonTypes/review";
 
 interface ProductReviewProps {
   productId: string;
+  preReviews: Array<ReviewType>;
+  reviewGrade: ReviewGrade;
   //   productReview: Object{userName, grade, context,};
 }
 
-const ProductReview: React.FC<ProductReviewProps> = ({ productId }) => {
+const ProductReview: React.FC<ProductReviewProps> = ({
+  productId,
+  preReviews,
+  reviewGrade,
+}) => {
+  const { colorScore, satisfactionScore, sizeScore, thicknessScore } =
+    reviewGrade;
+
   const theme = useTheme();
   const { width: windowWith } = useWindowSize();
-
-  // mock data
-  const preReviews: Array<ReviewType> = product_01_Data.review.slice(0, 4); // first 3 reviews
-  const {
-    satisfactionScore,
-    sizeScore,
-    colorScore,
-    thicknessScore,
-  }: ReviewGrade = product_01_Data.reviewGrade;
 
   // MODAL
   const { setModalView, openModal } = useUI();

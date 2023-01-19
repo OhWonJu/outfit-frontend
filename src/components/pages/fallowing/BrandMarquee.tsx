@@ -5,7 +5,7 @@ import { SCREEN_SIZE_LG } from "src/constants";
 import { Col } from "src/styles/GlobalStyle";
 import styled from "styled-components";
 
-import { FallowingProductCardData } from "types/product";
+import { FallowingProductCardData } from "src/commonTypes/product/productType";
 import BrandProductCard from "./BrandProductCard";
 
 const mockData = Array(80) // @ts-ignore

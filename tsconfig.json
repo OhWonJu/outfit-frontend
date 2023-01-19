@@ -22,6 +22,7 @@
       "@config/*": ["src/config/*"],
       "@assets/*": ["assets/*"],
       "@components/*": ["src/components/*"],
+      "@screens/*": ["src/screens/*"],
       "@mui/styled-engine": ["./node_modules/@mui/styled-engine-sc"]
     },
     "plugins": [

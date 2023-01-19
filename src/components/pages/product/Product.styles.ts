@@ -6,7 +6,7 @@ import { PRODUCT_CARD_WIDTH } from "src/constants";
 // ProductCard ------------------------------- //
 export const CardLayout = styled.div<any>`
   width: ${PRODUCT_CARD_WIDTH}px;
-  ${tw`relative mb-14`}
+  ${tw`relative mb-14 shadow-md`}
 `;
 
 export const ImageWrapper = styled.div`
@@ -19,7 +19,8 @@ export const InfoSection = styled.div`
   position: relative;
   width: 100%;
   height: 30%;
-  ${tw`pt-7`}
+
+  ${tw`pt-7 px-2 pb-1`};
 `;
 
 export const InfoBox = styled.div`
