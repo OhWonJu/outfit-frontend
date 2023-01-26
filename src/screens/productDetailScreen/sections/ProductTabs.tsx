@@ -12,30 +12,28 @@ import {
   BORDER_BASE_WIDTH,
   CONTAINER_PADDING_HORIZONTAIL,
   NAV_HEIGHT,
+  PRODUCT_TAB_HEIGHT,
 } from "src/constants";
 import { ReviewGrade, ReviewType } from "src/commonTypes/review";
 
 import { ProductReview } from "./productDetailTabSections";
 
-const TAB_HEIGHT: number = 50;
-
 function getElementPosition(current: any): number {
   const element = current;
-  const headerOffset = NAV_HEIGHT + TAB_HEIGHT;
+  const headerOffset = NAV_HEIGHT + PRODUCT_TAB_HEIGHT;
   const elementPosition = element.getBoundingClientRect().top;
   const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
   return offsetPosition;
 }
 
-interface ProductTabsProps {
+interface IProductTabsProps {
   id: string;
-  //   detailFileUrl: string;
   reviewCount: number;
   preReviews: Array<ReviewType>;
   reviewGrade: ReviewGrade;
 }
 
-const ProductTabs: React.FC<ProductTabsProps> = ({
+const ProductTabs: React.FC<IProductTabsProps> = ({
   id,
   reviewCount,
   preReviews,
@@ -52,15 +50,25 @@ const ProductTabs: React.FC<ProductTabsProps> = ({
   const qnaRef = useRef() as React.MutableRefObject<HTMLDivElement>;
   const refArray = [detailRef, reviewRef, qnaRef];
 
-  // GET SECTIONS TOP -------------------------------------------------
+  // GET SECTIONS TOP ------------------------------------------------- //
   let sectionsTop: Array<number> = [];
   useEffect(() => {
     refArray.forEach(section => {
       sectionsTop.push(getElementPosition(section.current));
     });
   }, [refArray]);
+  // useMemo(
+  //   // 이러니까 에러가 안남...
+  //   () => () => {
+  //     refArray.forEach(section => {
+  //       sectionsTop.push(getElementPosition(section.current));
+  //     });
+  //   },
+  //   [refArray],
+  // );
+  // ------------------------------------------------- GET SECTIONS TOP //
 
-  // TABS SCROLL ACTION ---------------------------------------------------------
+  // TABS SCROLL ACTION --------------------------------------------------------- //
   function scrollToTargetAdjusted(ref: React.MutableRefObject<HTMLDivElement>) {
     const offsetPosition = getElementPosition(ref.current) + 1; // sticky 보정 1px
 
@@ -69,9 +77,9 @@ const ProductTabs: React.FC<ProductTabsProps> = ({
       behavior: "smooth",
     });
   }
-  // ------------------------------------------------------------------------- //
+  // --------------------------------------------------------- TABS SCROLL ACTION //
 
-  const handleChange = (event: any, value: any) => {
+  const _tabSectionChangeHanlder = (event: any, value: any) => {
     scrollToTargetAdjusted(refArray[value]);
     // setScreenValue(value);
   };
@@ -109,7 +117,7 @@ const ProductTabs: React.FC<ProductTabsProps> = ({
         <Box
           sx={{
             width: "100%",
-            height: TAB_HEIGHT,
+            height: PRODUCT_TAB_HEIGHT,
             borderBottom: BORDER_BASE_WIDTH,
             borderColor: theme.gray_light,
             paddingX: CONTAINER_PADDING_HORIZONTAIL,
@@ -130,11 +138,11 @@ const ProductTabs: React.FC<ProductTabsProps> = ({
             aria-label="basic tabs example"
           >
             <Tab
-              onClick={e => handleChange(e, 0)}
+              onClick={e => _tabSectionChangeHanlder(e, 0)}
               label={<TabSpan selected={screenValue === 0}>Detail</TabSpan>}
             />
             <Tab
-              onClick={e => handleChange(e, 1)}
+              onClick={e => _tabSectionChangeHanlder(e, 1)}
               label={
                 <TabSpan selected={screenValue === 1}>
                   Review ({reviewCount})
@@ -142,7 +150,7 @@ const ProductTabs: React.FC<ProductTabsProps> = ({
               }
             />
             <Tab
-              onClick={e => handleChange(e, 2)}
+              onClick={e => _tabSectionChangeHanlder(e, 2)}
               label={<TabSpan selected={screenValue === 2}>Q & A</TabSpan>}
             />
           </Tabs>

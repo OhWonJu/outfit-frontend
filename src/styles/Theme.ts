@@ -17,6 +17,7 @@ export const lightTheme: object = {
   gray_light: "#E3E3E3",
   white_primary: "#FAFAFA",
   red_primary: "#EB2F06",
+  red_secondary: "#FF6878",
   blue_priamry: "#3897F0",
 };
 

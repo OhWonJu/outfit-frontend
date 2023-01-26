@@ -10,6 +10,8 @@ interface Props {
   context: string;
   className?: string;
   lineClamp?: number;
+  lineHeight?: number;
+  isClickAble?: boolean;
   onClick?: Function;
   [key: string]: any;
 }
@@ -18,6 +20,8 @@ const EllipsisSpan: React.FC<Props> = ({
   context,
   className,
   lineClamp = 3,
+  lineHeight = 1.5,
+  isClickAble = true,
   onClick,
   ...rest
 }) => {
@@ -57,12 +61,23 @@ const EllipsisSpan: React.FC<Props> = ({
         ref={contentRef}
         className={rootClassName}
         lineClamp={lineClamp}
+        lineHeight={lineHeight}
+        {...rest}
       >
         {context}
       </Ellipsis>
-      {isShowReadMore && (
-        <Button type="button" onClick={event => clickHandler(event)}>
+      {isClickAble && isShowReadMore && (
+        <Button
+          type="button"
+          onClick={(event: any) => clickHandler(event)}
+          lineHeight={lineHeight}
+        >
           ...더보기
+        </Button>
+      )}
+      {!isClickAble && isShowReadMore && (
+        <Button disabled type="button" lineHeight={lineHeight}>
+          ...
         </Button>
       )}
     </>
@@ -75,8 +90,8 @@ const Ellipsis = styled.div<any>`
   position: relative;
   display: -webkit-box;
   /* max-height: 6rem; */
-  max-height: ${props => props.lineClamp * 1.5}rem;
-  line-height: 1.5rem;
+  max-height: ${props => props.lineClamp * props.lineHeight}rem;
+  line-height: ${props => props.lineHeight}rem;
   overflow: hidden;
   -webkit-line-clamp: ${props => props.lineClamp};
 
@@ -88,9 +103,9 @@ const Ellipsis = styled.div<any>`
   }
 `;
 
-const Button = styled.button`
-  max-height: 2rem;
-  line-height: 2rem;
+const Button = styled.button<any>`
+  max-height: ${props => props.lineHeight}rem;
+  line-height: ${props => props.lineHeight}rem;
   color: ${props => props.theme.gray_dark};
   ${tw`text-xs font-semibold`}
 

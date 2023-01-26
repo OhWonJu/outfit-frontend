@@ -11,7 +11,7 @@ const Home: NextPage = () => {
   return (
     <IndexContainer>
       <IndexWrapper className="overflow-hidden">
-        {/* <LaunchingBanner /> */}
+        <LaunchingBanner />
       </IndexWrapper>
       <button
         onClick={() => toLight("light")}

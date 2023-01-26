@@ -4,7 +4,11 @@ import tw from "twin.macro";
 
 import useTheme from "@lib/client/hooks/useTheme";
 import { Col, Row } from "src/styles/GlobalStyle";
-import { BORDER_TINE_WIDTH } from "src/constants";
+import {
+  BORDER_TINE_WIDTH,
+  CARDS_BORDER_RADIUS,
+  CARDS_PADDING,
+} from "src/constants";
 import { EllipsisSpan } from "@components/ui";
 
 const UserInfo = ({
@@ -139,7 +143,7 @@ const ReviewCard: React.FC<ReviewType> = ({
   return (
     <>
       {reviewCardType === "MOBILE" && (
-        <Wrapper className="p-3 shadow-md">
+        <Wrapper className="">
           {/* INFOS */}
           <UserInfo
             theme={theme}
@@ -181,7 +185,7 @@ const ReviewCard: React.FC<ReviewType> = ({
         </Wrapper>
       )}
       {reviewCardType === "DESKTOP" && (
-        <Wrapper className="p-3 shadow-md">
+        <Wrapper className="">
           {/* INFOS */}
           <UserInfo
             theme={theme}
@@ -246,7 +250,9 @@ export const CardWrappeer = styled.div<any>`
   border-width: ${BORDER_TINE_WIDTH}px;
   border-color: ${props => props.theme.gray_light + 50};
   background-color: ${props => props.theme.container_bg_color};
-  ${tw`w-[328px] min-h-[360px] md:w-full md:min-h-0 md:h-[300px] rounded-md`}
+  border-radius: ${CARDS_BORDER_RADIUS}px;
+  padding: ${CARDS_PADDING}px;
+  ${tw`w-[328px] min-h-[360px] md:w-full md:min-h-0 md:h-[300px] shadow-md`}
 `;
 
 const UserInfoSpan = styled.span`
@@ -259,7 +265,9 @@ const ModalCardWrapper = styled.div`
   border-width: ${BORDER_TINE_WIDTH}px;
   border-color: ${props => props.theme.gray_light + 50};
   background-color: ${props => props.theme.container_bg_color};
-  ${tw`relative w-full min-h-[360px] p-3 shadow-md rounded-md`}
+  border-radius: ${CARDS_BORDER_RADIUS}px;
+  padding: ${CARDS_PADDING}px;
+  ${tw`relative w-full min-h-[360px] shadow-md`}
 `;
 
 const ModalContextSpan = styled.span`

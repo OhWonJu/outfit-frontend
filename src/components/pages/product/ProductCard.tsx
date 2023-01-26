@@ -1,20 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 
+import useTheme from "@lib/client/hooks/useTheme";
 import { Row } from "src/styles/GlobalStyle";
 import {
   CardLayout,
   DiscountPercent,
   DiscountPrice,
+  DiscountSection,
   ImageWrapper,
   InfoBox,
+  InfoContent,
   InfoSection,
   Price,
   PriceBox,
   UtilButtonSection,
 } from "./Product.styles";
-import { Heart } from "@components/icons";
-import useTheme from "@lib/client/hooks/useTheme";
+import { ArrowRight, Heart } from "@components/icons";
+import { EllipsisSpan, Link } from "@components/ui";
 
 interface Props {
   data: any;
@@ -23,7 +26,9 @@ interface Props {
 const ProductCard: React.FC<Props> = ({ data }) => {
   const theme = useTheme();
 
-  console.log(data);
+  const [isPined, setIsPined] = useState(false);
+
+  // console.log(data);
   return (
     <CardLayout className="aspect-10/16">
       <ImageWrapper>
@@ -40,30 +45,60 @@ const ProductCard: React.FC<Props> = ({ data }) => {
       </ImageWrapper>
       <InfoSection className="">
         <InfoBox className="">
-          <span className="font-bold">{data.name}</span>
+          <span className="font-semibold">{data.name}</span>
+          <EllipsisSpan
+            context={data.content}
+            lineClamp={2}
+            lineHeight={1}
+            isClickAble={false}
+            className="text-sm font-semibold"
+            style={{ color: theme.gray_primary, lineHeight: "1rem" }}
+          />
+          {/* <InfoContent>
+            Damn!!! it is soooo cool and gorgeous i love so much much mucho
+            grascia!!! fuck that shiiiiiiit scuuurk!!
+          </InfoContent> */}
         </InfoBox>
         <PriceBox className="">
-          <Price disable={true}>{data.price.toLocaleString("ko-KR")}원</Price>
           {true && (
-            <Row className="sm:pl-2">
+            <Row className="pr-1 space-x-1">
               <DiscountPrice>
                 {(
                   data.price - Math.floor(data.price / (100 - 10))
                 ).toLocaleString("ko-KR")}
                 원
               </DiscountPrice>
-              <DiscountPercent>10%</DiscountPercent>
             </Row>
           )}
+          <Price disable={true}>{data.price.toLocaleString("ko-KR")}원</Price>
         </PriceBox>
       </InfoSection>
-      <UtilButtonSection>
-        <div className="w-10 h-10 m-2 flex justify-center items-center">
+      {true && (
+        <DiscountSection className="">
           <div>
-            <Heart stroke={theme.white_primary} />
+            <ArrowRight
+              className="h-6 w-6 rotate-45"
+              stroke={theme.red_primary}
+              strokeWidth={1.8}
+            />
           </div>
+          <DiscountPercent>10%</DiscountPercent>
+        </DiscountSection>
+      )}
+      <UtilButtonSection className="">
+        <div className="flex flex-col space-y-4 justify-center items-center">
+          <button
+            className=""
+            type="button"
+            onClick={() => setIsPined(!isPined)}
+          >
+            <Heart
+              className="h-6 w-6"
+              fill={isPined ? theme.red_secondary : theme.gray_light + 70}
+              strokeWidth={0}
+            />
+          </button>
         </div>
-        <div className="w-10 h-10 m-2" />
       </UtilButtonSection>
     </CardLayout>
   );

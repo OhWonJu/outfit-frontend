@@ -8,20 +8,20 @@ import { NAV_HEIGHT, PRODUCT_PADDING } from "src/constants";
 import { TProductThumbFile } from "src/commonTypes/product/productType";
 import { ProductCarousel } from "./sections";
 
-interface ProductDetailProps {
+interface IProductDetailViewProps {
   contentRef: React.MutableRefObject<HTMLDivElement>;
-  PRODUCT_INFO: JSX.Element;
-  PRODUCT_TABS: JSX.Element;
   name: string;
   thumbFiles: Array<TProductThumbFile>;
+  PRODUCT_INFO: JSX.Element;
+  PRODUCT_TABS: JSX.Element;
 }
 
-const ProductDetailView: React.FC<ProductDetailProps> = ({
+const ProductDetailView: React.FC<IProductDetailViewProps> = ({
   contentRef,
-  PRODUCT_INFO,
-  PRODUCT_TABS,
   name,
   thumbFiles,
+  PRODUCT_INFO,
+  PRODUCT_TABS,
 }) => {
   return (
     <>

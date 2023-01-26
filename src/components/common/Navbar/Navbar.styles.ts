@@ -21,7 +21,7 @@ export const NavContent = styled.div<any>`
 `;
 
 export const LogoSection = styled.div<any>`
-  ${tw`relative z-20 order-2 min-w-[74px] flex-1 w-[74px] h-full xmd:order-none xmd:pl-5 xmd:max-w-[25%] xmd:justify-start`}
+  ${tw`relative z-20 order-2 min-w-[70px] flex-1 h-full xmd:order-none xmd:pl-[2.3rem] xmd:max-w-[25%] xmd:justify-start`}
 `;
 
 export const ListItem = styled.div<any>`
@@ -29,6 +29,22 @@ export const ListItem = styled.div<any>`
   align-items: center;
   position: relative;
   height: ${NAV_HEIGHT}px;
+
+  ${props => {
+    if (props.focused) {
+      return css`
+        :before {
+          content: "";
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          width: 100%;
+          height: 1.8px;
+          background-color: ${props => props.theme.text_primary_color};
+        }
+      `;
+    }
+  }}
 
   :hover:before {
     content: "";

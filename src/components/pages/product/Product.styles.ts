@@ -1,12 +1,20 @@
 import styled, { css } from "styled-components";
 import tw from "twin.macro";
 
-import { PRODUCT_CARD_WIDTH } from "src/constants";
+import {
+  BORDER_TINE_WIDTH,
+  CARDS_BORDER_RADIUS,
+  CARDS_MEDIUM_PADDING,
+  PRODUCT_CARD_WIDTH,
+} from "src/constants";
 
 // ProductCard ------------------------------- //
 export const CardLayout = styled.div<any>`
   width: ${PRODUCT_CARD_WIDTH}px;
-  ${tw`relative mb-14 shadow-md`}
+  border-width: ${BORDER_TINE_WIDTH}px;
+  border-color: ${props => props.theme.gray_light + 50};
+  border-radius: ${CARDS_BORDER_RADIUS}px;
+  ${tw`relative mb-14 shadow-md overflow-hidden`}
 `;
 
 export const ImageWrapper = styled.div`
@@ -19,20 +27,30 @@ export const InfoSection = styled.div`
   position: relative;
   width: 100%;
   height: 30%;
+  padding: 0px ${CARDS_MEDIUM_PADDING}px;
 
-  ${tw`pt-7 px-2 pb-1`};
+  ${tw`pt-3 pb-1`};
 `;
 
 export const InfoBox = styled.div`
   width: 100%;
-  height: 72%;
+  height: 68%;
+
+  ${tw`flex flex-col text-center items-center  space-y-1`};
+`;
+
+export const InfoContent = styled.span`
+  color: ${props => props.theme.gray_primary};
+
+  ${tw`text-sm font-semibold`};
 `;
 
 export const PriceBox = styled.div`
   width: 100%;
-  height: 28%;
+  height: 32%;
   display: flex;
-  align-items: flex-end;
+  align-items: flex-start;
+  justify-content: end;
 `;
 
 export const Price = styled.span<any>`
@@ -52,13 +70,21 @@ export const DiscountPrice = styled.span`
   ${tw`font-bold text-lg`}
 `;
 
+export const DiscountSection = styled.div`
+  padding-top: ${CARDS_MEDIUM_PADDING + 5}px;
+  padding-left: ${CARDS_MEDIUM_PADDING}px;
+  ${tw`absolute top-0 left-0 flex flex-row `}
+`;
+
 export const DiscountPercent = styled.span`
   color: ${props => props.theme.red_primary};
-  ${tw`font-semibold text-base pl-1`};
+  ${tw`font-bold text-lg`};
 `;
 
 export const UtilButtonSection = styled.div`
-  ${tw`absolute right-0 top-0 w-14 space-y-4`}
+  padding-top: ${CARDS_MEDIUM_PADDING + 5}px;
+  padding-right: ${CARDS_MEDIUM_PADDING}px;
+  ${tw`absolute top-0 right-0`}
 `;
 // ------------------------------- ProductCard //
 

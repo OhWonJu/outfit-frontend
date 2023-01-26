@@ -1,13 +1,19 @@
 import { useRouter } from "next/router";
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useMemo, useState } from "react";
 import styled, { css } from "styled-components";
 import tw from "twin.macro";
 import { throttle } from "lodash";
 
-import { LogoSection, NavbarRoot, NavContent, ListItem, ListSpan } from "./Navbar.styles";
+import {
+  LogoSection,
+  NavbarRoot,
+  NavContent,
+  ListItem,
+  ListSpan,
+} from "./Navbar.styles";
 
 import useTheme from "@lib/client/hooks/useTheme";
-import { NAV_HEIGHT, SYMBOL_TEXT } from "src/constants";
+import { SYMBOL_TEXT } from "src/constants";
 import { Link, useUI } from "@components/ui";
 import { Menu, Search, ShoppingBag } from "@components/icons";
 import Avatar from "../Avatar";
@@ -45,6 +51,13 @@ const Navbar: FC<NavbarProps> = ({ links, logoVisible }) => {
   } = useUI();
 
   const [hasScrolled, setHasScrolled] = useState(false);
+  const [focused, setFocused] = useState(""); // 타입지정해주자
+
+  useMemo(() => {
+    if (!displayDropDown) {
+      setFocused("");
+    }
+  }, [displayDropDown]);
 
   useEffect(() => {
     const handleScroll = throttle(() => {
@@ -67,17 +80,24 @@ const Navbar: FC<NavbarProps> = ({ links, logoVisible }) => {
     <NavbarRoot $scrolled={hasScrolled}>
       <NavContent>
         {/* Logo */}
-        <LogoSection onMouseOver={closeDropDown}>
-          <Link
-            href={"/"}
-            className={`logo--link ${
-              hasScrolled || logoVisible ? "block" : "hidden"
-            } xmd:w-fit h-full px-6 flex justify-center items-center`}
-          >
-            <span className="text-sm font-extrabold font-sansSrif">
-              {SYMBOL_TEXT}
-            </span>
-          </Link>
+        <LogoSection
+          onMouseOver={() => {
+            setFocused("");
+            closeDropDown();
+          }}
+        >
+          <div className="h-full w-[70px] mx-auto xmd:mx-0">
+            <Link
+              href={"/"}
+              className={`logo--link ${
+                hasScrolled || logoVisible ? "block" : "hidden"
+              } xmd:w-fit h-full px-6 flex justify-center items-center`}
+            >
+              <span className="text-sm font-extrabold font-sansSrif">
+                {SYMBOL_TEXT}
+              </span>
+            </Link>
+          </div>
         </LogoSection>
 
         {/* Mobile  Menu Section */}
@@ -98,8 +118,10 @@ const Navbar: FC<NavbarProps> = ({ links, logoVisible }) => {
           <ul className="flex">
             <li className="store h-full">
               <ListItem
+                focused={focused === "store"}
                 currentPage={router.pathname.split("/")[1] === "store"}
                 onMouseOver={() => {
+                  setFocused("store");
                   setDropDownView("TEST_VIEW");
                   openDropDown();
                 }}
@@ -113,8 +135,10 @@ const Navbar: FC<NavbarProps> = ({ links, logoVisible }) => {
             </li>
             <li className="new h-full">
               <ListItem
+                focused={focused === "new"}
                 currentPage={router.pathname.split("/")[1] === "new"}
                 onMouseOver={() => {
+                  setFocused("new");
                   setDropDownView("TEST_VIEW2");
                   openDropDown();
                 }}
@@ -128,8 +152,10 @@ const Navbar: FC<NavbarProps> = ({ links, logoVisible }) => {
             </li>
             <li className="fallowing h-full">
               <ListItem
+                focused={focused === "fallowing"}
                 currentPage={router.pathname.split("/")[1] === "fallowing"}
                 onMouseOver={() => {
+                  setFocused("");
                   closeDropDown();
                 }}
               >
@@ -140,8 +166,10 @@ const Navbar: FC<NavbarProps> = ({ links, logoVisible }) => {
             </li>
             <li className="brand h-full">
               <ListItem
+                focused={focused === "brand"}
                 currentPage={router.pathname.split("/")[1] === "brand"}
                 onMouseOver={() => {
+                  setFocused("");
                   closeDropDown();
                 }}
               >
@@ -150,7 +178,10 @@ const Navbar: FC<NavbarProps> = ({ links, logoVisible }) => {
             </li>
             <li className="etc h-full">
               <ListItem
+                focused={focused === "etc"}
+                currentPage={router.pathname.split("/")[1] === "etc"}
                 onMouseOver={() => {
+                  setFocused("");
                   closeDropDown();
                 }}
               >
@@ -163,7 +194,10 @@ const Navbar: FC<NavbarProps> = ({ links, logoVisible }) => {
         {/* Util Section - cart, Avator, Search */}
         <div
           className="desktop--cart-navigation order-3 flex-1 h-full flex justify-end items-center xmd:w-fit xmd:pr-5 space-x-4"
-          onMouseOver={closeDropDown}
+          onMouseOver={() => {
+            setFocused("");
+            closeDropDown();
+          }}
         >
           <button
             onClick={() => {
@@ -228,4 +262,3 @@ const Navbar: FC<NavbarProps> = ({ links, logoVisible }) => {
 };
 
 export default Navbar;
-
