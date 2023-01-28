@@ -41,7 +41,7 @@ const Container: FC<ContainerProps> = ({
         )}
         <div
           className={`w-full h-full px-5 md:px-14 ${
-            verticalSidebarVisible ? `md:ml-[280px]` : "md:mr-0"
+            verticalSidebarVisible ? `md:ml-[280px]` : "md:ml-0"
           }`}
         >
           {children}

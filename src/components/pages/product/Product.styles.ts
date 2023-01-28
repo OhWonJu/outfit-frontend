@@ -29,28 +29,21 @@ export const InfoSection = styled.div`
   height: 30%;
   padding: 0px ${CARDS_MEDIUM_PADDING}px;
 
-  ${tw`pt-3 pb-1`};
+  ${tw`pt-1 pb-2`};
 `;
 
-export const InfoBox = styled.div`
+export const InfoBox = styled.article`
   width: 100%;
-  height: 68%;
+  height: 60%;
 
-  ${tw`flex flex-col text-center items-center  space-y-1`};
-`;
-
-export const InfoContent = styled.span`
-  color: ${props => props.theme.gray_primary};
-
-  ${tw`text-sm font-semibold`};
+  ${tw`flex flex-col items-start`};
 `;
 
 export const PriceBox = styled.div`
   width: 100%;
-  height: 32%;
+  height: 40%;
   display: flex;
-  align-items: flex-start;
-  justify-content: end;
+  flex-direction: column;
 `;
 
 export const Price = styled.span<any>`
@@ -60,10 +53,15 @@ export const Price = styled.span<any>`
         color: ${props => props.theme.gray_primary};
         text-decoration-color: ${props => props.theme.gray_primary};
         text-decoration: line-through;
+        ${tw`text-xs`}
+      `;
+    } else {
+      return css`
+        ${tw`text-lg`}
       `;
     }
   }}
-  ${tw`font-bold text-lg`}
+  ${tw`font-bold`}
 `;
 
 export const DiscountPrice = styled.span`
@@ -71,9 +69,14 @@ export const DiscountPrice = styled.span`
 `;
 
 export const DiscountSection = styled.div`
-  padding-top: ${CARDS_MEDIUM_PADDING + 5}px;
-  padding-left: ${CARDS_MEDIUM_PADDING}px;
-  ${tw`absolute top-0 left-0 flex flex-row `}
+  /* padding-top: ${CARDS_MEDIUM_PADDING + 5}px; */
+  /* padding-left: ${CARDS_MEDIUM_PADDING}px; */
+  /* ${tw`absolute top-0 left-0 flex flex-row `} */
+`;
+
+export const DiscountType = styled.a<any>`
+  color: ${props => props.theme.red_primary};
+  ${tw`font-bold text-xs pr-1`};
 `;
 
 export const DiscountPercent = styled.span`

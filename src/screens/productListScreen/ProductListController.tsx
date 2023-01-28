@@ -6,10 +6,13 @@ import { TestSidebar } from "@components/verticalSidebar";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { _GET } from "@lib/server/rootAPI";
 import { ProductCard } from "@components/pages/product";
+import useWindowSize from "@lib/client/hooks/useWindowSize";
+import { SCREEN_SIZE_MD, SCREEN_SIZE_XL } from "src/constants";
 
 const TAKE = 9;
 
 const ProductListController = () => {
+  const { width: windowWith } = useWindowSize();
   const [ref, inView] = useInView({
     rootMargin: "20%",
   });
@@ -65,10 +68,14 @@ const ProductListController = () => {
       verticalSidebarChildren={<TestSidebar />}
     >
       <div className="mt-36 mb-36">
-        <div className="grid grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+        <div className="grid grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 justify-items-center">
           {data &&
             products.map((item, index) => (
-              <ProductCard key={index} data={item} />
+              <ProductCard
+                key={index}
+                cardType={windowWith < SCREEN_SIZE_XL ? "MOBILE" : "DESKTOP"}
+                data={item}
+              />
             ))}
         </div>
       </div>

@@ -11,7 +11,6 @@ interface Props {
   className?: string;
   lineClamp?: number;
   lineHeight?: number;
-  isClickAble?: boolean;
   onClick?: Function;
   [key: string]: any;
 }
@@ -21,7 +20,6 @@ const EllipsisSpan: React.FC<Props> = ({
   className,
   lineClamp = 3,
   lineHeight = 1.5,
-  isClickAble = true,
   onClick,
   ...rest
 }) => {
@@ -66,18 +64,13 @@ const EllipsisSpan: React.FC<Props> = ({
       >
         {context}
       </Ellipsis>
-      {isClickAble && isShowReadMore && (
+      {isShowReadMore && (
         <Button
           type="button"
           onClick={(event: any) => clickHandler(event)}
           lineHeight={lineHeight}
         >
           ...더보기
-        </Button>
-      )}
-      {!isClickAble && isShowReadMore && (
-        <Button disabled type="button" lineHeight={lineHeight}>
-          ...
         </Button>
       )}
     </>

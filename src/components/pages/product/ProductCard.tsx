@@ -7,19 +7,19 @@ import {
   CardLayout,
   DiscountPercent,
   DiscountPrice,
-  DiscountSection,
+  DiscountType,
   ImageWrapper,
   InfoBox,
-  InfoContent,
   InfoSection,
   Price,
   PriceBox,
   UtilButtonSection,
 } from "./Product.styles";
 import { ArrowRight, Heart } from "@components/icons";
-import { EllipsisSpan, Link } from "@components/ui";
+import { EllipsisSpan, EllipsisText, Link } from "@components/ui";
 
 interface Props {
+  cardType: "MOBILE" | "DESKTOP";
   data: any;
 }
 
@@ -28,7 +28,10 @@ const ProductCard: React.FC<Props> = ({ data }) => {
 
   const [isPined, setIsPined] = useState(false);
 
-  // console.log(data);
+  const isDiscount = true;
+  const context =
+    "다음 휴가에서 영감을 받은 새로운 디자인으로 스타일을 뽐내 보세요. 여름에 어울리는 통기성 좋은 메쉬 스우시 포인트가 양말을 돋보이게 해줍니다. 무게 기준 20% 이상 재생 소재로 제작되어 멋스러운 스타일을 연출하며 환경 보호에도 동참할 수 있습니다.";
+
   return (
     <CardLayout className="aspect-10/16">
       <ImageWrapper>
@@ -45,23 +48,36 @@ const ProductCard: React.FC<Props> = ({ data }) => {
       </ImageWrapper>
       <InfoSection className="">
         <InfoBox className="">
-          <span className="font-semibold">{data.name}</span>
-          <EllipsisSpan
-            context={data.content}
-            lineClamp={2}
-            lineHeight={1}
-            isClickAble={false}
-            className="text-sm font-semibold"
-            style={{ color: theme.gray_primary, lineHeight: "1rem" }}
+          <span className="font-bold text-xs truncate">NIKE</span>
+          <span className="font-medium pb-1 truncate">{data.name}</span>
+          <EllipsisText
+            context={context}
+            className="text-xs font-semibold"
+            style={{ color: theme.gray_primary }}
           />
-          {/* <InfoContent>
-            Damn!!! it is soooo cool and gorgeous i love so much much mucho
-            grascia!!! fuck that shiiiiiiit scuuurk!!
-          </InfoContent> */}
         </InfoBox>
         <PriceBox className="">
-          {true && (
-            <Row className="pr-1 space-x-1">
+          <div className="__origin_price_and_discount_type__ flex flex-row">
+            {isDiscount && (
+              <div className="flex flex-row">
+                <ArrowRight
+                  className="h-[14px] w-[14px] rotate-45"
+                  stroke={theme.red_primary}
+                  strokeWidth={1.8}
+                />
+                <DiscountType className="">할인가</DiscountType>
+              </div>
+            )}
+            <Price disable={isDiscount}>
+              {data.price.toLocaleString("ko-KR")}원
+            </Price>
+          </div>
+          {/* DISCOUNT PRICE */}
+          {isDiscount && (
+            <Row className="space-x-1">
+              <div className="flex flex-row">
+                <DiscountPercent>10%</DiscountPercent>
+              </div>
               <DiscountPrice>
                 {(
                   data.price - Math.floor(data.price / (100 - 10))
@@ -70,21 +86,8 @@ const ProductCard: React.FC<Props> = ({ data }) => {
               </DiscountPrice>
             </Row>
           )}
-          <Price disable={true}>{data.price.toLocaleString("ko-KR")}원</Price>
         </PriceBox>
       </InfoSection>
-      {true && (
-        <DiscountSection className="">
-          <div>
-            <ArrowRight
-              className="h-6 w-6 rotate-45"
-              stroke={theme.red_primary}
-              strokeWidth={1.8}
-            />
-          </div>
-          <DiscountPercent>10%</DiscountPercent>
-        </DiscountSection>
-      )}
       <UtilButtonSection className="">
         <div className="flex flex-col space-y-4 justify-center items-center">
           <button

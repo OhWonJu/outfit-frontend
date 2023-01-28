@@ -4,7 +4,7 @@ import { theme } from "twin.macro";
 
 export const lightTheme: object = {
   // background_color: "#F8F9FA",
-  background_color: "#F5F8F7",
+  background_color: "#F5F6F5",
   container_bg_color: "#F9FBFB",
   theme_color: "#F5F8F7",
   theme_comparsion_color: "#202020",
