@@ -10,6 +10,22 @@ import {
   CARDS_PADDING,
 } from "src/constants";
 import { EllipsisSpan } from "@components/ui";
+import {
+  AvatarWrapper,
+  BuyerComment,
+  BuyerInfo,
+  BuyerInfoLeft,
+  BuyerInfoRight,
+  BuyerInfoText,
+  BuyerInfoWrapper,
+  Card,
+  CardHeader,
+  CardImageSection,
+  CardIndicatorWrapper,
+  CardInfoSection,
+  Date,
+  UserName,
+} from "./Review.styles";
 
 const UserInfo = ({
   theme,
@@ -143,46 +159,67 @@ const ReviewCard: React.FC<ReviewType> = ({
   return (
     <>
       {reviewCardType === "MOBILE" && (
-        <Wrapper className="">
-          {/* INFOS */}
-          <UserInfo
-            theme={theme}
-            userName={userName}
-            userGender={userGender}
-            userHeight={userHeight}
-            userWeight={userWeight}
-            size={size}
-            color={color}
-          />
-          {/* PHOTO & Rate */}
-          <div className="flex flex-row mb-3">
-            <div className="flex-1 mr-3">
-              <div className="w-full aspect-square bg-slate-200" />
-            </div>
-            <Col className="flex-1 flex-wraps space-y-2">
-              <ProductGrade
-                fitColor={fitColor}
-                fitSize={fitSize}
-                fitThickness={fitThickness}
-              />
-            </Col>
-          </div>
-          {/* Context */}
-          <article className="my-5">
-            {isModal ? (
-              <ModalContextSpan>{context}</ModalContextSpan>
-            ) : (
-              <EllipsisSpan
-                className="font-medium"
-                context={context}
-                onClick={seeMoreHandler}
-              />
-            )}
-          </article>
-          <div className="absolute bottom-0 right-0 pb-2 pr-3">
-            <UserInfoSpan>{date}</UserInfoSpan>
-          </div>
-        </Wrapper>
+        <Card>
+          <CardHeader>
+            <Row className="__AVATAR_USERNAME_DATE__ flex-1 h-full items-center">
+              <Row className="flex-1 h-full items-center">
+                <AvatarWrapper className="h-full aspect-square py-1">
+                  <div className="rounded-full h-full aspect-square bg-gray-400" />
+                </AvatarWrapper>
+                <UserName>{userName}</UserName>
+              </Row>
+              <Row className="flex-1 justify-end h-full items-center space-x-1">
+                <Date>신고하기</Date>
+                <Date>{date.replace(/-/g, ".").slice(2)}</Date>
+              </Row>
+            </Row>
+            <Row className="flex-1 items-center">
+              <a>{grade}</a>
+            </Row>
+          </CardHeader>
+          <CardImageSection>
+            <div className="rounded-lg h-full w-full bg-sky-100" />
+            <CardIndicatorWrapper>1/2</CardIndicatorWrapper>
+          </CardImageSection>
+          <CardInfoSection>
+            <BuyerInfoWrapper className="mt-4 mb-2">
+              <BuyerInfo>
+                <BuyerInfoLeft>
+                  <BuyerInfoText>맞춤 정보</BuyerInfoText>
+                </BuyerInfoLeft>
+                <BuyerInfoRight>
+                  <BuyerInfoText>
+                    {userGender === "male" ? "남성" : "여성"}
+                  </BuyerInfoText>
+                  <BuyerInfoText>{userHeight}cm</BuyerInfoText>
+                  <BuyerInfoText>{userWeight}kg</BuyerInfoText>
+                </BuyerInfoRight>
+              </BuyerInfo>
+              <BuyerInfo>
+                <BuyerInfoLeft>
+                  <BuyerInfoText>선택 옵션</BuyerInfoText>
+                </BuyerInfoLeft>
+                <BuyerInfoRight>
+                  <BuyerInfoText>{size}</BuyerInfoText>
+                  <BuyerInfoText>{color}</BuyerInfoText>
+                </BuyerInfoRight>
+              </BuyerInfo>
+            </BuyerInfoWrapper>
+            <BuyerComment className="">
+              {isModal ? (
+                <ModalContextSpan>{context}</ModalContextSpan>
+              ) : (
+                <EllipsisSpan
+                  className="font-medium"
+                  context={context}
+                  onClick={seeMoreHandler}
+                  lineClamp={4}
+                  lineHeight={1.2}
+                />
+              )}
+            </BuyerComment>
+          </CardInfoSection>
+        </Card>
       )}
       {reviewCardType === "DESKTOP" && (
         <Wrapper className="">

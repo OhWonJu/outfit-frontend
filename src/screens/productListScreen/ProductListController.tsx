@@ -1,18 +1,22 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useInView } from "react-intersection-observer";
 
 import { Container } from "@components/ui";
 import { TestSidebar } from "@components/verticalSidebar";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { _GET } from "@lib/server/rootAPI";
-import { ProductCard } from "@components/pages/product";
 import useWindowSize from "@lib/client/hooks/useWindowSize";
-import { SCREEN_SIZE_MD, SCREEN_SIZE_XL } from "src/constants";
+import { ProductCard } from "@components/pages/product";
+import {
+  SCREEN_SIZE_MD,
+  SCREEN_SIZE_XL,
+  VERTICAL_SIDEBAR_WIDTH,
+} from "src/constants";
 
 const TAKE = 9;
 
 const ProductListController = () => {
-  const { width: windowWith } = useWindowSize();
+  const { width: windowWidth, height: windowHeight } = useWindowSize();
   const [ref, inView] = useInView({
     rootMargin: "20%",
   });
@@ -61,6 +65,15 @@ const ProductListController = () => {
     () => (data ? data.pages.flatMap(page => page.res.items) : []),
     [data],
   );
+  // ------------------------------------------------------------------------------------------------------------------------------ //
+
+  // const columnCount = useMemo(() => {
+  //   const width =
+  //     windowWidth < SCREEN_SIZE_MD
+  //       ? windowWidth
+  //       : windowWidth - VERTICAL_SIDEBAR_WIDTH;
+  //   return Math.floor(width / 210);
+  // }, [windowWidth]);
 
   return (
     <Container
@@ -73,7 +86,7 @@ const ProductListController = () => {
             products.map((item, index) => (
               <ProductCard
                 key={index}
-                cardType={windowWith < SCREEN_SIZE_XL ? "MOBILE" : "DESKTOP"}
+                cardType={windowWidth < SCREEN_SIZE_XL ? "MOBILE" : "DESKTOP"}
                 data={item}
               />
             ))}

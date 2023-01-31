@@ -2,13 +2,13 @@ import React from "react";
 
 import PresentProductStore from "@lib/client/store/simpleStore/presentProductStore";
 import ModalLayout from "@components/common/ModalLayout";
-import { ReviewType } from "types/review";
 import ReviewCard from "./ReviewCard";
 import useWindowSize from "@lib/client/hooks/useWindowSize";
 import { SCREEN_SIZE_MB } from "src/constants";
+import { ReviewType } from "src/commonTypes/review";
+import ReviewFilter from "./ReviewFilter";
 
 import { product_01_Data } from "MockData/productData";
-import ReviewFilter from "./ReviewFilter";
 
 interface ReviewProps {}
 
