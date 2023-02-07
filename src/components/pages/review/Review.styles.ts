@@ -43,22 +43,17 @@ export const Date = styled.a`
 
 export const CardImageSection = styled.div`
   position: relative;
-  height: 52%;
+  height: 50%;
+  width: 100%;
 `;
 
-export const CardIndicatorWrapper = styled.span`
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translate(-50%);
-  color: ${props => props.theme.text_secondary_color};
-  background-color: ${props =>
-    props.theme.black_primary + ICON_BUTTON_BLACK_OPACTIY};
-  ${tw`text-sm font-bold px-2 py-1 rounded-full text-center mb-2`};
+export const CardIndicatorWrapper = styled.div`
+  height: 5%;
+  ${tw`flex justify-center items-center`}
 `;
 
 export const CardInfoSection = styled.section`
-  height: 35%;
+  height: 32%;
   ${tw`flex flex-col`}
 `;
 

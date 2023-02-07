@@ -1,6 +1,8 @@
-import React from "react";
+import React, { MutableRefObject, useRef, useState } from "react";
+import Image from "next/image";
 import styled from "styled-components";
 import tw from "twin.macro";
+import Carousel from "nuka-carousel/lib/carousel";
 
 import useTheme from "@lib/client/hooks/useTheme";
 import { Col, Row } from "src/styles/GlobalStyle";
@@ -9,7 +11,7 @@ import {
   CARDS_BORDER_RADIUS,
   CARDS_PADDING,
 } from "src/constants";
-import { EllipsisSpan } from "@components/ui";
+import { DotIndicator, EllipsisSpan } from "@components/ui";
 import {
   AvatarWrapper,
   BuyerComment,
@@ -26,6 +28,8 @@ import {
   Date,
   UserName,
 } from "./Review.styles";
+
+import { product_01_Data } from "MockData/productData";
 
 const UserInfo = ({
   theme,
@@ -154,12 +158,17 @@ const ReviewCard: React.FC<ReviewType> = ({
 }) => {
   const theme = useTheme();
 
+  const imageUrls = product_01_Data.thumbFiles;
+
+  const carouselRef = useRef() as MutableRefObject<HTMLDivElement>;
+  const [slideIdx, setSlideIdx] = useState<number>(0);
+
   const Wrapper = isModal ? ModalCardWrapper : CardWrappeer;
 
   return (
     <>
       {reviewCardType === "MOBILE" && (
-        <Card>
+        <Card className="">
           <CardHeader>
             <Row className="__AVATAR_USERNAME_DATE__ flex-1 h-full items-center">
               <Row className="flex-1 h-full items-center">
@@ -177,11 +186,38 @@ const ReviewCard: React.FC<ReviewType> = ({
               <a>{grade}</a>
             </Row>
           </CardHeader>
-          <CardImageSection>
-            <div className="rounded-lg h-full w-full bg-sky-100" />
-            <CardIndicatorWrapper>1/2</CardIndicatorWrapper>
+          <CardImageSection className="overscroll-x-contain">
+            <Carousel
+              innerRef={carouselRef}
+              withoutControls={true}
+              slideIndex={slideIdx}
+              beforeSlide={(_, v) => setSlideIdx(v)}
+            >
+              {imageUrls.map(data => (
+                <div
+                  key={data.url}
+                  className="__Image_wrapper__ relative w-full h-[287px]  overflow-hidden"
+                >
+                  <Image
+                    src={data.url}
+                    alt="product image"
+                    fill={true}
+                    sizes="100%"
+                    style={{ objectFit: "cover" }}
+                    // width={600}
+                    // height={600}
+                    // layout="responsive"
+                    // objectFit="cover"
+                    draggable={false}
+                  />
+                </div>
+              ))}
+            </Carousel>
           </CardImageSection>
-          <CardInfoSection>
+          <CardIndicatorWrapper className="">
+            <DotIndicator current={slideIdx} length={imageUrls.length} />
+          </CardIndicatorWrapper>
+          <CardInfoSection className="">
             <BuyerInfoWrapper className="mt-4 mb-2">
               <BuyerInfo>
                 <BuyerInfoLeft>
