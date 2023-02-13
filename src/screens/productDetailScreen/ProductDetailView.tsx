@@ -56,7 +56,7 @@ const ProductDetailView: React.FC<IProductDetailViewProps> = ({
           <ProductCarousel
             parentRef={contentRef}
             imageUrls={thumbFiles}
-            className="mb-16"
+            className="mb-10 md:mb-16"
           />
           <section className="max-w-[1200px]">{PRODUCT_INFO}</section>
           {/* More... */}

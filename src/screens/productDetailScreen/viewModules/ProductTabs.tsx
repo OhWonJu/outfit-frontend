@@ -159,17 +159,25 @@ const ProductTabs: React.FC<IProductTabsProps> = ({
         </Box>
       </div>
       <Container verticalSidebarVisible={false} style={{ borderTopWidth: 0 }}>
-        <section ref={detailRef} className="h-[1000px] bg-red-400 ">
+        <section
+          id="detail-section"
+          ref={detailRef}
+          className="h-[1000px] bg-red-400 "
+        >
           Detail screen
         </section>
-        <section ref={reviewRef} className="pt-6">
+        <section id="review-section" ref={reviewRef} className="pt-6">
           <ProductReview
             productId={id}
             preReviews={preReviews}
             reviewGrade={reviewGrade}
           />
         </section>
-        <section ref={qnaRef} className="h-[500px] bg-blue-400 pt-6">
+        <section
+          id="qna-section"
+          ref={qnaRef}
+          className="h-[500px] bg-blue-400 pt-6"
+        >
           Q & A screen
         </section>
       </Container>

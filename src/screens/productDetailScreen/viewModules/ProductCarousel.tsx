@@ -1,19 +1,13 @@
 import React, { MutableRefObject, useRef, useState } from "react";
 import Image from "next/image";
-// import {
-//   clearAllBodyScrollLocks,
-//   disableBodyScroll,
-//   enableBodyScroll,
-// } from "body-scroll-lock";
 import Carousel from "nuka-carousel/lib/carousel";
 import cn from "clsx";
 import throttle from "lodash.throttle";
-import { IconButton } from "@mui/material";
 
 import useTheme from "@lib/client/hooks/useTheme";
-import { ChevronDown, ChevronLeft, ChevronRight } from "@components/icons";
 import { ICON_BUTTON_BLACK_OPACTIY } from "src/constants";
-// import useHover from "@lib/hooks/useHover";
+import { DotIndicator } from "@components/ui";
+import { ChevronDown } from "@components/icons";
 
 interface ProductCarouselProps {
   parentRef: MutableRefObject<HTMLDivElement>;
@@ -47,20 +41,6 @@ const ProductCarousel: React.FC<ProductCarouselProps> = ({
 
   // throttle //
   // throttle condition
-  const goLeft = (goLeft: boolean) => {
-    let next;
-    if (goLeft) {
-      if (slideIdx > 0) {
-        next = slideIdx - 1;
-      }
-    } else {
-      if (slideIdx < imageUrls.length - 1) {
-        next = slideIdx + 1;
-      }
-    }
-    return next;
-  };
-
   const clickHandler = (next: number): any => {
     setSlideIdx(next);
   };
@@ -74,22 +54,6 @@ const ProductCarousel: React.FC<ProductCarouselProps> = ({
     { leading: true },
   );
   // -------------------------------------------- //
-
-  // body scroll rock //
-  // useEffect(() => {
-  //   const contentElement = parentRef.current;
-
-  //   if (contentElement && isHovered) {
-  //     disableBodyScroll(contentElement, { reserveScrollBarGap: true });
-  //   } else {
-  //     enableBodyScroll(contentElement);
-  //   }
-
-  //   return () => {
-  //     clearAllBodyScrollLocks();
-  //   };
-  // }, [isHovered]);
-  // --------------------------------------------------------------------- //
 
   return (
     <div
@@ -105,6 +69,7 @@ const ProductCarousel: React.FC<ProductCarouselProps> = ({
           innerRef={carouselRef}
           withoutControls={true}
           slideIndex={slideIdx}
+          beforeSlide={(_, v) => setSlideIdx(v)}
         >
           {imageUrls.map(data => (
             <div
@@ -128,41 +93,8 @@ const ProductCarousel: React.FC<ProductCarouselProps> = ({
           ))}
         </Carousel>
         {/* CAROUSEL CONTROLLER */}
-        <div
-          className="md:hidden absolute top-[45%] left-2 flex sitems-center rounded-full "
-          style={{
-            backgroundColor: theme.black_primary + ICON_BUTTON_BLACK_OPACTIY,
-          }}
-        >
-          {slideIdx > 0 && (
-            <IconButton
-              onClick={() => throttleClickHandler(() => goLeft(true))}
-            >
-              <ChevronLeft
-                className="w-5 h-5"
-                stroke={theme.text_secondary_color}
-                strokeWidth={2}
-              />
-            </IconButton>
-          )}
-        </div>
-        <div
-          className="md:hidden absolute top-[45%] right-2 flex items-center rounded-full "
-          style={{
-            backgroundColor: theme.black_primary + ICON_BUTTON_BLACK_OPACTIY,
-          }}
-        >
-          {slideIdx < imageUrls.length - 1 && (
-            <IconButton
-              onClick={() => throttleClickHandler(() => goLeft(false))}
-            >
-              <ChevronRight
-                className="w-5 h-5"
-                stroke={theme.text_secondary_color}
-                strokeWidth={2}
-              />
-            </IconButton>
-          )}
+        <div className="flex w-full h-6 justify-center md:hidden">
+          <DotIndicator current={slideIdx} length={imageUrls.length} />
         </div>
       </div>
 

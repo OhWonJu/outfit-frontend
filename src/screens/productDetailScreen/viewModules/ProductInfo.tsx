@@ -6,7 +6,7 @@ import { BORDER_BASE_WIDTH } from "src/constants";
 import useTheme from "@lib/client/hooks/useTheme";
 import { Col, Row } from "src/styles/GlobalStyle";
 import { Check, ChevronRight, Star } from "@components/icons";
-import { Button, Tag } from "@components/ui";
+import { Button, Link, Tag } from "@components/ui";
 import { TProductDetailData } from "src/commonTypes/product/productType";
 
 interface IProductInfoProps {
@@ -103,7 +103,8 @@ const ProductInfo: React.FC<IProductInfoProps> = ({
           {JSON.stringify(size)}
         </span>
       </Col>
-      {/* OPTONS & ACTION BUTTOn COL */}
+
+      {/* OPTONS & ACTION BUTTON COL */}
       <Col className="xmd:max-w-[450px] xmd:ml-5">
         {/* size choose */}
         <Col className="mb-5">
@@ -154,6 +155,7 @@ const ProductInfo: React.FC<IProductInfoProps> = ({
             ))}
           </Row>
         </Col>
+        {/* BUTTONS */}
         <Button className="mb-4" variant="flat" type="button">
           <span>Buy Now</span>
         </Button>

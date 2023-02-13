@@ -5,7 +5,6 @@ import {
   BORDER_TINE_WIDTH,
   CARDS_BORDER_RADIUS,
   CARDS_PADDING,
-  ICON_BUTTON_BLACK_OPACTIY,
 } from "src/constants";
 
 export const Card = styled.div`
@@ -19,7 +18,12 @@ export const Card = styled.div`
   max-width: 400px;
   min-width: 300px;
   height: 600px;
-  ${tw`md:min-h-0 md:h-[300px] shadow-md`}
+  ${tw`md:min-h-0  shadow-md`}
+`;
+
+export const ReviewWriteCard = styled(Card)`
+  padding: 0;
+  ${tw`shadow-none`}
 `;
 
 export const CardHeader = styled.div`
