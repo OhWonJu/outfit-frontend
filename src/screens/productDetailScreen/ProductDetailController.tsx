@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 
 import ProductDetailView from "./ProductDetailView";
-import { ProductInfo, ProductTabs } from "./sections";
+import { ProductInfo, ProductTabs } from "./viewModules";
 
 import { product_01_Data } from "MockData/productData";
 

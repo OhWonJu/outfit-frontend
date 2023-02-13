@@ -112,6 +112,7 @@ const ProductCarousel: React.FC<ProductCarouselProps> = ({
               className="relative w-full aspect-square overflow-hidden"
             >
               <Image
+                priority
                 src={data.url}
                 alt="product image"
                 fill={true}
@@ -178,6 +179,7 @@ const ProductCarousel: React.FC<ProductCarouselProps> = ({
               className="relative w-full aspect-square overflow-hidden"
             >
               <Image
+                priority
                 onClick={() => throttleClickHandler((): any => null, index)}
                 src={data.url}
                 fill={true}

@@ -109,7 +109,7 @@ const ProductReview: React.FC<ProductReviewProps> = ({
         </Row>
       </div>
       {/* Review Card */}
-      <ReviewCardWrapper className="flex md:grid md:grid-cols-2 md:gap-4 w-full snap-mandatory snap-x md:snap-none overflow-scroll scrollbar-hide p-2 space-x-4 md:space-x-0">
+      <ReviewCardWrapper className="flex md:grid md:grid-cols-2 md:gap-4 w-full snap-mandatory snap-x md:snap-none overflow-scroll scrollbar-hide p-2 space-x-4 md:space-x-0 touch-none">
         {preReviews.map((data, index) => (
           <div key={index} className="snap-center">
             <ReviewCard

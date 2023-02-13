@@ -1,17 +1,19 @@
-import React, { MutableRefObject, useRef, useState } from "react";
+import React, { MutableRefObject, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import styled from "styled-components";
 import tw from "twin.macro";
 import Carousel from "nuka-carousel/lib/carousel";
+import { disableBodyScroll, clearAllBodyScrollLocks } from "body-scroll-lock";
 
-import useTheme from "@lib/client/hooks/useTheme";
 import { Col, Row } from "src/styles/GlobalStyle";
 import {
   BORDER_TINE_WIDTH,
   CARDS_BORDER_RADIUS,
   CARDS_PADDING,
 } from "src/constants";
+import useTheme from "@lib/client/hooks/useTheme";
 import { DotIndicator, EllipsisSpan } from "@components/ui";
+
 import {
   AvatarWrapper,
   BuyerComment,
@@ -30,6 +32,7 @@ import {
 } from "./Review.styles";
 
 import { product_01_Data } from "MockData/productData";
+import { useLockBodyScroll } from "react-use";
 
 const UserInfo = ({
   theme,

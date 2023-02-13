@@ -33,7 +33,10 @@ const Modal: FC<ModalProps> = ({ children, onClose }) => {
   }, [handleKey]);
 
   return (
-    <div className="fixed bg-black bg-opacity-10 flex items-center inset-0 z-[100] justify-center backdrop-blur-[1.2px]">
+    <div
+      ref={ref}
+      className="fixed bg-black bg-opacity-10 flex items-center inset-0 z-[100] justify-center backdrop-blur-[1.2px]"
+    >
       {children}
     </div>
   );

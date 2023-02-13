@@ -48,8 +48,8 @@ const DropDown: React.FC<DropDownProps> = ({
 
   return (
     <div
-      className="fixed inset-0 h-full w-full z-[100] box-border outline-none"
       ref={dropDownRef}
+      className="fixed inset-0 h-full w-full z-[100] box-border outline-none"
       onKeyDown={activateCloseKeyAction ? onKeyDownDropdown : null}
       style={{ marginTop: navCover ? 0 : NAV_HEIGHT }}
       tabIndex={1}

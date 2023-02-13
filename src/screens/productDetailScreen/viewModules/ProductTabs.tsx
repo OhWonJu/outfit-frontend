@@ -1,7 +1,12 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { throttle } from "lodash";
-import { Tab, Tabs } from "@mui/material";
-import { Box } from "@mui/system";
+import { Tab, Tabs, Box } from "@mui/material";
 import styled from "styled-components";
 import tw from "twin.macro";
 
@@ -56,16 +61,10 @@ const ProductTabs: React.FC<IProductTabsProps> = ({
     refArray.forEach(section => {
       sectionsTop.push(getElementPosition(section.current));
     });
+    return () => {
+      sectionsTop = [];
+    };
   }, [refArray]);
-  // useMemo(
-  //   // 이러니까 에러가 안남...
-  //   () => () => {
-  //     refArray.forEach(section => {
-  //       sectionsTop.push(getElementPosition(section.current));
-  //     });
-  //   },
-  //   [refArray],
-  // );
   // ------------------------------------------------- GET SECTIONS TOP //
 
   // TABS SCROLL ACTION --------------------------------------------------------- //
@@ -79,10 +78,13 @@ const ProductTabs: React.FC<IProductTabsProps> = ({
   }
   // --------------------------------------------------------- TABS SCROLL ACTION //
 
-  const _tabSectionChangeHanlder = (event: any, value: any) => {
-    scrollToTargetAdjusted(refArray[value]);
-    // setScreenValue(value);
-  };
+  // const _tabSectionChangeHanlder = (event: any, value: any) => {
+  const _tabSectionChangeHanlder = useCallback(
+    (_event: any, value: any) => {
+      scrollToTargetAdjusted(refArray[value]);
+    },
+    [refArray],
+  );
 
   // SCROLL EVENT -------------------------------------------- //
   const throttledScroll = useMemo(

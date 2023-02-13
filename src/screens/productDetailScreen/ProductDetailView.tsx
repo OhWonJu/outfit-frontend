@@ -6,7 +6,7 @@ import Footer from "@components/footer/Footer";
 
 import { NAV_HEIGHT, PRODUCT_PADDING } from "src/constants";
 import { TProductThumbFile } from "src/commonTypes/product/productType";
-import { ProductCarousel } from "./sections";
+import { ProductCarousel } from "./viewModules";
 
 interface IProductDetailViewProps {
   contentRef: React.MutableRefObject<HTMLDivElement>;
