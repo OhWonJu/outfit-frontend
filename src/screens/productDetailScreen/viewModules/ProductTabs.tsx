@@ -7,8 +7,6 @@ import React, {
 } from "react";
 import { throttle } from "lodash";
 import { Tab, Tabs, Box } from "@mui/material";
-import styled from "styled-components";
-import tw from "twin.macro";
 
 import useTheme from "@lib/client/hooks/useTheme";
 import { Container } from "@components/ui";
@@ -18,10 +16,11 @@ import {
   CONTAINER_PADDING_HORIZONTAIL,
   NAV_HEIGHT,
   PRODUCT_TAB_HEIGHT,
-} from "src/constants";
+} from "constants/constants";
 import { ReviewGrade, ReviewType } from "src/commonTypes/review";
 
-import { ProductReview } from "./productDetailTabSections";
+import ProductTabReview from "./ProductTabReview";
+import { TabSpan } from "../ProductDetail.styles";
 
 function getElementPosition(current: any): number {
   const element = current;
@@ -31,14 +30,14 @@ function getElementPosition(current: any): number {
   return offsetPosition;
 }
 
-interface IProductTabsProps {
+interface ProductTabsProps {
   id: string;
   reviewCount: number;
   preReviews: Array<ReviewType>;
   reviewGrade: ReviewGrade;
 }
 
-const ProductTabs: React.FC<IProductTabsProps> = ({
+const ProductTabs: React.FC<ProductTabsProps> = ({
   id,
   reviewCount,
   preReviews,
@@ -53,7 +52,14 @@ const ProductTabs: React.FC<IProductTabsProps> = ({
   const detailRef = useRef() as React.MutableRefObject<HTMLDivElement>;
   const reviewRef = useRef() as React.MutableRefObject<HTMLDivElement>;
   const qnaRef = useRef() as React.MutableRefObject<HTMLDivElement>;
-  const refArray = [detailRef, reviewRef, qnaRef];
+  // const refArray = [detailRef, reviewRef, qnaRef];
+  const refArray = useMemo(() => [detailRef, reviewRef, qnaRef], []);
+
+  const tabs = [
+    { label: "Detail" },
+    { label: `Review (${reviewCount})` },
+    { label: "Q & A" },
+  ];
 
   // GET SECTIONS TOP ------------------------------------------------- //
   let sectionsTop: Array<number> = [];
@@ -139,22 +145,17 @@ const ProductTabs: React.FC<IProductTabsProps> = ({
             // variant="fullWidth"
             aria-label="basic tabs example"
           >
-            <Tab
-              onClick={e => _tabSectionChangeHanlder(e, 0)}
-              label={<TabSpan selected={screenValue === 0}>Detail</TabSpan>}
-            />
-            <Tab
-              onClick={e => _tabSectionChangeHanlder(e, 1)}
-              label={
-                <TabSpan selected={screenValue === 1}>
-                  Review ({reviewCount})
-                </TabSpan>
-              }
-            />
-            <Tab
-              onClick={e => _tabSectionChangeHanlder(e, 2)}
-              label={<TabSpan selected={screenValue === 2}>Q & A</TabSpan>}
-            />
+            {tabs.map((tab, index) => (
+              <Tab
+                key={index}
+                onClick={e => _tabSectionChangeHanlder(e, index)}
+                label={
+                  <TabSpan selected={screenValue === index}>
+                    {tab.label}
+                  </TabSpan>
+                }
+              />
+            ))}
           </Tabs>
         </Box>
       </div>
@@ -167,7 +168,7 @@ const ProductTabs: React.FC<IProductTabsProps> = ({
           Detail screen
         </section>
         <section id="review-section" ref={reviewRef} className="pt-6">
-          <ProductReview
+          <ProductTabReview
             productId={id}
             preReviews={preReviews}
             reviewGrade={reviewGrade}
@@ -186,9 +187,3 @@ const ProductTabs: React.FC<IProductTabsProps> = ({
 };
 
 export default ProductTabs;
-
-const TabSpan = styled.span<any>`
-  color: ${props =>
-    props.selected ? props.theme.text_primary_color : props.theme.gray_dark};
-  ${tw`font-bold`}
-`;

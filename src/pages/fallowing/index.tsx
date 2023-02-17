@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled, { css } from "styled-components";
 import tw from "twin.macro";
 
-import { BORDER_TINE_WIDTH, NAV_HEIGHT } from "src/constants";
+import { BORDER_TINE_WIDTH, NAV_HEIGHT } from "constants/constants";
 import { BrandList, BrandMarquee } from "@components/pages/fallowing";
 import { Cross, Menu } from "@components/icons";
 import useTheme from "@lib/client/hooks/useTheme";

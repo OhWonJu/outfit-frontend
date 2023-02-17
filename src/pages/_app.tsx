@@ -9,7 +9,7 @@ import AppHead from "@components/common/AppHead";
 import Layout from "@components/common/Layout";
 import { ManagedUIContext } from "@components/ui/context";
 
-import { SYMBOL_TEXT } from "src/constants";
+import { SYMBOL_TEXT } from "constants/constants";
 import { GlobalStyle } from "src/styles/GlobalStyle";
 import "../styles/globals.css";
 

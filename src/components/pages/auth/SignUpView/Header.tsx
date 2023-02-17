@@ -1,5 +1,5 @@
 import React from "react";
-import { SYMBOL_TEXT } from "src/constants";
+import { SYMBOL_TEXT } from "constants/constants";
 import styled, { keyframes } from "styled-components";
 import tw from "twin.macro";
 

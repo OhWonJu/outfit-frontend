@@ -3,7 +3,7 @@ import {
   BORDER_BASE_WIDTH,
   NAV_HEIGHT,
   VERTICAL_SIDEBAR_WIDTH,
-} from "src/constants";
+} from "constants/constants";
 
 interface SidebarProps {
   children: any;

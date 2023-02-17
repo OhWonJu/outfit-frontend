@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 // http path 상에서 접근하지 못하도록 막는 역할?
 
 export default function withHandler(
-  method: "GET" | "POST" | "DELETE",
+  method: "GET" | "POST" | "PATCH" | "DELETE",
   fn: (req: NextApiRequest, res: NextApiResponse) => void,
 ) {
   console.log("handler Call");

@@ -1,2 +1,2 @@
-export { default as TestDropDown } from "./TestDropDown";
+export { default as StoreDropDown } from "./StoreDropDown";
 export { default as TestDropDown2 } from "./TestDropDown2";

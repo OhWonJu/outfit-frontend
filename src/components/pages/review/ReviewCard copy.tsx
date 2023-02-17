@@ -10,7 +10,7 @@ import {
   BORDER_TINE_WIDTH,
   CARDS_BORDER_RADIUS,
   CARDS_PADDING,
-} from "src/constants";
+} from "constants/constants";
 import useTheme from "@lib/client/hooks/useTheme";
 import { DotIndicator, EllipsisSpan } from "@components/ui";
 

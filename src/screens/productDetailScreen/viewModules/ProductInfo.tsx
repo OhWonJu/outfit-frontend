@@ -1,13 +1,20 @@
 import React, { useState } from "react";
-import styled, { css, keyframes } from "styled-components";
-import tw from "twin.macro";
 
-import { BORDER_BASE_WIDTH } from "src/constants";
 import useTheme from "@lib/client/hooks/useTheme";
 import { Col, Row } from "src/styles/GlobalStyle";
 import { Check, ChevronRight, Star } from "@components/icons";
-import { Button, Link, Tag } from "@components/ui";
+import { Button, Tag } from "@components/ui";
 import { TProductDetailData } from "src/commonTypes/product/productType";
+
+import {
+  ColorButton,
+  DiscountPercent,
+  DiscountPrice,
+  OptionButton,
+  Price,
+  TagSearchContainer,
+  TagSpanWrapper,
+} from "../ProductDetail.styles";
 
 interface IProductInfoProps {
   data: TProductDetailData;
@@ -43,6 +50,8 @@ const ProductInfo: React.FC<IProductInfoProps> = ({
   } = data;
 
   const theme = useTheme();
+
+  const [isSoldOut, setisSoldOut] = useState(false);
 
   return (
     <div className="flex flex-col xmd:flex-row w-full">
@@ -156,10 +165,23 @@ const ProductInfo: React.FC<IProductInfoProps> = ({
           </Row>
         </Col>
         {/* BUTTONS */}
-        <Button className="mb-4" variant="flat" type="button">
-          <span>Buy Now</span>
-        </Button>
-        <Button className="mb-4" variant="naked" type="button">
+        <>
+          {isSoldOut ? (
+            <Button className="mb-4" variant="disabled" type="button" disabled>
+              <span>SOLD OUT</span>
+            </Button>
+          ) : (
+            <Button className="mb-4" variant="flat" type="button">
+              <span>Buy Now</span>
+            </Button>
+          )}
+        </>
+        <Button
+          className="mb-4"
+          variant="naked"
+          type="button"
+          disabled={isSoldOut}
+        >
           Add to Cart
         </Button>
         <Button variant="naked" type="button">
@@ -171,114 +193,6 @@ const ProductInfo: React.FC<IProductInfoProps> = ({
 };
 
 export default ProductInfo;
-
-const Price = styled.span<any>`
-  ${props => {
-    if (props.$disable) {
-      return css`
-        color: ${props => props.theme.gray_primary};
-        text-decoration-color: ${props => props.theme.gray_primary};
-        text-decoration: line-through;
-      `;
-    }
-  }}
-  ${tw`font-bold text-2xl`}
-`;
-
-const OptionButton = styled.button<any>`
-  border-color: ${props => props.theme.gray_primary};
-  border-width: ${BORDER_BASE_WIDTH}px;
-  ${props => {
-    if (props.disabled) {
-      return css`
-        background-color: ${props => props.theme.gray_light};
-        color: ${props => props.theme.gray_dark};
-      `;
-    } else {
-      return css`
-        &:hover {
-          border-color: ${props => props.theme.black_primary};
-        }
-      `;
-    }
-  }}
-  ${props => {
-    if (props.selected) {
-      return css`
-        background-color: ${props => props.theme.black_primary};
-        border-color: ${props => props.theme.black_primary};
-        color: ${props => props.theme.white_primary};
-      `;
-    }
-  }}
-
-  ${tw`rounded-md w-20 h-12 mr-[0.4rem] mb-3 text-center text-lg`}
-`;
-
-const ColorButton = styled.button<any>`
-  background-color: ${props => props.$bgColor};
-  ${tw`rounded-full w-12 h-12 mr-3 mb-3`}
-`;
-
-// Price Animation //
-const animation = keyframes`
-  0% {
-    opacity: 0;
-    transform: translateX(-100px)
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0px);
-  }
-`;
-
-const animation_vertical = keyframes`
-  0% {
-    opacity: 0;
-    transform: translateY(-30px)
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0px);
-  }
-`;
-const DiscountPrice = styled.span`
-  opacity: 0;
-  @media screen and (max-width: 640px) {
-    animation: ${animation_vertical} 800ms ease-out 1;
-    animation-delay: 300ms;
-    animation-fill-mode: forwards;
-  }
-  @media screen and (min-width: 641px) {
-    animation: ${animation} 800ms ease-out 1;
-    animation-delay: 300ms;
-    animation-fill-mode: forwards;
-  }
-
-  ${tw`font-bold text-3xl`}
-`;
-
-const animation_precent = keyframes`
-  0% {
-    opacity: 0;
-    transform: translateX(-40px)
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0px);
-  }
-`;
-const DiscountPercent = styled.span`
-  color: ${props => props.theme.red_primary};
-
-  opacity: 0;
-  animation: ${animation_precent} 700ms ease-out 1;
-  animation-delay: 1000ms;
-  animation-fill-mode: forwards;
-
-  ${tw`px-2 p-1 font-semibold`};
-`;
-// ------------------------------------------------ //
 
 const TagSearchButton: React.FC<{
   tags: Array<string>;
@@ -307,18 +221,3 @@ const TagSearchButton: React.FC<{
     </TagSearchContainer>
   );
 };
-
-const TagSearchContainer = styled.div`
-  background-color: ${props => props.theme.blue_priamry};
-  color: ${props => props.theme.white_primary};
-  ${tw`absolute top-[100%] flex flex-row p-2 rounded-lg text-sm z-50`}
-`;
-
-const TagSpanWrapper = styled.div`
-  border-right-width: 1.4px;
-  border-color: ${props => props.theme.white_primary};
-  & > span {
-    color: ${props => props.theme.white_primary};
-  }
-  ${tw`space-x-2 space-y-2 pr-2`}
-`;

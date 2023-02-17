@@ -1,19 +1,18 @@
 import React, { useCallback } from "react";
-import styled from "styled-components";
-import tw from "twin.macro";
 
 import PresentProductStore from "@lib/client/store/simpleStore/presentProductStore";
 import useTheme from "@lib/client/hooks/useTheme";
-import useWindowSize from "@lib/client/hooks/useWindowSize";
 import { ReviewCard } from "@components/pages/review";
 import { useUI } from "@components/ui";
 import { Star } from "@components/icons";
-import { BORDER_BASE_WIDTH } from "src/constants";
+import { BORDER_BASE_WIDTH } from "constants/constants";
 import { Row } from "src/styles/GlobalStyle";
 
-import { product_01_Data } from "../../../../../MockData/productData";
+import { product_01_Data } from "../../../../MockData/productData";
 import { ReviewGrade, ReviewType } from "src/commonTypes/review";
 import { ReviewWriteCard } from "@components/pages/review/Review.styles";
+
+import { Grade, GradeBackGround, GradeTitle, GradeWrapper, ReviewCardWrapper, ReviewWriteButton } from "../ProductDetail.styles";
 
 interface ProductReviewProps {
   productId: string;
@@ -22,7 +21,7 @@ interface ProductReviewProps {
   //   productReview: Object{userName, grade, context,};
 }
 
-const ProductReview: React.FC<ProductReviewProps> = ({
+const ProductTabReview: React.FC<ProductReviewProps> = ({
   productId,
   preReviews,
   reviewGrade,
@@ -31,9 +30,8 @@ const ProductReview: React.FC<ProductReviewProps> = ({
     reviewGrade;
 
   const theme = useTheme();
-  const { width: windowWith } = useWindowSize();
 
-  // MODAL
+  // MODAL -------------------------------------------------- //
   const { setModalView, openModal } = useUI();
   const { setProduct } = PresentProductStore();
 
@@ -42,7 +40,7 @@ const ProductReview: React.FC<ProductReviewProps> = ({
     setModalView("PRODUCT_REVIEW");
     openModal();
   }, []);
-  // -------------------------------------------------------- //
+  // -------------------------------------------------- MODAL //
 
   const getPercent = useCallback((grade: number): number => {
     return Math.floor((grade / 5) * 100);
@@ -113,7 +111,7 @@ const ProductReview: React.FC<ProductReviewProps> = ({
       </div>
 
       {/* Review Card */}
-      <ReviewCardWrapper className="flex w-full snap-mandatory snap-x overflow-scroll scrollbar-hide p-2 space-x-4 touch-none">
+      <ReviewCardWrapper className="flex w-full snap-mandatory snap-x overflow-scroll scrollbar-hide p-2 space-x-4">
         {preReviews.map((data, index) => (
           <div key={index} className="snap-center">
             <ReviewCard seeMoreHandler={_handleClick} {...data} />
@@ -153,55 +151,6 @@ const ProductReview: React.FC<ProductReviewProps> = ({
   );
 };
 
-export default ProductReview;
+export default ProductTabReview;
 
-const ReviewCardWrapper = styled.div`
-  @media screen and (max-width: 640px) {
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
-  }
-  /* max-width: 1200px; */
-`;
 
-const GradeTitle = styled.span`
-  ${tw`w-[50%] font-medium mr-2`}
-`;
-
-const GradeWrapper = styled.div`
-  ${tw`flex flex-row w-[50%] items-center`}
-`;
-
-const GradeBackGround = styled.div`
-  position: relative;
-  height: 4px;
-  width: 100%;
-  margin-right: 1rem;
-  background-color: ${props => props.theme.gray_light};
-  ${tw`rounded-full`};
-`;
-
-const Grade = styled.span<any>`
-  width: ${props => props.percent}%;
-  background-color: ${props => props.theme.black_primary};
-  ${tw`absolute top-0 left-0 bottom-0 rounded-full`}
-`;
-
-const ReviewWriteButton = styled.button`
-  background-color: ${props => props.theme.background_color};
-  border-width: ${BORDER_BASE_WIDTH}px;
-  border-color: ${props => props.theme.gray_light};
-
-  & > div {
-    color: ${props => props.theme.gray_primary};
-  }
-
-  :hover {
-    background-color: ${props => props.theme.container_bg_color};
-    border-width: 0px;
-    & > div {
-      color: ${props => props.theme.text_primary_color};
-    }
-  }
-
-  ${tw`w-full h-full rounded-md transition-all border-dashed hover:border-solid hover:shadow-md`}
-`;

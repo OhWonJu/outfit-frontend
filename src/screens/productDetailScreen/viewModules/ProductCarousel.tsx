@@ -5,7 +5,7 @@ import cn from "clsx";
 import throttle from "lodash.throttle";
 
 import useTheme from "@lib/client/hooks/useTheme";
-import { ICON_BUTTON_BLACK_OPACTIY } from "src/constants";
+import { ICON_BUTTON_BLACK_OPACTIY } from "constants/constants";
 import { DotIndicator } from "@components/ui";
 import { ChevronDown } from "@components/icons";
 
@@ -58,7 +58,7 @@ const ProductCarousel: React.FC<ProductCarouselProps> = ({
   return (
     <div
       className={cn(
-        "flex flex-row w-full md:max-w-[1200px] md:max-h-[600px]",
+        "flex flex-row w-full md:max-w-[1200px] md:max-h-[600px] md:mx-auto",
         {},
         className,
       )}
@@ -71,22 +71,18 @@ const ProductCarousel: React.FC<ProductCarouselProps> = ({
           slideIndex={slideIdx}
           beforeSlide={(_, v) => setSlideIdx(v)}
         >
-          {imageUrls.map(data => (
+          {imageUrls?.map(data => (
             <div
-              key={data.url}
+              key={data?.url}
               className="relative w-full aspect-square overflow-hidden"
             >
               <Image
                 priority
-                src={data.url}
+                src={data?.url}
                 alt="product image"
                 fill={true}
                 sizes="100%"
                 style={{ objectFit: "cover" }}
-                // width={600}
-                // height={600}
-                // layout="responsive"
-                // objectFit="cover"
                 draggable={false}
               />
             </div>
@@ -105,23 +101,19 @@ const ProductCarousel: React.FC<ProductCarouselProps> = ({
         onScroll={_handleScroll}
       >
         <div className="grid grid-cols-3">
-          {imageUrls.map((data, index) => (
+          {imageUrls?.map((data, index) => (
             <div
-              key={data.url}
+              key={data?.url}
               className="relative w-full aspect-square overflow-hidden"
             >
               <Image
                 priority
                 onClick={() => throttleClickHandler((): any => null, index)}
-                src={data.url}
+                src={data?.url}
+                alt="product image"
                 fill={true}
                 sizes="100%"
                 style={{ objectFit: "cover" }}
-                alt="product image"
-                // width={200}
-                // height={200}
-                // layout="responsive"
-                // objectFit="cover"
                 draggable={false}
               />
             </div>

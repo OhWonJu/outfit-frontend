@@ -1,7 +1,5 @@
 import { useRouter } from "next/router";
 import { FC, useEffect, useMemo, useState } from "react";
-import styled, { css } from "styled-components";
-import tw from "twin.macro";
 import { throttle } from "lodash";
 
 import {
@@ -13,7 +11,7 @@ import {
 } from "./Navbar.styles";
 
 import useTheme from "@lib/client/hooks/useTheme";
-import { SYMBOL_TEXT } from "src/constants";
+import { SYMBOL_TEXT } from "constants/constants";
 import { Link, useUI } from "@components/ui";
 import { Menu, Search, ShoppingBag } from "@components/icons";
 import Avatar from "../Avatar";
@@ -32,7 +30,6 @@ interface NavbarProps {
 
 const Navbar: FC<NavbarProps> = ({ links, logoVisible }) => {
   const theme = useTheme();
-
   const router = useRouter();
 
   const {
@@ -53,12 +50,14 @@ const Navbar: FC<NavbarProps> = ({ links, logoVisible }) => {
   const [hasScrolled, setHasScrolled] = useState(false);
   const [focused, setFocused] = useState(""); // 타입지정해주자
 
+  // INIT FOCUSE
   useMemo(() => {
     if (!displayDropDown) {
       setFocused("");
     }
   }, [displayDropDown]);
 
+  // SCROLL EVENT ======================================= //
   useEffect(() => {
     const handleScroll = throttle(() => {
       const offset = 0;
@@ -75,6 +74,7 @@ const Navbar: FC<NavbarProps> = ({ links, logoVisible }) => {
       document.removeEventListener("scroll", handleScroll);
     };
   }, [hasScrolled]);
+  // ======================================= SCROLL EVENT //
 
   return (
     <NavbarRoot $scrolled={hasScrolled}>
@@ -117,21 +117,23 @@ const Navbar: FC<NavbarProps> = ({ links, logoVisible }) => {
         <div className="desktop--main--nav hidden xmd:flex align-start xmd:w-fit">
           <ul className="flex">
             <li className="store h-full">
-              <ListItem
-                focused={focused === "store"}
-                currentPage={router.pathname.split("/")[1] === "store"}
-                onMouseOver={() => {
-                  setFocused("store");
-                  setDropDownView("TEST_VIEW");
-                  openDropDown();
-                }}
-              >
-                <ListSpan>Store</ListSpan>
-                {/* Legacy */}
-                {/* {dropDownView === "TEST_VIEW" && displayDropDown && (
+              <Link href={"/store"}>
+                <ListItem
+                  focused={focused === "store"}
+                  currentPage={router.pathname.split("/")[1] === "store"}
+                  onMouseOver={() => {
+                    setFocused("store");
+                    setDropDownView("STORE_VIEW");
+                    openDropDown();
+                  }}
+                >
+                  <ListSpan>Store</ListSpan>
+                  {/* Legacy */}
+                  {/* {dropDownView === "TEST_VIEW" && displayDropDown && (
                   <TestDropDown onClose={closeDropDown} />
                 )} */}
-              </ListItem>
+                </ListItem>
+              </Link>
             </li>
             <li className="new h-full">
               <ListItem
@@ -151,18 +153,18 @@ const Navbar: FC<NavbarProps> = ({ links, logoVisible }) => {
               </ListItem>
             </li>
             <li className="fallowing h-full">
-              <ListItem
-                focused={focused === "fallowing"}
-                currentPage={router.pathname.split("/")[1] === "fallowing"}
-                onMouseOver={() => {
-                  setFocused("");
-                  closeDropDown();
-                }}
-              >
-                <Link href={"/fallowing"}>
+              <Link href={"/fallowing"}>
+                <ListItem
+                  focused={focused === "fallowing"}
+                  currentPage={router.pathname.split("/")[1] === "fallowing"}
+                  onMouseOver={() => {
+                    setFocused("");
+                    closeDropDown();
+                  }}
+                >
                   <ListSpan>Fallowing</ListSpan>
-                </Link>
-              </ListItem>
+                </ListItem>
+              </Link>
             </li>
             <li className="brand h-full">
               <ListItem

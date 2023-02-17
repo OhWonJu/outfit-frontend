@@ -1,5 +1,5 @@
 import React from "react";
-import { SYMBOL_TEXT } from "src/constants";
+import { SYMBOL_TEXT } from "constants/constants";
 
 const Footer = () => {
   return (

@@ -13,19 +13,36 @@ import {
   InfoSection,
   Price,
   PriceBox,
+  ProductSoldOutWrapper,
   UtilButtonSection,
 } from "./Product.styles";
-import { ArrowRight, Heart } from "@components/icons";
-import { EllipsisSpan, EllipsisText, Link } from "@components/ui";
+import { ArrowRight, ChevronRight, Heart } from "@components/icons";
+import { EllipsisText } from "@components/ui";
+
+import { CATEGORY_MAP, TYPE_MAP } from "constants/products";
+import { TKategorie, TType } from "src/commonTypes/product/productType";
+
+type TData = {
+  id: string;
+  name: string;
+  thumbNails: any;
+  kategorie: TKategorie;
+  type: TType;
+  content: string;
+  price: number;
+};
 
 interface Props {
   cardType: "MOBILE" | "DESKTOP";
-  data: any;
+  data: TData;
 }
 
 const ProductCard: React.FC<Props> = ({ data }) => {
   const theme = useTheme();
 
+  const [isSoldOut, setIsSoldOut] = useState(
+    Math.random() > 0.5 ? false : true,
+  );
   const [isPined, setIsPined] = useState(false);
 
   const isDiscount = true;
@@ -33,7 +50,11 @@ const ProductCard: React.FC<Props> = ({ data }) => {
     "다음 휴가에서 영감을 받은 새로운 디자인으로 스타일을 뽐내 보세요. 여름에 어울리는 통기성 좋은 메쉬 스우시 포인트가 양말을 돋보이게 해줍니다. 무게 기준 20% 이상 재생 소재로 제작되어 멋스러운 스타일을 연출하며 환경 보호에도 동참할 수 있습니다.";
 
   return (
-    <CardLayout className="aspect-10/16">
+    <CardLayout
+      isSoldOut={isSoldOut}
+      className="aspect-10/16 hover:scale-[1.02] hover:-translate-y-3 hover:shadow-lg transition-all"
+    >
+      {/* PRODUCT THUMB NAIL */}
       <ImageWrapper>
         <Image
           alt={data.name}
@@ -46,10 +67,34 @@ const ProductCard: React.FC<Props> = ({ data }) => {
           style={{ objectFit: "cover" }}
         />
       </ImageWrapper>
+
+      {/* PRODUCT INFO */}
       <InfoSection className="">
         <InfoBox className="">
-          <span className="font-bold text-xs truncate">NIKE</span>
+          <Row className="w-full justify-between">
+            {/* Brand */}
+            <span className="font-bold text-xs truncate">NIKE</span>
+            <Row style={{ color: theme.gray_primary }}>
+              {/* CATEGORY */}
+              <a className="font-semibold text-xs truncate">
+                {CATEGORY_MAP[data?.kategorie?.kategorie]}
+              </a>
+              <div className="">
+                <ChevronRight
+                  className="h-[14px] w-[14px]"
+                  stroke={theme.gray_primary}
+                  strokeWidth={1.8}
+                />
+              </div>
+              {/* CATEGORY > TYPE */}
+              <a className="font-semibold text-xs truncate">
+                {TYPE_MAP[data?.type?.type]}
+              </a>
+            </Row>
+          </Row>
+          {/* PRODUCT NAME */}
           <span className="font-medium pb-1 truncate">{data.name}</span>
+          {/* PRODUCT CONTEXT */}
           <EllipsisText
             context={context}
             className="text-xs font-semibold"
@@ -88,6 +133,8 @@ const ProductCard: React.FC<Props> = ({ data }) => {
           )}
         </PriceBox>
       </InfoSection>
+
+      {/* CARD UTILS */}
       <UtilButtonSection className="">
         <div className="flex flex-col space-y-4 justify-center items-center">
           <button
@@ -103,6 +150,18 @@ const ProductCard: React.FC<Props> = ({ data }) => {
           </button>
         </div>
       </UtilButtonSection>
+
+      {/* SOLD OUT */}
+      {isSoldOut && (
+        <ProductSoldOutWrapper className="bg-black bg-opacity-10 backdrop-blur-[0.8px]">
+          <a
+            className="text-2xl font-extrabold -rotate-6"
+            style={{ color: theme.white_primary }}
+          >
+            SOLD OUT
+          </a>
+        </ProductSoldOutWrapper>
+      )}
     </CardLayout>
   );
 };

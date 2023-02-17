@@ -5,7 +5,13 @@ export type TProductDiscount = {
 };
 
 export type TKategorie = {
+  id: string;
   kategorie: string;
+};
+
+export type TType = {
+  id: string;
+  type: string;
 };
 
 export type TProductStock = {
@@ -62,11 +68,11 @@ export type TProductDetailData = {
   id: string;
   name: string;
   brand: string;
-  type: string;
   price: number;
   discount: TProductDiscount;
-  //   kategorie: Array<TKategorie>;
-  kategorie: Array<string>;
+  kategorie: Array<TKategorie>;
+  // kategorie: Array<string>;
+  type: TType;
   context: string;
   grade: number;
   reviewCount: number;

@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { FC } from "react";
 
-import { SYMBOL_TEXT } from "src/constants";
+import { SYMBOL_TEXT } from "constants/constants";
 
 interface Props {
   title: string;

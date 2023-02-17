@@ -4,11 +4,11 @@ import { Container } from "@components/ui";
 import AppHead from "@components/common/AppHead";
 import Footer from "@components/footer/Footer";
 
-import { NAV_HEIGHT, PRODUCT_PADDING } from "src/constants";
+import { NAV_HEIGHT, PRODUCT_PADDING } from "constants/constants";
 import { TProductThumbFile } from "src/commonTypes/product/productType";
 import { ProductCarousel } from "./viewModules";
 
-interface IProductDetailViewProps {
+interface ProductDetailViewProps {
   contentRef: React.MutableRefObject<HTMLDivElement>;
   name: string;
   thumbFiles: Array<TProductThumbFile>;
@@ -16,7 +16,7 @@ interface IProductDetailViewProps {
   PRODUCT_TABS: JSX.Element;
 }
 
-const ProductDetailView: React.FC<IProductDetailViewProps> = ({
+const ProductDetailView: React.FC<ProductDetailViewProps> = ({
   contentRef,
   name,
   thumbFiles,

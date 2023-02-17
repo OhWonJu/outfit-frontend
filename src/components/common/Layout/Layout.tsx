@@ -9,8 +9,8 @@ import SideNavbar from "../MobileNavbar";
 import { Review } from "@components/pages/review";
 import { LoginView } from "@components/pages/auth";
 import { CartSidebarView } from "@components/pages/cart";
-import SearchDropDown from "../Searchbar/SearchDropDown";
-import { TestDropDown, TestDropDown2 } from "../NavDroupDown";
+import { StoreDropDown, TestDropDown2 } from "../NavDropDown";
+import { SearchDropDown } from "../SearchDropDown";
 // import { TestDropDown, TestDropDown2 } from "../NavDroupDown";
 // import { Cross } from "@components/icons";
 
@@ -107,7 +107,9 @@ const DropDownView: React.FC<{
       {dropDownView === "SEARCH_VIEW" && (
         <SearchDropDown onClose={closeDropDown} />
       )}
-      {dropDownView === "TEST_VIEW" && <TestDropDown onClose={closeDropDown} />}
+      {dropDownView === "STORE_VIEW" && (
+        <StoreDropDown onClose={closeDropDown} />
+      )}
       {dropDownView === "TEST_VIEW2" && (
         <TestDropDown2 onClose={closeDropDown} />
       )}

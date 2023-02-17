@@ -10,7 +10,7 @@ import {
   BORDER_TINE_WIDTH,
   CARDS_BORDER_RADIUS,
   CARDS_PADDING,
-} from "src/constants";
+} from "constants/constants";
 import { DotIndicator, EllipsisSpan } from "@components/ui";
 
 import {
@@ -75,6 +75,8 @@ const ReviewCard: React.FC<ReviewType> = ({
   const carouselRef = useRef() as MutableRefObject<HTMLDivElement>;
   const [slideIdx, setSlideIdx] = useState<number>(0);
 
+  const [isDragged, setIsDragged] = useState(false);
+
   return (
     <Card className="">
       <CardHeader>
@@ -94,28 +96,27 @@ const ReviewCard: React.FC<ReviewType> = ({
           <a>{grade}</a>
         </Row>
       </CardHeader>
-      <CardImageSection className="overscroll-x-contain">
+      <CardImageSection className="overscroll-x-contain touch-none">
         <Carousel
           innerRef={carouselRef}
           withoutControls={true}
           slideIndex={slideIdx}
+          onDragStart={() => setIsDragged(true)}
+          onDragEnd={() => setIsDragged(false)}
           beforeSlide={(_, v) => setSlideIdx(v)}
         >
-          {imageUrls.map(data => (
+          {imageUrls?.map(data => (
             <div
-              key={data.url}
+              key={data?.url}
               className="__Image_wrapper__ relative w-full h-[287px]  overflow-hidden"
             >
               <Image
-                src={data.url}
+                priority
+                src={data?.url}
                 alt="product image"
                 fill={true}
                 sizes="100%"
                 style={{ objectFit: "cover" }}
-                // width={600}
-                // height={600}
-                // layout="responsive"
-                // objectFit="cover"
                 draggable={false}
               />
             </div>

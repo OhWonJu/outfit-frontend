@@ -3,7 +3,7 @@ import { disableBodyScroll, clearAllBodyScrollLocks } from "body-scroll-lock";
 import styled from "styled-components";
 import tw from "twin.macro";
 
-import { BORDER_BASE_WIDTH, NAV_HEIGHT } from "src/constants";
+import { BORDER_BASE_WIDTH, NAV_HEIGHT } from "constants/constants";
 
 interface DropDownProps {
   children?: any;
@@ -63,7 +63,7 @@ const DropDown: React.FC<DropDownProps> = ({
               : "absolute inset-0 bg-opacity-0"
           }`}
         />
-        <section className="absolute inset-y-0 w-full max-w-full min-h-[35%] max-h-[45%] h-fit flex outline-none">
+        <section className="absolute inset-y-0 w-full max-w-full h-full min-h-[35%] md:max-h-[50%] flex outline-none">
           <InnerContainer ref={contentRef}>{children}</InnerContainer>
         </section>
       </div>
@@ -74,8 +74,8 @@ const DropDown: React.FC<DropDownProps> = ({
 export default DropDown;
 
 const InnerContainer = styled.div<any>`
-  ${tw`w-full shadow-md cursor-default`}
+  ${tw`relative flex flex-col w-full h-full shadow-md cursor-default`}
   background-color: ${props => props.theme.background_color};
-  border-top-width: ${BORDER_BASE_WIDTH}px;
-  border-color: ${props => props.theme.gray_ligth};
+  /* border-top-width: ${BORDER_BASE_WIDTH}px; */
+  /* border-color: ${props => props.theme.gray_ligth}; */
 `;

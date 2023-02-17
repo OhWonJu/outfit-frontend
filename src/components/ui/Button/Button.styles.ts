@@ -19,4 +19,10 @@ export const Naked = styled.button<any>`
   ${tw`flex justify-center items-center shadow hover:shadow-inner transition-shadow`}
 `;
 
-export const Disabled = styled.button``;
+export const Disabled = styled.button`
+  width: 100%;
+  background-color: ${props => props.theme.gray_primary};
+  & > span {
+    color: ${props => props.theme.text_secondary_color};
+  }
+`;

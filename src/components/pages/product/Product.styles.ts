@@ -6,14 +6,22 @@ import {
   CARDS_BORDER_RADIUS,
   CARDS_MEDIUM_PADDING,
   PRODUCT_CARD_WIDTH,
-} from "src/constants";
+} from "constants/constants";
 
 // ProductCard ------------------------------- //
 export const CardLayout = styled.div<any>`
   width: ${PRODUCT_CARD_WIDTH}px;
-  border-width: ${BORDER_TINE_WIDTH}px;
-  border-color: ${props => props.theme.gray_light + 50};
   border-radius: ${CARDS_BORDER_RADIUS}px;
+
+  ${props => {
+    if (!props.isSoldOut) {
+      return css`
+        border-width: ${BORDER_TINE_WIDTH}px;
+        border-color: ${props => props.theme.gray_light + 50};
+      `;
+    }
+  }}
+
   ${tw`relative mb-14 shadow-md overflow-hidden`}
 `;
 
@@ -29,7 +37,7 @@ export const InfoSection = styled.div`
   height: 30%;
   padding: 0px ${CARDS_MEDIUM_PADDING}px;
 
-  ${tw`pt-1 pb-2`};
+  ${tw`pt-2 pb-1`};
 `;
 
 export const InfoBox = styled.article`
@@ -88,6 +96,10 @@ export const UtilButtonSection = styled.div`
   padding-top: ${CARDS_MEDIUM_PADDING + 5}px;
   padding-right: ${CARDS_MEDIUM_PADDING}px;
   ${tw`absolute top-0 right-0`}
+`;
+
+export const ProductSoldOutWrapper = styled.div`
+  ${tw`absolute inset-0 w-full h-full flex justify-center items-center`}
 `;
 // ------------------------------- ProductCard //
 

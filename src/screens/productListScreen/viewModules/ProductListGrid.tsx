@@ -1,11 +1,12 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { Grid } from "react-virtualized";
 import {
   PRODUCT_CARD_WIDTH,
   SCREEN_SIZE_MD,
   SCREEN_SIZE_XL,
   VERTICAL_SIDEBAR_WIDTH,
-} from "src/constants";
+} from "constants/constants";
+import { Grid } from "react-virtualized";
+
 import { ProductCard } from "@components/pages/product";
 import useWindowSize from "@lib/client/hooks/useWindowSize";
 
@@ -44,7 +45,7 @@ const ProductListGrid: React.FC<GridProps> = ({
     );
   };
 
-  console.log(columnCount)
+  console.log(columnCount);
 
   return (
     <Grid

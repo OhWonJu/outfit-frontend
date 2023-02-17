@@ -4,7 +4,7 @@ import PresentProductStore from "@lib/client/store/simpleStore/presentProductSto
 import ModalLayout from "@components/common/ModalLayout";
 import ReviewCard from "./ReviewCard";
 import useWindowSize from "@lib/client/hooks/useWindowSize";
-import { SCREEN_SIZE_MB } from "src/constants";
+import { SCREEN_SIZE_MB } from "constants/constants";
 import { ReviewType } from "src/commonTypes/review";
 import ReviewFilter from "./ReviewFilter";
 

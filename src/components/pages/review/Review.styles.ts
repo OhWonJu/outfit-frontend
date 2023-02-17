@@ -5,7 +5,7 @@ import {
   BORDER_TINE_WIDTH,
   CARDS_BORDER_RADIUS,
   CARDS_PADDING,
-} from "src/constants";
+} from "constants/constants";
 
 export const Card = styled.div`
   position: relative;

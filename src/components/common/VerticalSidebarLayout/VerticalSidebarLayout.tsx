@@ -1,5 +1,5 @@
 import React from "react";
-import { CONTAINER_PADDING_VERTICAL } from "src/constants";
+import { CONTAINER_PADDING_VERTICAL } from "constants/constants";
 import cn from "clsx";
 
 type ComponentProps = { children: any; className?: string };

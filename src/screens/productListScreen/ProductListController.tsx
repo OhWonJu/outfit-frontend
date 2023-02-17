@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useInView } from "react-intersection-observer";
 
 import { Container } from "@components/ui";
@@ -7,13 +7,10 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { _GET } from "@lib/server/rootAPI";
 import useWindowSize from "@lib/client/hooks/useWindowSize";
 import { ProductCard } from "@components/pages/product";
-import {
-  SCREEN_SIZE_MD,
-  SCREEN_SIZE_XL,
-  VERTICAL_SIDEBAR_WIDTH,
-} from "src/constants";
+import { SCREEN_SIZE_XL } from "constants/constants";
 
-const TAKE = 9;
+import { TAKE } from "constants/products";
+import { useRouter } from "next/router";
 
 const ProductListController = () => {
   const { width: windowWidth, height: windowHeight } = useWindowSize();
@@ -21,6 +18,11 @@ const ProductListController = () => {
     rootMargin: "20%",
   });
 
+  const router = useRouter();
+  const urlCategory = useMemo(() => router.query.category, [router]);
+  // console.log(urlCategory);
+
+  // FETCHING PRODUCTS ===================================================== //
   const _fetchPage = async ({ pageParam = 0 }) => {
     if (pageParam !== undefined)
       return {
@@ -52,12 +54,11 @@ const ProductListController = () => {
 
   useEffect(() => {
     if (ref && inView && !isFetchingNextPage) {
-      // getProducts();
       fetchNextPage();
     }
   }, [inView]);
   // eact-intersection-observer
-  //https://slog.website/post/8
+  // https://slog.website/post/8
   // react-virtualized
   // https://velog.io/@kimjh96/react-virtualized-%EB%A0%8C%EB%8D%94%EB%A7%81-%EC%84%B1%EB%8A%A5-%EC%B5%9C%EC%A0%81%ED%99%94
 
@@ -65,7 +66,7 @@ const ProductListController = () => {
     () => (data ? data.pages.flatMap(page => page.res.items) : []),
     [data],
   );
-  // ------------------------------------------------------------------------------------------------------------------------------ //
+  // ===================================================== FETCHING PRODUCTS //
 
   // const columnCount = useMemo(() => {
   //   const width =

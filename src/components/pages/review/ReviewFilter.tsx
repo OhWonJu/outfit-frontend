@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Row } from "src/styles/GlobalStyle";
 import useTheme from "@lib/client/hooks/useTheme";
 import { Tag } from "@components/ui";
-import { BORDER_TINE_WIDTH } from "src/constants";
+import { BORDER_TINE_WIDTH } from "constants/constants";
 import {
   Checkbox,
   FormControl,

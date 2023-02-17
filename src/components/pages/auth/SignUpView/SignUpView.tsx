@@ -11,7 +11,7 @@ import { Button, Input, InputLabel } from "@components/ui";
 import {
   BORDER_TINE_WIDTH,
   MOBILEABLE_CONTAINER_HORIZONTAL_SPACE,
-} from "src/constants";
+} from "constants/constants";
 import PolicyListView from "./PolicyListView";
 import useTheme from "@lib/client/hooks/useTheme";
 import Header from "./Header";

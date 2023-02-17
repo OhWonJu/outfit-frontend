@@ -1,5 +1,4 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import client from "@lib/server/client";
 import withHandler from "@lib/server/withHandler";
 
 async function logInHandler(req: NextApiRequest, res: NextApiResponse) {

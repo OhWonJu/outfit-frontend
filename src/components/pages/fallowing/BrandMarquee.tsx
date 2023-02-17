@@ -1,7 +1,7 @@
 import { getRandomPairOfColors } from "@lib/client/colors";
 import useWindowSize from "@lib/client/hooks/useWindowSize";
 import { useState } from "react";
-import { SCREEN_SIZE_LG } from "src/constants";
+import { SCREEN_SIZE_LG } from "constants/constants";
 import { Col } from "src/styles/GlobalStyle";
 import styled from "styled-components";
 

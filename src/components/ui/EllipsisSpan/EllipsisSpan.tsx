@@ -1,7 +1,7 @@
 import React, { useCallback, useRef, useState } from "react";
 import cn from "clsx";
 
-import { BORDER_BASE_WIDTH } from "src/constants";
+import { BORDER_BASE_WIDTH } from "constants/constants";
 import useResizeObserver from "@lib/client/hooks/useResizeObserver";
 import styled from "styled-components";
 import tw from "twin.macro";

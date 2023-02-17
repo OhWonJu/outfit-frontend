@@ -8,12 +8,12 @@ import React, {
 import { LoadingDots } from "@components/ui";
 import { mergeRefs } from "react-merge-refs";
 import { StyledComponent } from "styled-components";
-import { Flat, Naked } from "./Button.styles";
+import { Disabled, Flat, Naked } from "./Button.styles";
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   href?: string;
   className?: string;
-  variant: "flat" | "naked";
+  variant: "flat" | "naked" | "disabled";
   active?: boolean;
   type?: "submit" | "reset" | "button";
   children: any;
@@ -25,6 +25,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 const ButtonType = {
   flat: Flat,
   naked: Naked,
+  disabled: Disabled,
 };
 
 // eslint-disable-next-line react/display-name
