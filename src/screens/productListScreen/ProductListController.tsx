@@ -1,16 +1,19 @@
 import React, { useEffect, useMemo } from "react";
+import { useRouter } from "next/router";
 import { useInView } from "react-intersection-observer";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { useWindowSize } from "react-use";
+
+import { _GET } from "@lib/server/rootAPI";
 
 import { Container } from "@components/ui";
-import { TestSidebar } from "@components/verticalSidebar";
-import { useInfiniteQuery } from "@tanstack/react-query";
-import { _GET } from "@lib/server/rootAPI";
-import useWindowSize from "@lib/client/hooks/useWindowSize";
-import { ProductCard } from "@components/pages/product";
-import { SCREEN_SIZE_XL } from "constants/constants";
+import { ProductSoftCard } from "@components/pages/product";
+import { CategorieSidebar } from "@components/verticalSidebar";
 
+import { SCREEN_SIZE_XL } from "constants/constants";
 import { TAKE } from "constants/products";
-import { useRouter } from "next/router";
+
+import { ProductListWrapper } from "./ProductList.styles";
 
 const ProductListController = () => {
   const { width: windowWidth, height: windowHeight } = useWindowSize();
@@ -20,7 +23,7 @@ const ProductListController = () => {
 
   const router = useRouter();
   const urlCategory = useMemo(() => router.query.category, [router]);
-  // console.log(urlCategory);
+  // console.log(router, urlCategory);
 
   // FETCHING PRODUCTS ===================================================== //
   const _fetchPage = async ({ pageParam = 0 }) => {
@@ -79,17 +82,19 @@ const ProductListController = () => {
   return (
     <Container
       verticalSidebarVisible={true}
-      verticalSidebarChildren={<TestSidebar />}
+      verticalSidebarChildren={<CategorieSidebar categorie={urlCategory} />}
     >
-      <div className="mt-36 mb-36">
-        <div className="grid grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 justify-items-center">
+      <div className="my-9">
+        <div className="flex flex-wrap justify-items-center">
           {data &&
             products.map((item, index) => (
-              <ProductCard
-                key={index}
-                cardType={windowWidth < SCREEN_SIZE_XL ? "MOBILE" : "DESKTOP"}
-                data={item}
-              />
+              <ProductListWrapper key={index} className="">
+                <ProductSoftCard
+                  key={index}
+                  cardType={windowWidth < SCREEN_SIZE_XL ? "MOBILE" : "DESKTOP"}
+                  data={item}
+                />
+              </ProductListWrapper>
             ))}
         </div>
       </div>

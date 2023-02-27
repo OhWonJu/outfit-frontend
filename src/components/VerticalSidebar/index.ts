@@ -1,1 +1,2 @@
-export { default as TestSidebar } from "./TestSidebar";
+export { default as CategorieSidebar } from "./CategorieSidebar";
+export { default as StoreSidebar } from "./StoreSidebar";

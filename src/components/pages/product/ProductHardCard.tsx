@@ -37,7 +37,7 @@ interface Props {
   data: TData;
 }
 
-const ProductCard: React.FC<Props> = ({ data }) => {
+const ProductHardCard: React.FC<Props> = ({ data }) => {
   const theme = useTheme();
 
   const [isSoldOut, setIsSoldOut] = useState(
@@ -166,4 +166,4 @@ const ProductCard: React.FC<Props> = ({ data }) => {
   );
 };
 
-export default ProductCard;
+export default ProductHardCard;

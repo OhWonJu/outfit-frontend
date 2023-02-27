@@ -1,4 +1,7 @@
+import React from "react";
+
 import useTheme from "@lib/client/hooks/useTheme";
+
 import {
   BORDER_BASE_WIDTH,
   NAV_HEIGHT,
@@ -14,7 +17,7 @@ const VerticalSidebar: React.FC<SidebarProps> = ({ children }) => {
 
   return (
     <aside
-      className={`min-h-screen hidden z-40 md:block fixed scrollbar-hide`}
+      className={`min-h-screen hidden z-40 md:block fixed`}
       style={{
         // borderRightWidth: BORDER_BASE_WIDTH,
         width: VERTICAL_SIDEBAR_WIDTH,

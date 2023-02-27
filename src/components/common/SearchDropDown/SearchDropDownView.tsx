@@ -36,7 +36,7 @@ const SearchDropDownView: React.FC<SearchDropDownViewProps> = ({
         {viewMode === "DESKTOP" ? (
           <Desktop className="">
             <div className="__CURRENT__ flex-1 md:ml-[10%] lg:ml-[15%] pr-5">
-              {watch("keyword")?.length > 0 ? (
+              {watch("keyword") && watch("keyword")?.length > 0 ? (
                 <>{AUTO_SECTION}</>
               ) : (
                 <>{CURRENT_SECTION}</>
@@ -51,7 +51,7 @@ const SearchDropDownView: React.FC<SearchDropDownViewProps> = ({
             {!showRecommend && watch("keyword").length < 1 && (
               <>{CURRENT_SECTION}</>
             )}
-            {watch("keyword").length > 0 && <>{AUTO_SECTION}</>}
+            {watch("keyword") && watch("keyword").length > 0 && <>{AUTO_SECTION}</>}
             {showRecommend && <RecommnedSection />}
           </Mobile>
         )}

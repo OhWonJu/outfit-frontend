@@ -8,8 +8,8 @@ import {
   PRODUCT_CARD_WIDTH,
 } from "constants/constants";
 
-// ProductCard ------------------------------- //
-export const CardLayout = styled.div<any>`
+// ProductHardCard ------------------------------- //
+export const CardLayout = styled.article<any>`
   width: ${PRODUCT_CARD_WIDTH}px;
   border-radius: ${CARDS_BORDER_RADIUS}px;
 
@@ -101,30 +101,27 @@ export const UtilButtonSection = styled.div`
 export const ProductSoldOutWrapper = styled.div`
   ${tw`absolute inset-0 w-full h-full flex justify-center items-center`}
 `;
-// ------------------------------- ProductCard //
+// ------------------------------- ProductHardCard //
 
-/*
-<div className="w-[300px]">
-<Image
-  alt={data.name}
-  src={
-    data.thumbNails.urls[0] ?? ""
-    // JSON.parse(JSON.stringify(item.thumbNails)).urls[0] ?? ""
-  }
-  width={300}
-  height={200}
-/>
-<div className="flex">
-  <span>{data.name}</span>
-  <span className="ml-auto">
-    {data.price.toLocaleString("ko-KR")}원
-  </span>
-</div>
-<div className="text-zinc-400">
-  <span className="text-zinc-400">
-    {data.kategorie.kategorie} {" > "}
-  </span>
-  <span className="text-zinc-400">{data.type.type}</span>
-</div>
-</div>
-*/
+// ProductSoftCard ------------------------------- //
+export const SoftCardLayout = styled.article<any>`
+  width: 100%;
+  border-radius: ${CARDS_BORDER_RADIUS}px;
+
+  ${props => {
+    if (!props.isSoldOut) {
+      return css`
+        border-width: ${BORDER_TINE_WIDTH}px;
+        border-color: ${props => props.theme.gray_light + 50};
+      `;
+    }
+  }}
+
+  ${tw`relative mb-14 shadow-md overflow-hidden`}
+`;
+
+export const SoftImageWrapper = styled.div`
+  width: 100%;
+  ${tw`relative`};
+`;
+// ------------------------------- ProductSoftCard //

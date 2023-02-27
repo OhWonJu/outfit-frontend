@@ -13,7 +13,7 @@ export const SCREEN_SIZE_XL = 1280;
 
 export const NAV_HEIGHT: number = 60;
 
-export const VERTICAL_SIDEBAR_WIDTH = 260;
+export const VERTICAL_SIDEBAR_WIDTH = 200;
 
 // BORDER ------------------------------------------ //
 export const BORDER_TINE_WIDTH: number = 1;

@@ -1,8 +1,8 @@
 import React, { useEffect, useMemo, useState } from "react";
+import { useWindowSize } from "react-use";
 import { FieldErrors, useForm } from "react-hook-form";
 
 import { SCREEN_SIZE_MD } from "constants/constants";
-import useWindowSize from "@lib/client/hooks/useWindowSize";
 
 import { brand, curr, shop } from "./SearhDropDownModel";
 import SearchDropDownView from "./SearchDropDownView";
@@ -23,9 +23,9 @@ const SearchDropDownController: React.FC<SearchDropDownProps> = ({
   const [inputFocused, setInputFocused] = useState(false);
   const [showRecommend, setShowRecommend] = useState(true);
 
-  // UI Controlls =============================================================== //
+  // UI Controlls ================================================================= //
   const viewMode = useMemo(
-    () => (windowWidth < SCREEN_SIZE_MD ? "MOBILE" : "DESKTOP"),
+    () => (windowWidth && windowWidth < SCREEN_SIZE_MD ? "MOBILE" : "DESKTOP"),
     [windowWidth],
   );
 
@@ -41,7 +41,9 @@ const SearchDropDownController: React.FC<SearchDropDownProps> = ({
   const _blurHandler = (event: React.FocusEvent<HTMLInputElement>) => {
     if (event.target.name) setInputFocused(false);
   };
-  // =============================================================== UI Controlls //
+
+  console.log(viewMode, windowWidth, showRecommend);
+  // ================================================================= UI Controlls //
 
   // Data fetching ================================================================ //
   const getCurrentKeyword = () => curr;
@@ -50,7 +52,7 @@ const SearchDropDownController: React.FC<SearchDropDownProps> = ({
   const getAutoKeyword = () => curr;
   // ================================================================ Data fetching //
 
-  // React Hook Form ============================================= //
+  // React Hook Form ============================================================= //
   const { register, handleSubmit, watch, setValue, setFocus } =
     useForm<SearchProps>({
       mode: "onChange",
@@ -76,7 +78,7 @@ const SearchDropDownController: React.FC<SearchDropDownProps> = ({
     setValue("keyword", "");
     setFocus("keyword");
   };
-  // ============================================= React Hook Form //
+  // =========================================================== React Hook Form //
 
   const SEARCH_BAR = (
     <Searchbar
