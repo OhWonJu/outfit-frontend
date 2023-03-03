@@ -2,7 +2,6 @@ import React, { useEffect, useMemo } from "react";
 import { useRouter } from "next/router";
 import { useInView } from "react-intersection-observer";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { useWindowSize } from "react-use";
 
 import { _GET } from "@lib/server/rootAPI";
 
@@ -10,10 +9,12 @@ import { Container } from "@components/ui";
 import { ProductSoftCard } from "@components/pages/product";
 import { CategorieSidebar } from "@components/verticalSidebar";
 
-import { SCREEN_SIZE_XL } from "constants/constants";
+import { SCREEN_SIZE_XL, SCREEN_SIZE_XMD } from "constants/constants";
 import { TAKE } from "constants/products";
 
 import { ProductListWrapper } from "./ProductList.styles";
+import useWindowSize from "@lib/client/hooks/useWindowSize";
+import { SideNavbar } from "@components/common/SideNavbar";
 
 const ProductListController = () => {
   const { width: windowWidth, height: windowHeight } = useWindowSize();
@@ -81,8 +82,11 @@ const ProductListController = () => {
 
   return (
     <Container
-      verticalSidebarVisible={true}
-      verticalSidebarChildren={<CategorieSidebar categorie={urlCategory} />}
+      verticalSidebarVisible={
+        windowWidth && windowWidth > SCREEN_SIZE_XMD ? true : false
+      }
+      verticalSidebarChildren={<SideNavbar isFixed={true} />}
+      widthLimit={false}
     >
       <div className="my-9">
         <div className="flex flex-wrap justify-items-center">

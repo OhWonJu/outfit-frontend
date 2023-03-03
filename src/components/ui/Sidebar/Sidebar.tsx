@@ -58,7 +58,7 @@ const Sidebar: React.FC<SidebarProps> = ({
           } w-full sm:w-auto max-w-full flex outline-none`}
         >
           <div
-            className="h-full w-full sm:w-screen sm:max-w-md shadow-md"
+            className="h-full w-full sm:max-w-md shadow-md"
             style={{ backgroundColor: theme.container_bg_color }}
           >
             <div ref={contentRef}>{children}</div>

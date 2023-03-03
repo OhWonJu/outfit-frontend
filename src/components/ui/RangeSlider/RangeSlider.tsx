@@ -1,6 +1,4 @@
-import React, {
-  useState,
-} from "react";
+import React, { useState } from "react";
 import Slider from "@mui/material/Slider";
 
 import useTheme from "@lib/client/hooks/useTheme";
@@ -61,7 +59,7 @@ const RangeSlider: React.FC<RangeSliderProps> = ({
   return (
     <div className="w-full">
       <div className="flex flex-col justify-center items-center mb-3 space-y-2">
-        <div className="relative rounded-md ">
+        <div className="relative w-full rounded-md ">
           <Span className="top-[0.3rem] left-[0.6rem]">Min</Span>
           <Span
             className="top-[1.3rem] left-[0.6rem]"
@@ -78,7 +76,7 @@ const RangeSlider: React.FC<RangeSliderProps> = ({
           />
         </div>
         {/* <div className="font-semibold text-lg"> ~ </div> */}
-        <div className="relative rounded-md">
+        <div className="relative w-full rounded-md">
           <Span className="top-[0.3rem] left-[0.6rem]">Max</Span>
           <Span
             className="top-[1.3rem] left-[0.6rem]"
@@ -104,7 +102,7 @@ const RangeSlider: React.FC<RangeSliderProps> = ({
         </div>
       </div>
 
-      <div className="mb-4 px-2">
+      <div className="mb-4 overflow-hidden px-3">
         <Slider
           getAriaLabel={() => "Minimum distance shift"}
           value={value}
@@ -115,6 +113,7 @@ const RangeSlider: React.FC<RangeSliderProps> = ({
           max={max}
           min={min}
           step={step}
+          size={"small"}
           disableSwap
         />
       </div>

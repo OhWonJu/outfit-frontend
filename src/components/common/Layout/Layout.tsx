@@ -5,12 +5,12 @@ import { Sidebar, LoadingDots, useUI } from "@components/ui";
 import { useAcceptCookies } from "@lib/client/hooks/useAcceptCookies";
 import useTheme from "@lib/client/hooks/useTheme";
 import Navbar from "../Navbar";
-import SideNavbar from "../MobileNavbar";
 import { Review } from "@components/pages/review";
 import { LoginView } from "@components/pages/auth";
 import { CartSidebarView } from "@components/pages/cart";
 import { StoreDropDown, TestDropDown2 } from "../NavDropDown";
 import { SearchDropDown } from "../SearchDropDown";
+import { SideNavbar } from "../SideNavbar";
 // import { TestDropDown, TestDropDown2 } from "../NavDroupDown";
 // import { Cross } from "@components/icons";
 
@@ -84,7 +84,7 @@ const SidebarView: React.FC<{
       {/* {sidebarView === "SHIPPING_VIEW" && <ShippingView />} */}
       {/* {sidebarView === "PAYMENT_VIEW" && <PaymentMethodView />} */}
       {/* {sidebarView === "CHECKOUT_VIEW" && <CheckoutSidebarView />} */}
-      {sidebarView === "MOBILE_NAV_VIEW" && <SideNavbar />}
+      {sidebarView === "MOBILE_NAV_VIEW" && <SideNavbar category={"all"} />}
       {/* {sidebarView === "MOBILE_MENU_VIEW" && <MenuSidebarView links={links} />} */}
     </Sidebar>
   );

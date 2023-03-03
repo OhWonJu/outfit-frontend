@@ -4,7 +4,7 @@ import { FieldErrors, useForm } from "react-hook-form";
 
 import { SCREEN_SIZE_MD } from "constants/constants";
 
-import { brand, curr, shop } from "./SearhDropDownModel";
+import { brand, curr, shop } from "./SearchDropDownModel";
 import SearchDropDownView from "./SearchDropDownView";
 import { AutoKeywordSection, CurrentSection, Searchbar } from "./viewModules";
 

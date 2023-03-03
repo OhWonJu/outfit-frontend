@@ -13,7 +13,7 @@ export const NavbarRoot = styled.header<any>`
   }
 
   ${props => props.$scrolled && tw`shadow-md`}
-  ${tw`fixed top-0 px-5 xmd:px-0 w-full z-50 border-transparent transition-shadow duration-300`}
+  ${tw`fixed top-0 px-5 xmd:px-14  w-full z-50 border-transparent transition-shadow duration-300`}
 `;
 
 export const NavContent = styled.div<any>`
@@ -21,7 +21,7 @@ export const NavContent = styled.div<any>`
 `;
 
 export const LogoSection = styled.div<any>`
-  ${tw`relative z-20 order-2 min-w-[70px] flex-1 h-full xmd:order-none xmd:pl-[2.3rem] xmd:max-w-[25%] xmd:justify-start`}
+  ${tw`relative z-20 order-2 min-w-[70px] flex-1 h-full xmd:order-none xmd:max-w-[25%] xmd:justify-start`}
 `;
 
 export const ListItem = styled.div<any>`

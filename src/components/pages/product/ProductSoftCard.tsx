@@ -96,7 +96,8 @@ const ProductSoftCard: React.FC<Props> = ({ data }) => {
           {/* PRODUCT CONTEXT */}
           <EllipsisText
             context={context}
-            className="text-xs font-semibold"
+            className="text-[12px] font-semibold"
+            lineClamp={2}
             style={{ color: theme.gray_primary }}
           />
         </InfoBox>

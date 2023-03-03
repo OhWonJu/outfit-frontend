@@ -44,8 +44,8 @@ const Container: FC<ContainerProps> = ({
           <VerticalSidebarUI>{verticalSidebarChildren}</VerticalSidebarUI>
         )}
         <div
-          className={`w-full h-full px-5 md:px-14 ${
-            verticalSidebarVisible ? `md:ml-[200px]` : "md:ml-0"
+          className={`w-full h-full px-[0.8rem] md:px-14 ${
+            verticalSidebarVisible ? `md:ml-[250px]` : "md:ml-0"
           }`}
         >
           {children}

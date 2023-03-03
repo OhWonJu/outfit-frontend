@@ -91,7 +91,7 @@ const Navbar: FC<NavbarProps> = ({ links, logoVisible }) => {
               href={"/"}
               className={`logo--link ${
                 hasScrolled || logoVisible ? "block" : "hidden"
-              } xmd:w-fit h-full px-6 flex justify-center items-center`}
+              } xmd:w-fit h-full flex justify-center items-center`}
             >
               <span className="text-sm font-extrabold font-sansSrif">
                 {SYMBOL_TEXT}
@@ -195,7 +195,7 @@ const Navbar: FC<NavbarProps> = ({ links, logoVisible }) => {
 
         {/* Util Section - cart, Avator, Search */}
         <div
-          className="desktop--cart-navigation order-3 flex-1 h-full flex justify-end items-center xmd:w-fit xmd:pr-5 space-x-4"
+          className="desktop--cart-navigation order-3 flex-1 h-full flex justify-end items-center xmd:w-fit space-x-4"
           onMouseOver={() => {
             setFocused("");
             closeDropDown();

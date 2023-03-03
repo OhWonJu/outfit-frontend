@@ -35,6 +35,7 @@ const EllipsisA = styled.a<any>`
   display: -webkit-box;
   -webkit-line-clamp: ${props => props.lineClamp};
   -webkit-box-orient: vertical;
+  line-height: 1rem;
   word-wrap: break-word;
   text-overflow: ellipsis;
   overflow: hidden;
